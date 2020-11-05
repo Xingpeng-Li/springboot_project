@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.mapper.HealthPunchinMapper">
+  <resultMap id="BaseResultMap" type="com.project.domain.HealthPunchin">
+    <id column="punchin_id" jdbcType="INTEGER" property="punchinId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_body_temp" jdbcType="DOUBLE" property="userBodyTemp" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="punchin_date" jdbcType="TIMESTAMP" property="punchinDate" />
+    <result column="punchin_note" jdbcType="VARCHAR" property="punchinNote" />
+    <result column="contact_suspected_case" jdbcType="CHAR" property="contactSuspectedCase" />
+    <result column="user_health_status" jdbcType="VARCHAR" property="userHealthStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    punchin_id, user_id, user_body_temp, city, province, punchin_date, punchin_note,
+    contact_suspected_case, user_health_status
+  </sql>
+  <select id="selectByUserID" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from healthpunchin
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+  select
+  <include refid="Base_Column_List" />
+  from healthpunchin
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from healthpunchin
+    where punchin_id = #{punchinId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from healthpunchin
+    where punchin_id = #{punchinId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.project.domain.HealthPunchin">
+    insert into healthpunchin (punchin_id, user_id, user_body_temp,
+      city, province, punchin_date,
+      punchin_note, contact_suspected_case, user_health_status
+      )
+    values (#{punchinId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{userBodyTemp,jdbcType=DOUBLE},
+      #{city,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{punchinDate,jdbcType=TIMESTAMP},
+      #{punchinNote,jdbcType=VARCHAR}, #{contactSuspectedCase,jdbcType=CHAR}, #{userHealthStatus,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.project.domain.HealthPunchin">
+    insert into healthpunchin
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="punchinId != null">
+        punchin_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="userBodyTemp != null">
+        user_body_temp,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="punchinDate != null">
+        punchin_date,
+      </if>
+      <if test="punchinNote != null">
+        punchin_note,
+      </if>
+      <if test="contactSuspectedCase != null">
+        contact_suspected_case,
+      </if>
+      <if test="userHealthStatus != null">
+        user_health_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="punchinId != null">
+        #{punchinId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userBodyTemp != null">
+        #{userBodyTemp,jdbcType=DOUBLE},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="punchinDate != null">
+        #{punchinDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="punchinNote != null">
+        #{punchinNote,jdbcType=VARCHAR},
+      </if>
+      <if test="contactSuspectedCase != null">
+        #{contactSuspectedCase,jdbcType=CHAR},
+      </if>
+      <if test="userHealthStatus != null">
+        #{userHealthStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.project.domain.HealthPunchin">
+    update healthpunchin
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userBodyTemp != null">
+        user_body_temp = #{userBodyTemp,jdbcType=DOUBLE},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="punchinDate != null">
+        punchin_date = #{punchinDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="punchinNote != null">
+        punchin_note = #{punchinNote,jdbcType=VARCHAR},
+      </if>
+      <if test="contactSuspectedCase != null">
+        contact_suspected_case = #{contactSuspectedCase,jdbcType=CHAR},
+      </if>
+      <if test="userHealthStatus != null">
+        user_health_status = #{userHealthStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where punchin_id = #{punchinId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.project.domain.HealthPunchin">
+    update healthpunchin
+    set user_id = #{userId,jdbcType=INTEGER},
+      user_body_temp = #{userBodyTemp,jdbcType=DOUBLE},
+      city = #{city,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      punchin_date = #{punchinDate,jdbcType=TIMESTAMP},
+      punchin_note = #{punchinNote,jdbcType=VARCHAR},
+      contact_suspected_case = #{contactSuspectedCase,jdbcType=CHAR},
+      user_health_status = #{userHealthStatus,jdbcType=VARCHAR}
+    where punchin_id = #{punchinId,jdbcType=INTEGER}
+  </update>
+</mapper>

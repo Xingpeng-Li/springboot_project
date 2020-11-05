@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.mapper.ApplicationMapper">
+  <resultMap id="BaseResultMap" type="com.project.domain.Application">
+    <id column="application_id" jdbcType="INTEGER" property="applicationId" />
+    <result column="applicant_id" jdbcType="INTEGER" property="applicantId" />
+    <result column="approver_id" jdbcType="INTEGER" property="approverId" />
+    <result column="second_approver_id" jdbcType="INTEGER" property="secondApproverId" />
+    <result column="application_type" jdbcType="CHAR" property="applicationType" />
+    <result column="application_reason" jdbcType="VARCHAR" property="applicationReason" />
+    <result column="application_start_time" jdbcType="TIMESTAMP" property="applicationStartTime" />
+    <result column="application_end_time" jdbcType="TIMESTAMP" property="applicationEndTime" />
+    <result column="application_time" jdbcType="TIMESTAMP" property="applicationTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    application_id, applicant_id, approver_id, second_approver_id, application_type, 
+    application_reason, application_start_time, application_end_time, application_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from application
+    where application_id = #{applicationId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from application
+    where application_id = #{applicationId,jdbcType=INTEGER}
+  </delete>
+  <!--返回插入后application的主键-->
+  <insert id="insert" parameterType="com.project.domain.Application">
+    insert into application (application_id, applicant_id, approver_id, 
+      second_approver_id, application_type, application_reason, 
+      application_start_time, application_end_time, 
+      application_time)
+    values (#{applicationId,jdbcType=INTEGER}, #{applicantId,jdbcType=INTEGER}, #{approverId,jdbcType=INTEGER}, 
+      #{secondApproverId,jdbcType=INTEGER}, #{applicationType,jdbcType=CHAR}, #{applicationReason,jdbcType=VARCHAR}, 
+      #{applicationStartTime,jdbcType=TIMESTAMP}, #{applicationEndTime,jdbcType=TIMESTAMP}, 
+      #{applicationTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.project.domain.Application" useGeneratedKeys="true" keyProperty="applicationId" keyColumn="application_id">
+    insert into application
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="applicationId != null">
+        application_id,
+      </if>
+      <if test="applicantId != null">
+        applicant_id,
+      </if>
+      <if test="approverId != null">
+        approver_id,
+      </if>
+      <if test="secondApproverId != null">
+        second_approver_id,
+      </if>
+      <if test="applicationType != null">
+        application_type,
+      </if>
+      <if test="applicationReason != null">
+        application_reason,
+      </if>
+      <if test="applicationStartTime != null">
+        application_start_time,
+      </if>
+      <if test="applicationEndTime != null">
+        application_end_time,
+      </if>
+      <if test="applicationTime != null">
+        application_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="applicationId != null">
+        #{applicationId,jdbcType=INTEGER},
+      </if>
+      <if test="applicantId != null">
+        #{applicantId,jdbcType=INTEGER},
+      </if>
+      <if test="approverId != null">
+        #{approverId,jdbcType=INTEGER},
+      </if>
+      <if test="secondApproverId != null">
+        #{secondApproverId,jdbcType=INTEGER},
+      </if>
+      <if test="applicationType != null">
+        #{applicationType,jdbcType=CHAR},
+      </if>
+      <if test="applicationReason != null">
+        #{applicationReason,jdbcType=VARCHAR},
+      </if>
+      <if test="applicationStartTime != null">
+        #{applicationStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applicationEndTime != null">
+        #{applicationEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applicationTime != null">
+        #{applicationTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.project.domain.Application">
+    update application
+    <set>
+      <if test="applicantId != null">
+        applicant_id = #{applicantId,jdbcType=INTEGER},
+      </if>
+      <if test="approverId != null">
+        approver_id = #{approverId,jdbcType=INTEGER},
+      </if>
+      <if test="secondApproverId != null">
+        second_approver_id = #{secondApproverId,jdbcType=INTEGER},
+      </if>
+      <if test="applicationType != null">
+        application_type = #{applicationType,jdbcType=CHAR},
+      </if>
+      <if test="applicationReason != null">
+        application_reason = #{applicationReason,jdbcType=VARCHAR},
+      </if>
+      <if test="applicationStartTime != null">
+        application_start_time = #{applicationStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applicationEndTime != null">
+        application_end_time = #{applicationEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applicationTime != null">
+        application_time = #{applicationTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where application_id = #{applicationId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.project.domain.Application">
+    update application
+    set applicant_id = #{applicantId,jdbcType=INTEGER},
+      approver_id = #{approverId,jdbcType=INTEGER},
+      second_approver_id = #{secondApproverId,jdbcType=INTEGER},
+      application_type = #{applicationType,jdbcType=CHAR},
+      application_reason = #{applicationReason,jdbcType=VARCHAR},
+      application_start_time = #{applicationStartTime,jdbcType=TIMESTAMP},
+      application_end_time = #{applicationEndTime,jdbcType=TIMESTAMP},
+      application_time = #{applicationTime,jdbcType=TIMESTAMP}
+    where application_id = #{applicationId,jdbcType=INTEGER}
+  </update>
+</mapper>

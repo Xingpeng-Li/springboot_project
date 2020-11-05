@@ -1,0 +1,71 @@
+spring:
+  datasource:
+#    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://cdb-8mhotb2i.cd.tencentcdb.com:10083/telecommutingdb?serverTimezone=GMT%2B8&rewriteBatchedStatements=true
+    username: root
+    password: 168171miaowhu!
+  mail:
+    #smtp服务主机  qq邮箱则为smtp.qq.com
+    #host: smtp.163.com
+    host: smtp.qq.com
+    #服务协议
+    protocol: smtp
+    # 编码集
+    default-encoding: UTF-8
+    #发送邮件的账户
+    #username: bicheng_xu@163.com
+    username: bicheng_xu@qq.com
+  servlet:
+    multipart:
+      max-file-size: 50MB
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: project.system.domain
+#tengxun:
+#  accessKey: AKID0lLg9L0xNYprc6fGwLTM2TGqAF3bptds
+#  secretKey: 8XfWheKnHcpobI8i37uRihQsU6bqujIn
+#  bucket: ap-chengdu
+#  bucketName: telecommuting-1301994676
+#  path: https://miaowhupic-1301994676.cos.ap-chengdu.myqcloud.com
+#  qianzhui: miaowhupic
+#tx:
+#  sms:
+#    appId: 1400397557
+#    appKey: b31ac26f3d8a76c0c8bf75d885190bb9
+#    templateId: 657579
+#    smsSign: 喵武个人小程序
+#    smsEffectiveTime: 2
+#  cos:
+#    secretId: AKIDWmAJBdFR0LrfkUzGVWIrBD0bNvBCbXnk
+#    secretKey: t4xYw5yadWZN0xe6GE0tWt0FFySpKYVC
+#    region: ap-chengdu
+#    bucketName: telecommuting-1301994676
+#    path: https://telecommuting-1301994676.cos.ap-chengdu.myqcloud.com/
+#    prefix: telecommutingCloudFile
+#  speech:
+#    secretId: AKIDWmAJBdFR0LrfkUzGVWIrBD0bNvBCbXnk
+#    secretKey: t4xYw5yadWZN0xe6GE0tWt0FFySpKYVC
+config:
+  jwt:
+    # 加密密钥
+    secret: iwqjhda8232bjgh432[cicada-smile]
+    # token有效时长
+    expire: 3600
+    # header 名称
+    header: Authorization
+    #prefix 前缀
+    prefix: Bearer
+    #iss 签发者
+    iss: miaowhu
+server:
+  port: 443
+  ssl:
+    key-store: classpath:miaowhu.cn.jks
+    key-store-password: 168171miaowhu
+    key-store-type: JKS
+    enabled: true
+openvidu:
+  #  url: https://212.64.65.145:4443/
+  url: https://sx3.51guagua.top
+  secret: wangxiaowei

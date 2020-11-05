@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.mapper.AccountSubscribeMapper">
+  <resultMap id="BaseResultMap" type="com.project.domain.AccountSubscribe">
+    <id column="subscribe_id" jdbcType="INTEGER" property="subscribeId" />
+    <result column="publicaccount_name" jdbcType="VARCHAR" property="publicaccountName" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    subscribe_id, publicaccount_name, user_id
+  </sql>
+
+  <select id="selectByUserId" parameterType="java.lang.Integer" resultType="java.lang.String">
+    select
+    publicaccount_name
+    from account_subscribe
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from account_subscribe
+    where subscribe_id = #{subscribeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from account_subscribe
+    where subscribe_id = #{subscribeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.project.domain.AccountSubscribe">
+    insert into account_subscribe (subscribe_id, publicaccount_name, user_id
+      )
+    values (#{subscribeId,jdbcType=INTEGER}, #{publicaccountName,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.project.domain.AccountSubscribe">
+    insert into account_subscribe
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="subscribeId != null">
+        subscribe_id,
+      </if>
+      <if test="publicaccountName != null">
+        publicaccount_name,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="subscribeId != null">
+        #{subscribeId,jdbcType=INTEGER},
+      </if>
+      <if test="publicaccountName != null">
+        #{publicaccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.project.domain.AccountSubscribe">
+    update account_subscribe
+    <set>
+      <if test="publicaccountName != null">
+        publicaccount_name = #{publicaccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where subscribe_id = #{subscribeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.project.domain.AccountSubscribe">
+    update account_subscribe
+    set publicaccount_name = #{publicaccountName,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER}
+    where subscribe_id = #{subscribeId,jdbcType=INTEGER}
+  </update>
+</mapper>

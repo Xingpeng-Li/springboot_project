@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.mapper.PublicAccountMapper">
+  <resultMap id="BaseResultMap" type="com.project.domain.PublicAccount">
+    <id column="publicaccount_id" jdbcType="INTEGER" property="publicaccountId" />
+    <result column="publicaccount_owner" jdbcType="INTEGER" property="publicaccountOwner" />
+    <result column="publicaccount_name" jdbcType="VARCHAR" property="publicaccountName" />
+    <result column="publicaccount_type" jdbcType="VARCHAR" property="publicaccountType" />
+    <result column="publicaccount_brief" jdbcType="VARCHAR" property="publicaccountBrief" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    publicaccount_id, publicaccount_owner, publicaccount_name, publicaccount_type, publicaccount_brief
+  </sql>
+  <select id="selectByKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from publicaccount
+    where publicaccount_name like '%${key}%'
+  </select>
+
+  <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from publicaccount
+    where publicaccount_name = #{name}
+  </select>
+
+  <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from publicaccount
+    where publicaccount_owner = #{userId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByCompanyId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from publicaccount
+    where publicaccount_owner = #{companyId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from publicaccount
+    where publicaccount_id = #{publicaccountId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from publicaccount
+    where publicaccount_id = #{publicaccountId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.project.domain.PublicAccount">
+    insert into publicaccount (publicaccount_id, publicaccount_owner,
+      publicaccount_name, publicaccount_type, publicaccount_brief
+      )
+    values (#{publicaccountId,jdbcType=INTEGER}, #{publicaccountOwner,jdbcType=INTEGER},
+      #{publicaccountName,jdbcType=VARCHAR}, #{publicaccountType,jdbcType=VARCHAR}, #{publicaccountBrief,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.project.domain.PublicAccount">
+    insert into publicaccount
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="publicaccountId != null">
+        publicaccount_id,
+      </if>
+      <if test="publicaccountOwner != null">
+        publicaccount_owner,
+      </if>
+      <if test="publicaccountName != null">
+        publicaccount_name,
+      </if>
+      <if test="publicaccountType != null">
+        publicaccount_type,
+      </if>
+      <if test="publicaccountBrief != null">
+        publicaccount_brief,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="publicaccountId != null">
+        #{publicaccountId,jdbcType=INTEGER},
+      </if>
+      <if test="publicaccountOwner != null">
+        #{publicaccountOwner,jdbcType=INTEGER},
+      </if>
+      <if test="publicaccountName != null">
+        #{publicaccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="publicaccountType != null">
+        #{publicaccountType,jdbcType=VARCHAR},
+      </if>
+      <if test="publicaccountBrief != null">
+        #{publicaccountBrief,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.project.domain.PublicAccount">
+    update publicaccount
+    <set>
+      <if test="publicaccountOwner != null">
+        publicaccount_owner = #{publicaccountOwner,jdbcType=INTEGER},
+      </if>
+      <if test="publicaccountName != null">
+        publicaccount_name = #{publicaccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="publicaccountType != null">
+        publicaccount_type = #{publicaccountType,jdbcType=VARCHAR},
+      </if>
+      <if test="publicaccountBrief != null">
+        publicaccount_brief = #{publicaccountBrief,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where publicaccount_id = #{publicaccountId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.project.domain.PublicAccount">
+    update publicaccount
+    set publicaccount_owner = #{publicaccountOwner,jdbcType=INTEGER},
+      publicaccount_name = #{publicaccountName,jdbcType=VARCHAR},
+      publicaccount_type = #{publicaccountType,jdbcType=VARCHAR},
+      publicaccount_brief = #{publicaccountBrief,jdbcType=VARCHAR}
+    where publicaccount_id = #{publicaccountId,jdbcType=INTEGER}
+  </update>
+</mapper>

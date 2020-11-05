@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.mapper.WorkReportMapper">
+  <resultMap id="BaseResultMap" type="com.project.domain.WorkReport">
+    <id column="report_id" jdbcType="INTEGER" property="reportId" />
+    <result column="report_type" jdbcType="CHAR" property="reportType" />
+    <result column="reporter_id" jdbcType="INTEGER" property="reporterId" />
+    <result column="report_url" jdbcType="VARCHAR" property="reportUrl" />
+    <result column="report_approver" jdbcType="INTEGER" property="reportApprover" />
+    <result column="report_second_approver" jdbcType="INTEGER" property="reportSecondApprover" />
+    <result column="report_time" jdbcType="TIMESTAMP" property="reportTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    report_id, report_type, reporter_id, report_url, report_approver, report_second_approver, 
+    report_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from workreport
+    where report_id = #{reportId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from workreport
+    where report_id = #{reportId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.project.domain.WorkReport">
+    insert into workreport (report_id, report_type, reporter_id, 
+      report_url, report_approver, report_second_approver, 
+      report_time)
+    values (#{reportId,jdbcType=INTEGER}, #{reportType,jdbcType=CHAR}, #{reporterId,jdbcType=INTEGER}, 
+      #{reportUrl,jdbcType=VARCHAR}, #{reportApprover,jdbcType=INTEGER}, #{reportSecondApprover,jdbcType=INTEGER}, 
+      #{reportTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.project.domain.WorkReport">
+    insert into workreport
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="reportId != null">
+        report_id,
+      </if>
+      <if test="reportType != null">
+        report_type,
+      </if>
+      <if test="reporterId != null">
+        reporter_id,
+      </if>
+      <if test="reportUrl != null">
+        report_url,
+      </if>
+      <if test="reportApprover != null">
+        report_approver,
+      </if>
+      <if test="reportSecondApprover != null">
+        report_second_approver,
+      </if>
+      <if test="reportTime != null">
+        report_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="reportId != null">
+        #{reportId,jdbcType=INTEGER},
+      </if>
+      <if test="reportType != null">
+        #{reportType,jdbcType=CHAR},
+      </if>
+      <if test="reporterId != null">
+        #{reporterId,jdbcType=INTEGER},
+      </if>
+      <if test="reportUrl != null">
+        #{reportUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="reportApprover != null">
+        #{reportApprover,jdbcType=INTEGER},
+      </if>
+      <if test="reportSecondApprover != null">
+        #{reportSecondApprover,jdbcType=INTEGER},
+      </if>
+      <if test="reportTime != null">
+        #{reportTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.project.domain.WorkReport">
+    update workreport
+    <set>
+      <if test="reportType != null">
+        report_type = #{reportType,jdbcType=CHAR},
+      </if>
+      <if test="reporterId != null">
+        reporter_id = #{reporterId,jdbcType=INTEGER},
+      </if>
+      <if test="reportUrl != null">
+        report_url = #{reportUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="reportApprover != null">
+        report_approver = #{reportApprover,jdbcType=INTEGER},
+      </if>
+      <if test="reportSecondApprover != null">
+        report_second_approver = #{reportSecondApprover,jdbcType=INTEGER},
+      </if>
+      <if test="reportTime != null">
+        report_time = #{reportTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where report_id = #{reportId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.project.domain.WorkReport">
+    update workreport
+    set report_type = #{reportType,jdbcType=CHAR},
+      reporter_id = #{reporterId,jdbcType=INTEGER},
+      report_url = #{reportUrl,jdbcType=VARCHAR},
+      report_approver = #{reportApprover,jdbcType=INTEGER},
+      report_second_approver = #{reportSecondApprover,jdbcType=INTEGER},
+      report_time = #{reportTime,jdbcType=TIMESTAMP}
+    where report_id = #{reportId,jdbcType=INTEGER}
+  </update>
+</mapper>

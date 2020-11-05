@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.mapper.PunchinMapper">
+  <resultMap id="BaseResultMap" type="com.project.domain.Punchin">
+    <id column="punchin_id" jdbcType="INTEGER" property="punchinId" />
+    <result column="puchin_time" jdbcType="TIMESTAMP" property="puchinTime" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="punchin_location" jdbcType="VARCHAR" property="punchinLocation" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    punchin_id, puchin_time, user_id, punchin_location
+  </sql>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from punchin
+  </select>
+  <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from punchin
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from punchin
+    where punchin_id = #{punchinId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from punchin
+    where punchin_id = #{punchinId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.project.domain.Punchin">
+    insert into punchin (punchin_id, puchin_time, user_id,
+      punchin_location)
+    values (#{punchinId,jdbcType=INTEGER}, #{puchinTime,jdbcType=TIMESTAMP}, #{userId,jdbcType=INTEGER},
+      #{punchinLocation,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.project.domain.Punchin">
+    insert into punchin
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="punchinId != null">
+        punchin_id,
+      </if>
+      <if test="puchinTime != null">
+        puchin_time,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="punchinLocation != null">
+        punchin_location,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="punchinId != null">
+        #{punchinId,jdbcType=INTEGER},
+      </if>
+      <if test="puchinTime != null">
+        #{puchinTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="punchinLocation != null">
+        #{punchinLocation,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.project.domain.Punchin">
+    update punchin
+    <set>
+      <if test="puchinTime != null">
+        puchin_time = #{puchinTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="punchinLocation != null">
+        punchin_location = #{punchinLocation,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where punchin_id = #{punchinId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.project.domain.Punchin">
+    update punchin
+    set puchin_time = #{puchinTime,jdbcType=TIMESTAMP},
+      user_id = #{userId,jdbcType=INTEGER},
+      punchin_location = #{punchinLocation,jdbcType=VARCHAR}
+    where punchin_id = #{punchinId,jdbcType=INTEGER}
+  </update>
+</mapper>

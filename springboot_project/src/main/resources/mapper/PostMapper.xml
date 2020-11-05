@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.mapper.PostMapper">
+  <resultMap id="BaseResultMap" type="com.project.domain.Post">
+    <id column="post_id" jdbcType="INTEGER" property="postId" />
+    <result column="publicaccount_id" jdbcType="INTEGER" property="publicaccountId" />
+    <result column="publicaccount_name" jdbcType="VARCHAR" property="publicaccountName" />
+    <result column="post_date" jdbcType="TIMESTAMP" property="postDate" />
+    <result column="post_image" jdbcType="VARCHAR" property="postImage" />
+    <result column="post_brief" jdbcType="VARCHAR" property="postBrief" />
+    <result column="post_title" jdbcType="VARCHAR" property="postTitle" />
+    <result column="post_body" jdbcType="VARCHAR" property="postBody" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    post_id, publicaccount_id, publicaccount_name, post_date, post_image, post_brief,
+    post_title, post_body
+  </sql>
+  <select id="selectByPublicAccountId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from post
+    where publicaccount_id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from post
+    where post_id = #{postId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from post
+    where post_id = #{postId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.project.domain.Post">
+    insert into post (post_id, publicaccount_id, publicaccount_name,
+      post_date, post_image, post_brief,
+      post_title, post_body)
+    values (#{postId,jdbcType=INTEGER}, #{publicaccountId,jdbcType=INTEGER}, #{publicaccountName,jdbcType=VARCHAR},
+      #{postDate,jdbcType=TIMESTAMP}, #{postImage,jdbcType=VARCHAR}, #{postBrief,jdbcType=VARCHAR},
+      #{postTitle,jdbcType=VARCHAR}, #{postBody,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.project.domain.Post">
+    insert into post
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="postId != null">
+        post_id,
+      </if>
+      <if test="publicaccountId != null">
+        publicaccount_id,
+      </if>
+      <if test="publicaccountName != null">
+        publicaccount_name,
+      </if>
+      <if test="postDate != null">
+        post_date,
+      </if>
+      <if test="postImage != null">
+        post_image,
+      </if>
+      <if test="postBrief != null">
+        post_brief,
+      </if>
+      <if test="postTitle != null">
+        post_title,
+      </if>
+      <if test="postBody != null">
+        post_body,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="postId != null">
+        #{postId,jdbcType=INTEGER},
+      </if>
+      <if test="publicaccountId != null">
+        #{publicaccountId,jdbcType=INTEGER},
+      </if>
+      <if test="publicaccountName != null">
+        #{publicaccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="postDate != null">
+        #{postDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="postImage != null">
+        #{postImage,jdbcType=VARCHAR},
+      </if>
+      <if test="postBrief != null">
+        #{postBrief,jdbcType=VARCHAR},
+      </if>
+      <if test="postTitle != null">
+        #{postTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="postBody != null">
+        #{postBody,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.project.domain.Post">
+    update post
+    <set>
+      <if test="publicaccountId != null">
+        publicaccount_id = #{publicaccountId,jdbcType=INTEGER},
+      </if>
+      <if test="publicaccountName != null">
+        publicaccount_name = #{publicaccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="postDate != null">
+        post_date = #{postDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="postImage != null">
+        post_image = #{postImage,jdbcType=VARCHAR},
+      </if>
+      <if test="postBrief != null">
+        post_brief = #{postBrief,jdbcType=VARCHAR},
+      </if>
+      <if test="postTitle != null">
+        post_title = #{postTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="postBody != null">
+        post_body = #{postBody,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where post_id = #{postId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.project.domain.Post">
+    update post
+    set publicaccount_id = #{publicaccountId,jdbcType=INTEGER},
+      publicaccount_name = #{publicaccountName,jdbcType=VARCHAR},
+      post_date = #{postDate,jdbcType=TIMESTAMP},
+      post_image = #{postImage,jdbcType=VARCHAR},
+      post_brief = #{postBrief,jdbcType=VARCHAR},
+      post_title = #{postTitle,jdbcType=VARCHAR},
+      post_body = #{postBody,jdbcType=VARCHAR}
+    where post_id = #{postId,jdbcType=INTEGER}
+  </update>
+</mapper>

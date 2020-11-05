@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.mapper.AnnouncementMapper">
+  <resultMap id="BaseResultMap" type="com.project.domain.Announcement">
+    <id column="announcement_id" jdbcType="INTEGER" property="announcementId" />
+    <result column="announcement_type" jdbcType="VARCHAR" property="announcementType" />
+    <result column="announcement_title" jdbcType="VARCHAR" property="announcementTitle" />
+    <result column="announcement_body" jdbcType="VARCHAR" property="announcementBody" />
+    <result column="announcement_url" jdbcType="VARCHAR" property="announcementUrl" />
+    <result column="announcement_sender" jdbcType="INTEGER" property="announcementSender" />
+    <result column="announcement_date" jdbcType="TIMESTAMP" property="announcementDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    announcement_id, announcement_type, announcement_title, announcement_body, announcement_url,
+    announcement_sender, announcement_date
+  </sql>
+  <!--获得系统公告（sender为0）LXP-->
+  <select id="getSystemAnnouncement" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from announcement
+    where announcement_sender = 0
+  </select>
+  <!--根据公告类型以及发送者id查找公告 LXP-->
+  <select id="getAnnouncement" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from announcement
+    where announcement_type = #{type} and announcement_sender = #{sender}
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from announcement
+    where announcement_id = #{announcementId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from announcement
+    where announcement_id = #{announcementId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.project.domain.Announcement">
+    insert into announcement (announcement_id, announcement_type,
+      announcement_title, announcement_body, announcement_url,
+      announcement_sender, announcement_date)
+    values (#{announcementId,jdbcType=INTEGER}, #{announcementType,jdbcType=VARCHAR},
+      #{announcementTitle,jdbcType=VARCHAR}, #{announcementBody,jdbcType=VARCHAR}, #{announcementUrl,jdbcType=VARCHAR},
+      #{announcementSender,jdbcType=INTEGER}, #{announcementDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.project.domain.Announcement">
+    insert into announcement
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="announcementId != null">
+        announcement_id,
+      </if>
+      <if test="announcementType != null">
+        announcement_type,
+      </if>
+      <if test="announcementTitle != null">
+        announcement_title,
+      </if>
+      <if test="announcementBody != null">
+        announcement_body,
+      </if>
+      <if test="announcementUrl != null">
+        announcement_url,
+      </if>
+      <if test="announcementSender != null">
+        announcement_sender,
+      </if>
+      <if test="announcementDate != null">
+        announcement_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="announcementId != null">
+        #{announcementId,jdbcType=INTEGER},
+      </if>
+      <if test="announcementType != null">
+        #{announcementType,jdbcType=VARCHAR},
+      </if>
+      <if test="announcementTitle != null">
+        #{announcementTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="announcementBody != null">
+        #{announcementBody,jdbcType=VARCHAR},
+      </if>
+      <if test="announcementUrl != null">
+        #{announcementUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="announcementSender != null">
+        #{announcementSender,jdbcType=INTEGER},
+      </if>
+      <if test="announcementDate != null">
+        #{announcementDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.project.domain.Announcement">
+    update announcement
+    <set>
+      <if test="announcementType != null">
+        announcement_type = #{announcementType,jdbcType=VARCHAR},
+      </if>
+      <if test="announcementTitle != null">
+        announcement_title = #{announcementTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="announcementBody != null">
+        announcement_body = #{announcementBody,jdbcType=VARCHAR},
+      </if>
+      <if test="announcementUrl != null">
+        announcement_url = #{announcementUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="announcementSender != null">
+        announcement_sender = #{announcementSender,jdbcType=INTEGER},
+      </if>
+      <if test="announcementDate != null">
+        announcement_date = #{announcementDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where announcement_id = #{announcementId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.project.domain.Announcement">
+    update announcement
+    set announcement_type = #{announcementType,jdbcType=VARCHAR},
+      announcement_title = #{announcementTitle,jdbcType=VARCHAR},
+      announcement_body = #{announcementBody,jdbcType=VARCHAR},
+      announcement_url = #{announcementUrl,jdbcType=VARCHAR},
+      announcement_sender = #{announcementSender,jdbcType=INTEGER},
+      announcement_date = #{announcementDate,jdbcType=TIMESTAMP}
+    where announcement_id = #{announcementId,jdbcType=INTEGER}
+  </update>
+</mapper>

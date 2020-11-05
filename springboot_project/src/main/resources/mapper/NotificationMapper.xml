@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.mapper.NotificationMapper">
+  <resultMap id="BaseResultMap" type="com.project.domain.Notification">
+    <id column="notification_id" jdbcType="INTEGER" property="notificationId" />
+    <result column="notification_receiver_id" jdbcType="INTEGER" property="notificationReceiverId" />
+    <result column="notification_sender_id" jdbcType="INTEGER" property="notificationSenderId" />
+    <result column="notification_type" jdbcType="VARCHAR" property="notificationType" />
+    <result column="notification_checked" jdbcType="CHAR" property="notificationChecked" />
+    <result column="notification_body" jdbcType="VARCHAR" property="notificationBody" />
+    <result column="notification_time" jdbcType="TIMESTAMP" property="notificationTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    notification_id, notification_receiver_id, notification_sender_id, notification_type, 
+    notification_checked, notification_body, notification_time
+  </sql>
+  <select id="selectByReceiverId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from notification
+    where notification_receiver_id = #{receiverId,jdbcType=INTEGER}
+    order by notification_id desc
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from notification
+    where notification_id = #{notificationId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from notification
+    where notification_id = #{notificationId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.project.domain.Notification">
+    insert into notification (notification_id, notification_receiver_id, 
+      notification_sender_id, notification_type, 
+      notification_checked, notification_body, notification_time
+      )
+    values (#{notificationId,jdbcType=INTEGER}, #{notificationReceiverId,jdbcType=INTEGER}, 
+      #{notificationSenderId,jdbcType=INTEGER}, #{notificationType,jdbcType=VARCHAR}, 
+      #{notificationChecked,jdbcType=CHAR}, #{notificationBody,jdbcType=VARCHAR}, #{notificationTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.project.domain.Notification">
+    insert into notification
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="notificationId != null">
+        notification_id,
+      </if>
+      <if test="notificationReceiverId != null">
+        notification_receiver_id,
+      </if>
+      <if test="notificationSenderId != null">
+        notification_sender_id,
+      </if>
+      <if test="notificationType != null">
+        notification_type,
+      </if>
+      <if test="notificationChecked != null">
+        notification_checked,
+      </if>
+      <if test="notificationBody != null">
+        notification_body,
+      </if>
+      <if test="notificationTime != null">
+        notification_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="notificationId != null">
+        #{notificationId,jdbcType=INTEGER},
+      </if>
+      <if test="notificationReceiverId != null">
+        #{notificationReceiverId,jdbcType=INTEGER},
+      </if>
+      <if test="notificationSenderId != null">
+        #{notificationSenderId,jdbcType=INTEGER},
+      </if>
+      <if test="notificationType != null">
+        #{notificationType,jdbcType=VARCHAR},
+      </if>
+      <if test="notificationChecked != null">
+        #{notificationChecked,jdbcType=CHAR},
+      </if>
+      <if test="notificationBody != null">
+        #{notificationBody,jdbcType=VARCHAR},
+      </if>
+      <if test="notificationTime != null">
+        #{notificationTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.project.domain.Notification">
+    update notification
+    <set>
+      <if test="notificationReceiverId != null">
+        notification_receiver_id = #{notificationReceiverId,jdbcType=INTEGER},
+      </if>
+      <if test="notificationSenderId != null">
+        notification_sender_id = #{notificationSenderId,jdbcType=INTEGER},
+      </if>
+      <if test="notificationType != null">
+        notification_type = #{notificationType,jdbcType=VARCHAR},
+      </if>
+      <if test="notificationChecked != null">
+        notification_checked = #{notificationChecked,jdbcType=CHAR},
+      </if>
+      <if test="notificationBody != null">
+        notification_body = #{notificationBody,jdbcType=VARCHAR},
+      </if>
+      <if test="notificationTime != null">
+        notification_time = #{notificationTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where notification_id = #{notificationId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.project.domain.Notification">
+    update notification
+    set notification_receiver_id = #{notificationReceiverId,jdbcType=INTEGER},
+      notification_sender_id = #{notificationSenderId,jdbcType=INTEGER},
+      notification_type = #{notificationType,jdbcType=VARCHAR},
+      notification_checked = #{notificationChecked,jdbcType=CHAR},
+      notification_body = #{notificationBody,jdbcType=VARCHAR},
+      notification_time = #{notificationTime,jdbcType=TIMESTAMP}
+    where notification_id = #{notificationId,jdbcType=INTEGER}
+  </update>
+</mapper>
