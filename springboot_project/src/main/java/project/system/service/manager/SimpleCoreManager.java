@@ -1,8 +1,6 @@
-package com.project.service.manager;
+package project.system.service.manager;
 
-import com.project.error.BusinessException;
-import com.project.error.EmBusinessError;
-import com.project.response.response.TokenInfoResponse;
+
 import io.openvidu.java.client.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
@@ -10,6 +8,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import project.system.error.BusinessException;
+import project.system.error.EmBusinessError;
+import project.system.response.response.TokenInfoResponse;
+
 import javax.annotation.Resource;
 import java.util.Collections;
 import java.util.List;

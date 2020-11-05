@@ -1,4 +1,4 @@
-package com.project.common.utils;
+package project.system.common.utils;
 
 import org.apache.poi.xwpf.model.XWPFHeaderFooterPolicy;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;

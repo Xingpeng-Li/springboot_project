@@ -1,10 +1,6 @@
-package com.project.service.impl;
+package project.system.service.impl;
 
-import com.project.domain.Post;
-import com.project.error.BusinessException;
-import com.project.error.EmBusinessError;
-import com.project.mapper.PostMapper;
-import com.project.service.UploadService;
+
 import com.qcloud.cos.COSClient;
 import com.qcloud.cos.ClientConfig;
 import com.qcloud.cos.auth.BasicCOSCredentials;
@@ -15,6 +11,11 @@ import com.qcloud.cos.region.Region;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import project.system.domain.Post;
+import project.system.error.BusinessException;
+import project.system.error.EmBusinessError;
+import project.system.mapper.PostMapper;
+import project.system.service.UploadService;
 
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;

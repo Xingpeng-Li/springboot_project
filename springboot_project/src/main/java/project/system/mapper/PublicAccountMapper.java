@@ -1,7 +1,7 @@
-package com.project.mapper;
+package project.system.mapper;
 
-import com.project.domain.PublicAccount;
 import org.apache.ibatis.annotations.Mapper;
+import project.system.domain.PublicAccount;
 
 import java.util.List;
 

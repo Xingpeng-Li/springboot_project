@@ -1,15 +1,17 @@
-package com.project.service.impl;
+package project.system.service.impl;
 
-import com.project.common.utils.TencentCosClient;
-import com.project.domain.Cloudfile;
-import com.project.error.BusinessException;
-import com.project.error.EmBusinessError;
-import com.project.mapper.CloudfileMapper;
-import com.project.service.CloudFileService;
-import com.project.view.CloudFileView;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import project.system.common.utils.TencentCosClient;
+import project.system.domain.Cloudfile;
+import project.system.error.BusinessException;
+import project.system.error.EmBusinessError;
+import project.system.mapper.CloudfileMapper;
+import project.system.service.CloudFileService;
+import project.system.view.CloudFileView;
+
 import javax.annotation.Resource;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

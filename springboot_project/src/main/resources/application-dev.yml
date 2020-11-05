@@ -2,9 +2,9 @@ spring:
   datasource:
 #    type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://cdb-8mhotb2i.cd.tencentcdb.com:10083/telecommutingdb?serverTimezone=GMT%2B8&rewriteBatchedStatements=true
+    url: jdbc:mysql://localhost:3306/telecommutingdb?serverTimezone=GMT%2B8&rewriteBatchedStatements=true
     username: root
-    password: 168171miaowhu!
+    password: xbc360121
   mail:
     #smtp服务主机  qq邮箱则为smtp.qq.com
     #host: smtp.163.com
@@ -29,20 +29,20 @@ mybatis:
 #  bucketName: telecommuting-1301994676
 #  path: https://miaowhupic-1301994676.cos.ap-chengdu.myqcloud.com
 #  qianzhui: miaowhupic
-#tx:
+tx:
 #  sms:
 #    appId: 1400397557
 #    appKey: b31ac26f3d8a76c0c8bf75d885190bb9
 #    templateId: 657579
 #    smsSign: 喵武个人小程序
 #    smsEffectiveTime: 2
-#  cos:
-#    secretId: AKIDWmAJBdFR0LrfkUzGVWIrBD0bNvBCbXnk
-#    secretKey: t4xYw5yadWZN0xe6GE0tWt0FFySpKYVC
-#    region: ap-chengdu
-#    bucketName: telecommuting-1301994676
-#    path: https://telecommuting-1301994676.cos.ap-chengdu.myqcloud.com/
-#    prefix: telecommutingCloudFile
+  cos:
+    secretId: AKIDe5sQpzRXu3zf44hQp6KOnxbzDCvQbeNw
+    secretKey: ub2CZgZBfusa5h7HAoa7NkXKtI8QTFnc
+    region: ap-nanjing
+    bucketName: officesystem-1304131169
+    path: https://officesystem-1304131169.cos.ap-nanjing.myqcloud.com
+    prefix: officesystemCloudFile
 #  speech:
 #    secretId: AKIDWmAJBdFR0LrfkUzGVWIrBD0bNvBCbXnk
 #    secretKey: t4xYw5yadWZN0xe6GE0tWt0FFySpKYVC
@@ -59,12 +59,12 @@ config:
     #iss 签发者
     iss: miaowhu
 server:
-  port: 443
-  ssl:
-    key-store: classpath:miaowhu.cn.jks
-    key-store-password: 168171miaowhu
-    key-store-type: JKS
-    enabled: true
+  port: 8080
+#  ssl:
+#    key-store: classpath:miaowhu.cn.jks
+#    key-store-password: 168171miaowhu
+#    key-store-type: JKS
+#    enabled: true
 openvidu:
   #  url: https://212.64.65.145:4443/
   url: https://sx3.51guagua.top

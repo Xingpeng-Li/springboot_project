@@ -1,15 +1,15 @@
-package com.project.service.impl;
+package project.system.service.impl;
 
-import com.project.common.utils.TencentCosClient;
-import com.project.domain.Announcement;
-import com.project.domain.User;
-import com.project.error.BusinessException;
-import com.project.error.EmBusinessError;
-import com.project.mapper.AnnouncementMapper;
-import com.project.mapper.UserMapper;
-import com.project.service.AnnouncementService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import project.system.common.utils.TencentCosClient;
+import project.system.domain.Announcement;
+import project.system.domain.User;
+import project.system.error.BusinessException;
+import project.system.error.EmBusinessError;
+import project.system.mapper.AnnouncementMapper;
+import project.system.mapper.UserMapper;
+import project.system.service.AnnouncementService;
 
 import javax.annotation.Resource;
 import java.text.SimpleDateFormat;

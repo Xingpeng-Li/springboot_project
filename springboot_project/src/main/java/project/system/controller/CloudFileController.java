@@ -1,14 +1,5 @@
 package project.system.controller;
 
-import com.project.common.utils.RequestUtil;
-import com.project.domain.Cloudfile;
-import com.project.response.CommonReturnType;
-import com.project.response.response.TokenInfoResponse;
-import com.project.service.CloudFileService;
-import com.project.service.LoginService;
-import com.project.service.TokenService;
-import com.project.view.CloudFileView;
-import com.project.view.UserDetailView;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -17,8 +8,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import project.system.common.utils.RequestUtil;
+import project.system.domain.Cloudfile;
 import project.system.error.BusinessException;
 import project.system.error.EmBusinessError;
+import project.system.response.CommonReturnType;
+import project.system.response.response.TokenInfoResponse;
+import project.system.service.CloudFileService;
+import project.system.service.LoginService;
+import project.system.service.TokenService;
+import project.system.view.CloudFileView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -58,13 +57,16 @@ public class CloudFileController extends BaseController {
         //登录有效性判断
         String token= RequestUtil.getCookievalue(request);
         TokenInfoResponse tokenInfoResponse = loginService.checkLogin(token);
-        if(tokenInfoResponse==null||tokenService.isExpiration(token))
+        if(tokenInfoResponse==null||tokenService.isExpiration(token)) {
             throw new BusinessException(EmBusinessError.UNLOGIN);
+        }
         //发起文件上传请求，文件上传成功返回true
-        if(cloudFileService.uploadFile(file,Integer.parseInt(tokenInfoResponse.getUserId())))
-        return CommonReturnType.create(null);//返回请求成功响应
-        else
+        if(cloudFileService.uploadFile(file,Integer.parseInt(tokenInfoResponse.getUserId()))) {
+            return CommonReturnType.create(null);//返回请求成功响应
+        }
+        else {
             throw new BusinessException(EmBusinessError.FILE_UPLOAD_FAIL);//抛出上传失败异常
+        }
     }
     //保存文件接口
     @ApiOperation(value = "保存文件接口",notes = "将他人的云空间文件保存到自己的云空间")
@@ -84,12 +86,16 @@ public class CloudFileController extends BaseController {
         TokenInfoResponse tokenInfoResponse = loginService.checkLogin(token);
         Cloudfile cloudfile=cloudFileService.getFileById(fileId);
         Integer userId=Integer.parseInt(tokenInfoResponse.getUserId());
-        if(cloudfile==null)//要复制的目标文件不存在
+        if(cloudfile==null) {//要复制的目标文件不存在
             throw new BusinessException(EmBusinessError.DB_ERROR);//抛出文件不存在的异常
+        }
         if(cloudFileService.copyFile(cloudfile,userId)){
-            return CommonReturnType.create(null);}//复制成功
-        else
+            return CommonReturnType.create(null);
+        }//复制成功
+        else{
             throw new BusinessException(EmBusinessError.FILE_COPY_FAIL);//复制失败
+        }
+
     }
     @ApiOperation(value = "获取文件列表接口",notes = "后端分页获取")
     @ApiResponses({
@@ -114,8 +120,9 @@ public class CloudFileController extends BaseController {
         //登录有效性验证
         String token= RequestUtil.getCookievalue(request);
         TokenInfoResponse tokenInfoResponse = loginService.checkLogin(token);
-        if(tokenInfoResponse==null||tokenService.isExpiration(token))
+        if(tokenInfoResponse==null||tokenService.isExpiration(token)) {
             throw new BusinessException(EmBusinessError.UNLOGIN);
+        }
         //获取文件列表
         List<CloudFileView> cloudFiles =cloudFileService.getMyFiles(Integer.parseInt(tokenInfoResponse.getUserId()),Integer.parseInt(pageNumber),Integer.parseInt(pageSize));
         return CommonReturnType.create(cloudFiles);//成功返回文件列表
@@ -136,12 +143,15 @@ public class CloudFileController extends BaseController {
         //登录有效性验证
         String token= RequestUtil.getCookievalue(request);
         TokenInfoResponse tokenInfoResponse = loginService.checkLogin(token);
-        if(tokenInfoResponse==null||tokenService.isExpiration(token))
+        if(tokenInfoResponse==null||tokenService.isExpiration(token)) {
             throw new BusinessException(EmBusinessError.UNLOGIN);
-        if(cloudFileService.deleteFile(fileId))
+        }
+        if(cloudFileService.deleteFile(fileId)) {
             return CommonReturnType.create(null);//删除成功
-        else
+        }
+        else {
             throw new BusinessException(EmBusinessError.DB_ERROR);//删除失败
+        }
     }
     @ApiOperation(value = "获取所有文件列表接口",notes = "前端分页")
     @ApiResponses({
@@ -157,8 +167,9 @@ public class CloudFileController extends BaseController {
         //登录有效性验证
         String token= RequestUtil.getCookievalue(request);
         TokenInfoResponse tokenInfoResponse = loginService.checkLogin(token);
-        if(tokenInfoResponse==null||tokenService.isExpiration(token))
+        if(tokenInfoResponse==null||tokenService.isExpiration(token)) {
             throw new BusinessException(EmBusinessError.UNLOGIN);
+        }
         //获取文件列表
         List<CloudFileView> cloudFiles=cloudFileService.getAllFiles(Integer.parseInt(tokenInfoResponse.getUserId()));
         return CommonReturnType.create(cloudFiles);//成功返回文件列表

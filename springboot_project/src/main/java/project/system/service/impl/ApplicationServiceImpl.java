@@ -1,14 +1,14 @@
-package com.project.service.impl;
+package project.system.service.impl;
 
-import com.project.domain.Application;
-import com.project.domain.Notification;
-import com.project.error.BusinessException;
-import com.project.error.EmBusinessError;
-import com.project.mapper.ApplicationMapper;
-import com.project.mapper.NotificationMapper;
-import com.project.mapper.UserMapper;
-import com.project.service.ApplicationService;
 import org.springframework.stereotype.Service;
+import project.system.domain.Application;
+import project.system.domain.Notification;
+import project.system.error.BusinessException;
+import project.system.error.EmBusinessError;
+import project.system.mapper.ApplicationMapper;
+import project.system.mapper.NotificationMapper;
+import project.system.mapper.UserMapper;
+import project.system.service.ApplicationService;
 
 import javax.annotation.Resource;
 import java.sql.Timestamp;

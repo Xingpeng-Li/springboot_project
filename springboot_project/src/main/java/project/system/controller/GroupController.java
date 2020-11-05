@@ -1,15 +1,5 @@
 package project.system.controller;
 
-import com.project.common.utils.RequestUtil;
-import com.project.error.BusinessException;
-import com.project.error.EmBusinessError;
-import com.project.response.CommonReturnType;
-import com.project.response.request.GroupRequest;
-import com.project.response.response.GroupResponse;
-import com.project.response.response.TokenInfoResponse;
-import com.project.service.GroupMemberService;
-import com.project.service.LoginService;
-import com.project.service.manager.SimpleCoreManager;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -18,6 +8,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import project.system.common.utils.RequestUtil;
+import project.system.error.BusinessException;
+import project.system.error.EmBusinessError;
+import project.system.response.CommonReturnType;
+import project.system.response.request.GroupRequest;
+import project.system.response.response.GroupResponse;
+import project.system.response.response.TokenInfoResponse;
+import project.system.service.GroupMemberService;
+import project.system.service.LoginService;
+import project.system.service.manager.SimpleCoreManager;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;

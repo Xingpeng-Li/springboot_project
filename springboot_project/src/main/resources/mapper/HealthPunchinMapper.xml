@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.project.mapper.HealthPunchinMapper">
-  <resultMap id="BaseResultMap" type="com.project.domain.HealthPunchin">
+<mapper namespace="project.system.mapper.HealthPunchinMapper">
+  <resultMap id="BaseResultMap" type="project.system.domain.HealthPunchin">
     <id column="punchin_id" jdbcType="INTEGER" property="punchinId" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="user_body_temp" jdbcType="DOUBLE" property="userBodyTemp" />
@@ -37,7 +37,7 @@
     delete from healthpunchin
     where punchin_id = #{punchinId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.project.domain.HealthPunchin">
+  <insert id="insert" parameterType="project.system.domain.HealthPunchin">
     insert into healthpunchin (punchin_id, user_id, user_body_temp,
       city, province, punchin_date,
       punchin_note, contact_suspected_case, user_health_status
@@ -47,7 +47,7 @@
       #{punchinNote,jdbcType=VARCHAR}, #{contactSuspectedCase,jdbcType=CHAR}, #{userHealthStatus,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.project.domain.HealthPunchin">
+  <insert id="insertSelective" parameterType="project.system.domain.HealthPunchin">
     insert into healthpunchin
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="punchinId != null">
@@ -108,7 +108,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.project.domain.HealthPunchin">
+  <update id="updateByPrimaryKeySelective" parameterType="project.system.domain.HealthPunchin">
     update healthpunchin
     <set>
       <if test="userId != null">
@@ -138,7 +138,7 @@
     </set>
     where punchin_id = #{punchinId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.project.domain.HealthPunchin">
+  <update id="updateByPrimaryKey" parameterType="project.system.domain.HealthPunchin">
     update healthpunchin
     set user_id = #{userId,jdbcType=INTEGER},
       user_body_temp = #{userBodyTemp,jdbcType=DOUBLE},

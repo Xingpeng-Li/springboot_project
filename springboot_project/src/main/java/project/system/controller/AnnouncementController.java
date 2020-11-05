@@ -1,11 +1,5 @@
 package project.system.controller;
 
-import com.project.common.utils.RequestUtil;
-import com.project.response.CommonReturnType;
-import com.project.response.response.TokenInfoResponse;
-import com.project.service.AnnouncementService;
-import com.project.service.LoginService;
-import com.project.service.TokenService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -15,8 +9,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import project.system.common.utils.RequestUtil;
 import project.system.error.BusinessException;
 import project.system.error.EmBusinessError;
+import project.system.response.CommonReturnType;
+import project.system.response.response.TokenInfoResponse;
+import project.system.service.AnnouncementService;
+import project.system.service.TokenService;
+import project.system.service.LoginService;
+
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;

@@ -1,4 +1,4 @@
-package com.project.autoconfig;
+package project.system.autoconfig;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

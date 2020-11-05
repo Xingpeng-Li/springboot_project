@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.project.mapper.PunchinMapper">
-  <resultMap id="BaseResultMap" type="com.project.domain.Punchin">
+<mapper namespace="project.system.mapper.PunchinMapper">
+  <resultMap id="BaseResultMap" type="project.system.domain.Punchin">
     <id column="punchin_id" jdbcType="INTEGER" property="punchinId" />
     <result column="puchin_time" jdbcType="TIMESTAMP" property="puchinTime" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
@@ -31,13 +31,13 @@
     delete from punchin
     where punchin_id = #{punchinId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.project.domain.Punchin">
+  <insert id="insert" parameterType="project.system.domain.Punchin">
     insert into punchin (punchin_id, puchin_time, user_id,
       punchin_location)
     values (#{punchinId,jdbcType=INTEGER}, #{puchinTime,jdbcType=TIMESTAMP}, #{userId,jdbcType=INTEGER},
       #{punchinLocation,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.project.domain.Punchin">
+  <insert id="insertSelective" parameterType="project.system.domain.Punchin">
     insert into punchin
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="punchinId != null">
@@ -68,7 +68,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.project.domain.Punchin">
+  <update id="updateByPrimaryKeySelective" parameterType="project.system.domain.Punchin">
     update punchin
     <set>
       <if test="puchinTime != null">
@@ -83,7 +83,7 @@
     </set>
     where punchin_id = #{punchinId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.project.domain.Punchin">
+  <update id="updateByPrimaryKey" parameterType="project.system.domain.Punchin">
     update punchin
     set puchin_time = #{puchinTime,jdbcType=TIMESTAMP},
       user_id = #{userId,jdbcType=INTEGER},

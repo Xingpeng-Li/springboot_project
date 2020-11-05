@@ -1,4 +1,4 @@
-package com.project.domain;
+package project.system.domain;
 
 public class AccountSubscribe {
     private Integer subscribeId;

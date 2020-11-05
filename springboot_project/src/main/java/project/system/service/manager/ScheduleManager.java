@@ -1,4 +1,4 @@
-package com.project.service.manager;
+package project.system.service.manager;
 
 import io.openvidu.java.client.OpenVidu;
 import lombok.extern.slf4j.Slf4j;

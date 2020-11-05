@@ -1,4 +1,4 @@
-package com.project.domain;
+package project.system.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;

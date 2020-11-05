@@ -1,4 +1,4 @@
-package com.project.common.utils;
+package project.system.common.utils;
 /*
 @author DKR
 @CreateDate 2020-7-14
@@ -7,10 +7,7 @@ package com.project.common.utils;
         2020-7-23 DKR 添加水印文件上传接口
 @description 与腾讯云对象存储服务对接的类
 */
-import com.project.domain.Cloudfile;
-import com.project.error.BusinessException;
-import com.project.error.EmBusinessError;
-import com.project.mapper.CloudfileMapper;
+
 import com.qcloud.cos.COSClient;
 import com.qcloud.cos.ClientConfig;
 import com.qcloud.cos.auth.BasicCOSCredentials;
@@ -23,6 +20,11 @@ import com.qcloud.cos.region.Region;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
+import project.system.domain.Cloudfile;
+import project.system.error.BusinessException;
+import project.system.error.EmBusinessError;
+import project.system.mapper.CloudfileMapper;
+
 import javax.annotation.Resource;
 import java.io.File;
 @Component

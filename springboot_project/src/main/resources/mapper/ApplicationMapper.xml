@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.project.mapper.ApplicationMapper">
-  <resultMap id="BaseResultMap" type="com.project.domain.Application">
+<mapper namespace="project.system.mapper.ApplicationMapper">
+  <resultMap id="BaseResultMap" type="project.system.domain.Application">
     <id column="application_id" jdbcType="INTEGER" property="applicationId" />
     <result column="applicant_id" jdbcType="INTEGER" property="applicantId" />
     <result column="approver_id" jdbcType="INTEGER" property="approverId" />
@@ -27,7 +27,7 @@
     where application_id = #{applicationId,jdbcType=INTEGER}
   </delete>
   <!--返回插入后application的主键-->
-  <insert id="insert" parameterType="com.project.domain.Application">
+  <insert id="insert" parameterType="project.system.domain.Application">
     insert into application (application_id, applicant_id, approver_id, 
       second_approver_id, application_type, application_reason, 
       application_start_time, application_end_time, 
@@ -37,7 +37,7 @@
       #{applicationStartTime,jdbcType=TIMESTAMP}, #{applicationEndTime,jdbcType=TIMESTAMP}, 
       #{applicationTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.project.domain.Application" useGeneratedKeys="true" keyProperty="applicationId" keyColumn="application_id">
+  <insert id="insertSelective" parameterType="project.system.domain.Application" useGeneratedKeys="true" keyProperty="applicationId" keyColumn="application_id">
     insert into application
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="applicationId != null">
@@ -98,7 +98,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.project.domain.Application">
+  <update id="updateByPrimaryKeySelective" parameterType="project.system.domain.Application">
     update application
     <set>
       <if test="applicantId != null">
@@ -128,7 +128,7 @@
     </set>
     where application_id = #{applicationId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.project.domain.Application">
+  <update id="updateByPrimaryKey" parameterType="project.system.domain.Application">
     update application
     set applicant_id = #{applicantId,jdbcType=INTEGER},
       approver_id = #{approverId,jdbcType=INTEGER},

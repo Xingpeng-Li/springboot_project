@@ -1,11 +1,12 @@
-package com.project.ws.utils;
+package project.system.ws.utils;
 
-import com.project.domain.SocketMessage;
-import com.project.domain.User;
-import com.project.mapper.UserMapper;
-import com.project.ws.model.SocketMessageModel;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
+import project.system.domain.SocketMessage;
+import project.system.domain.User;
+import project.system.mapper.UserMapper;
+import project.system.ws.model.SocketMessageModel;
 
 import javax.annotation.Resource;
 
@@ -21,7 +22,7 @@ public class SocketMessageUtil {
     @Resource
     private UserMapper socketUserMapper;
 
-    public  SocketMessageModel convertFromSocketMessage(SocketMessage socketMessage) {
+    public SocketMessageModel convertFromSocketMessage(SocketMessage socketMessage) {
         if (socketMessage == null) {
             return null;
         }

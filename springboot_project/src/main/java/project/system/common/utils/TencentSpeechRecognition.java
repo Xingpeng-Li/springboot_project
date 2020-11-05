@@ -1,6 +1,5 @@
-package com.project.common.utils;
-import com.project.error.BusinessException;
-import com.project.error.EmBusinessError;
+package project.system.common.utils;
+
 import com.tencentcloudapi.asr.v20190614.models.DescribeTaskStatusRequest;
 import com.tencentcloudapi.asr.v20190614.models.DescribeTaskStatusResponse;
 import com.tencentcloudapi.common.Credential;
@@ -12,6 +11,9 @@ import com.tencentcloudapi.asr.v20190614.models.CreateRecTaskRequest;
 import com.tencentcloudapi.asr.v20190614.models.CreateRecTaskResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import project.system.error.BusinessException;
+import project.system.error.EmBusinessError;
+
 /*
 @author DKR
 @CreateDate 2020-7-17

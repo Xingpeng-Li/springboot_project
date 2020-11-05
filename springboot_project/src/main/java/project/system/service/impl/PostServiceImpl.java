@@ -1,11 +1,12 @@
-package com.project.service.impl;
+package project.system.service.impl;
 
-import com.project.domain.Post;
-import com.project.error.BusinessException;
-import com.project.error.EmBusinessError;
-import com.project.mapper.PostMapper;
-import com.project.service.PostService;
+
 import org.springframework.stereotype.Service;
+import project.system.domain.Post;
+import project.system.error.BusinessException;
+import project.system.error.EmBusinessError;
+import project.system.mapper.PostMapper;
+import project.system.service.PostService;
 
 import javax.annotation.Resource;
 

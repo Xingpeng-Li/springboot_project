@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.project.mapper.AnnouncementMapper">
-  <resultMap id="BaseResultMap" type="com.project.domain.Announcement">
+<mapper namespace="project.system.mapper.AnnouncementMapper">
+  <resultMap id="BaseResultMap" type="project.system.domain.Announcement">
     <id column="announcement_id" jdbcType="INTEGER" property="announcementId" />
     <result column="announcement_type" jdbcType="VARCHAR" property="announcementType" />
     <result column="announcement_title" jdbcType="VARCHAR" property="announcementTitle" />
@@ -38,7 +38,7 @@
     delete from announcement
     where announcement_id = #{announcementId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.project.domain.Announcement">
+  <insert id="insert" parameterType="project.system.domain.Announcement">
     insert into announcement (announcement_id, announcement_type,
       announcement_title, announcement_body, announcement_url,
       announcement_sender, announcement_date)
@@ -46,7 +46,7 @@
       #{announcementTitle,jdbcType=VARCHAR}, #{announcementBody,jdbcType=VARCHAR}, #{announcementUrl,jdbcType=VARCHAR},
       #{announcementSender,jdbcType=INTEGER}, #{announcementDate,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.project.domain.Announcement">
+  <insert id="insertSelective" parameterType="project.system.domain.Announcement">
     insert into announcement
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="announcementId != null">
@@ -95,7 +95,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.project.domain.Announcement">
+  <update id="updateByPrimaryKeySelective" parameterType="project.system.domain.Announcement">
     update announcement
     <set>
       <if test="announcementType != null">
@@ -119,7 +119,7 @@
     </set>
     where announcement_id = #{announcementId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.project.domain.Announcement">
+  <update id="updateByPrimaryKey" parameterType="project.system.domain.Announcement">
     update announcement
     set announcement_type = #{announcementType,jdbcType=VARCHAR},
       announcement_title = #{announcementTitle,jdbcType=VARCHAR},

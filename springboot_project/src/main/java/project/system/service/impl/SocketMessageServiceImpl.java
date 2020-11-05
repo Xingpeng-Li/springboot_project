@@ -1,9 +1,10 @@
-package com.project.service.impl;
+package project.system.service.impl;
 
-import com.project.domain.SocketMessage;
-import com.project.mapper.SocketMessageMapper;
-import com.project.service.SocketMessageService;
+
 import org.springframework.stereotype.Service;
+import project.system.domain.SocketMessage;
+import project.system.mapper.SocketMessageMapper;
+import project.system.service.SocketMessageService;
 
 import javax.annotation.Resource;
 import java.util.Date;

@@ -1,6 +1,6 @@
-package com.project.common.utils;
+package project.system.common.utils;
 
-import com.project.common.constant.RequestConstant;
+import project.system.common.constant.RequestConstant;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;

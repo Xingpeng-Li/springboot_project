@@ -1,6 +1,6 @@
-package com.project.domain;
+package project.system.domain;
 
-import com.project.common.utils.Md5Utils;
+import project.system.common.utils.Md5Utils;
 
 public class User {
 

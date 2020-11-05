@@ -1,16 +1,15 @@
-package com.project.ws.config;
+package project.system.ws.config;
 
 
-import com.project.mapper.UserMapper;
-import com.project.service.SocketMessageService;
-import com.project.service.manager.SimpleCoreManager;
-import com.project.ws.send.MyWebsocketServer;
-import com.project.ws.send.VideoWebsocketServer;
-import com.project.ws.utils.SocketMessageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.server.standard.ServerEndpointExporter;
+
+import project.system.mapper.UserMapper;
+import project.system.service.SocketMessageService;
+import project.system.ws.send.MyWebsocketServer;
+import project.system.ws.utils.SocketMessageUtil;
 
 /*
 @author WL

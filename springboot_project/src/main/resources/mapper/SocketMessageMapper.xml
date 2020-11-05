@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.project.mapper.SocketMessageMapper">
-  <resultMap id="BaseResultMap" type="com.project.domain.SocketMessage">
+<mapper namespace="project.system.mapper.SocketMessageMapper">
+  <resultMap id="BaseResultMap" type="project.system.domain.SocketMessage">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="launch_id" jdbcType="VARCHAR" property="launchId" />
     <result column="receive_id" jdbcType="VARCHAR" property="receiveId" />
@@ -40,7 +40,7 @@
     delete from socket_message
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.project.domain.SocketMessage">
+  <insert id="insert" parameterType="project.system.domain.SocketMessage">
     insert into socket_message (id, launch_id, receive_id,
       content, type, create_time,
       dept_id, company_id)
@@ -48,7 +48,7 @@
       #{content,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP},
       #{deptId,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.project.domain.SocketMessage">
+  <insert id="insertSelective" parameterType="project.system.domain.SocketMessage">
     insert into socket_message
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -103,7 +103,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.project.domain.SocketMessage">
+  <update id="updateByPrimaryKeySelective" parameterType="project.system.domain.SocketMessage">
     update socket_message
     <set>
       <if test="launchId != null">
@@ -130,7 +130,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.project.domain.SocketMessage">
+  <update id="updateByPrimaryKey" parameterType="project.system.domain.SocketMessage">
     update socket_message
     set launch_id = #{launchId,jdbcType=VARCHAR},
       receive_id = #{receiveId,jdbcType=VARCHAR},

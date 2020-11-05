@@ -1,7 +1,7 @@
-package com.project.mapper;
+package project.system.mapper;
 
-import com.project.domain.Application;
 import org.apache.ibatis.annotations.Mapper;
+import project.system.domain.Application;
 
 @Mapper
 public interface ApplicationMapper {

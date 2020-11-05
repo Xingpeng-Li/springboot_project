@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.project.mapper.NotificationMapper">
-  <resultMap id="BaseResultMap" type="com.project.domain.Notification">
+<mapper namespace="project.system.mapper.NotificationMapper">
+  <resultMap id="BaseResultMap" type="project.system.domain.Notification">
     <id column="notification_id" jdbcType="INTEGER" property="notificationId" />
     <result column="notification_receiver_id" jdbcType="INTEGER" property="notificationReceiverId" />
     <result column="notification_sender_id" jdbcType="INTEGER" property="notificationSenderId" />
@@ -31,7 +31,7 @@
     delete from notification
     where notification_id = #{notificationId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.project.domain.Notification">
+  <insert id="insert" parameterType="project.system.domain.Notification">
     insert into notification (notification_id, notification_receiver_id, 
       notification_sender_id, notification_type, 
       notification_checked, notification_body, notification_time
@@ -41,7 +41,7 @@
       #{notificationChecked,jdbcType=CHAR}, #{notificationBody,jdbcType=VARCHAR}, #{notificationTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.project.domain.Notification">
+  <insert id="insertSelective" parameterType="project.system.domain.Notification">
     insert into notification
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="notificationId != null">
@@ -90,7 +90,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.project.domain.Notification">
+  <update id="updateByPrimaryKeySelective" parameterType="project.system.domain.Notification">
     update notification
     <set>
       <if test="notificationReceiverId != null">
@@ -114,7 +114,7 @@
     </set>
     where notification_id = #{notificationId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.project.domain.Notification">
+  <update id="updateByPrimaryKey" parameterType="project.system.domain.Notification">
     update notification
     set notification_receiver_id = #{notificationReceiverId,jdbcType=INTEGER},
       notification_sender_id = #{notificationSenderId,jdbcType=INTEGER},

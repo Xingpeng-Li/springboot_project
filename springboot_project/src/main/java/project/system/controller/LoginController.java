@@ -1,21 +1,6 @@
 package project.system.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.project.common.constant.RequestConstant;
-import com.project.common.utils.Md5Utils;
-import com.project.common.utils.RequestUtil;
-import com.project.common.utils.Validator;
-import com.project.domain.User;
-import com.project.error.BusinessException;
-import com.project.error.EmBusinessError;
-import com.project.response.CommonReturnType;
-import com.project.response.request.LoginRequest;
-import com.project.response.response.TokenInfoResponse;
-import com.project.service.LoginService;
-import com.project.service.TokenService;
-import com.project.service.UserService;
-import com.project.service.manager.SimpleCoreManager;
-import com.project.view.UserView;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -25,6 +10,21 @@ import org.apache.commons.lang3.Validate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import project.system.common.constant.RequestConstant;
+import project.system.common.utils.Md5Utils;
+import project.system.common.utils.RequestUtil;
+import project.system.common.utils.Validator;
+import project.system.domain.User;
+import project.system.error.BusinessException;
+import project.system.error.EmBusinessError;
+import project.system.response.CommonReturnType;
+import project.system.response.request.LoginRequest;
+import project.system.response.response.TokenInfoResponse;
+import project.system.service.LoginService;
+import project.system.service.TokenService;
+import project.system.service.UserService;
+import project.system.service.manager.SimpleCoreManager;
+import project.system.view.UserView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -57,7 +57,7 @@ public class LoginController extends BaseController{
             @ApiResponse(code = 2008, message = "验证码过期")
     })
     @RequestMapping("/loginByPhone")
-    public  CommonReturnType login(HttpServletRequest request, HttpServletResponse response){
+    public CommonReturnType login(HttpServletRequest request, HttpServletResponse response){
         //从前端获取需要的参数
         String phoneNumber=request.getParameter("phoneNumber");
         String verificationCode=request.getParameter("verificationCode");

@@ -1,6 +1,6 @@
-package com.project.service;
+package project.system.service;
 
-import com.project.domain.PublicAccount;
+import project.system.domain.PublicAccount;
 
 /*
 @author WL

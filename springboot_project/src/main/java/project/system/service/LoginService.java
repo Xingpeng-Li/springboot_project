@@ -1,7 +1,8 @@
-package com.project.service;
+package project.system.service;
 
-import com.project.response.request.LoginRequest;
-import com.project.response.response.TokenInfoResponse;
+
+import project.system.response.request.LoginRequest;
+import project.system.response.response.TokenInfoResponse;
 
 /*
 @author WL

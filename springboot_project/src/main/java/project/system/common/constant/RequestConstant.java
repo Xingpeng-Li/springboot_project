@@ -1,4 +1,4 @@
-package com.project.common.constant;
+package project.system.common.constant;
 
 /*
 @author WL

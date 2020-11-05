@@ -1,4 +1,4 @@
-package com.project.view;
+package project.system.view;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

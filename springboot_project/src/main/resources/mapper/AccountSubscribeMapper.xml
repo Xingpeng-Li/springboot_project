@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.project.mapper.AccountSubscribeMapper">
-  <resultMap id="BaseResultMap" type="com.project.domain.AccountSubscribe">
+<mapper namespace="project.system.mapper.AccountSubscribeMapper">
+  <resultMap id="BaseResultMap" type="project.system.domain.AccountSubscribe">
     <id column="subscribe_id" jdbcType="INTEGER" property="subscribeId" />
     <result column="publicaccount_name" jdbcType="VARCHAR" property="publicaccountName" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
@@ -27,13 +27,13 @@
     delete from account_subscribe
     where subscribe_id = #{subscribeId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.project.domain.AccountSubscribe">
+  <insert id="insert" parameterType="project.system.domain.AccountSubscribe">
     insert into account_subscribe (subscribe_id, publicaccount_name, user_id
       )
     values (#{subscribeId,jdbcType=INTEGER}, #{publicaccountName,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.project.domain.AccountSubscribe">
+  <insert id="insertSelective" parameterType="project.system.domain.AccountSubscribe">
     insert into account_subscribe
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="subscribeId != null">
@@ -58,7 +58,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.project.domain.AccountSubscribe">
+  <update id="updateByPrimaryKeySelective" parameterType="project.system.domain.AccountSubscribe">
     update account_subscribe
     <set>
       <if test="publicaccountName != null">
@@ -70,7 +70,7 @@
     </set>
     where subscribe_id = #{subscribeId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.project.domain.AccountSubscribe">
+  <update id="updateByPrimaryKey" parameterType="project.system.domain.AccountSubscribe">
     update account_subscribe
     set publicaccount_name = #{publicaccountName,jdbcType=VARCHAR},
       user_id = #{userId,jdbcType=INTEGER}

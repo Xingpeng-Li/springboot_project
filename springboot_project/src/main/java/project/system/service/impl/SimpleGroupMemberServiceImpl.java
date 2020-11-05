@@ -1,12 +1,13 @@
-package com.project.service.impl;
+package project.system.service.impl;
 
-import com.project.error.BusinessException;
-import com.project.response.request.GroupRequest;
-import com.project.response.response.GroupResponse;
-import com.project.service.GroupMemberService;
-import com.project.service.manager.SimpleCoreManager;
+
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+import project.system.error.BusinessException;
+import project.system.response.request.GroupRequest;
+import project.system.response.response.GroupResponse;
+import project.system.service.GroupMemberService;
+import project.system.service.manager.SimpleCoreManager;
 
 import javax.annotation.Resource;
 import java.util.Objects;

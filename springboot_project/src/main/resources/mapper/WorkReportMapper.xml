@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.project.mapper.WorkReportMapper">
-  <resultMap id="BaseResultMap" type="com.project.domain.WorkReport">
+<mapper namespace="project.system.mapper.WorkReportMapper">
+  <resultMap id="BaseResultMap" type="project.system.domain.WorkReport">
     <id column="report_id" jdbcType="INTEGER" property="reportId" />
     <result column="report_type" jdbcType="CHAR" property="reportType" />
     <result column="reporter_id" jdbcType="INTEGER" property="reporterId" />
@@ -24,7 +24,7 @@
     delete from workreport
     where report_id = #{reportId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.project.domain.WorkReport">
+  <insert id="insert" parameterType="project.system.domain.WorkReport">
     insert into workreport (report_id, report_type, reporter_id, 
       report_url, report_approver, report_second_approver, 
       report_time)
@@ -32,7 +32,7 @@
       #{reportUrl,jdbcType=VARCHAR}, #{reportApprover,jdbcType=INTEGER}, #{reportSecondApprover,jdbcType=INTEGER}, 
       #{reportTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.project.domain.WorkReport">
+  <insert id="insertSelective" parameterType="project.system.domain.WorkReport">
     insert into workreport
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="reportId != null">
@@ -81,7 +81,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.project.domain.WorkReport">
+  <update id="updateByPrimaryKeySelective" parameterType="project.system.domain.WorkReport">
     update workreport
     <set>
       <if test="reportType != null">
@@ -105,7 +105,7 @@
     </set>
     where report_id = #{reportId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.project.domain.WorkReport">
+  <update id="updateByPrimaryKey" parameterType="project.system.domain.WorkReport">
     update workreport
     set report_type = #{reportType,jdbcType=CHAR},
       reporter_id = #{reporterId,jdbcType=INTEGER},

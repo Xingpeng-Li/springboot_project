@@ -1,8 +1,8 @@
-package com.project.mapper;
+package project.system.mapper;
 
-import com.project.domain.Announcement;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import project.system.domain.Announcement;
 
 import java.util.List;
 

@@ -1,14 +1,15 @@
-package com.project.service.impl;
+package project.system.service.impl;
 
-import com.project.domain.AccountSubscribe;
-import com.project.domain.PublicAccount;
-import com.project.error.BusinessException;
-import com.project.error.EmBusinessError;
-import com.project.mapper.AccountSubscribeMapper;
-import com.project.mapper.PublicAccountMapper;
-import com.project.service.AccountSubscribeService;
-import com.project.service.PublicAccountService;
+
 import org.springframework.stereotype.Service;
+import project.system.domain.AccountSubscribe;
+import project.system.domain.PublicAccount;
+import project.system.error.BusinessException;
+import project.system.error.EmBusinessError;
+import project.system.mapper.AccountSubscribeMapper;
+import project.system.mapper.PublicAccountMapper;
+import project.system.service.AccountSubscribeService;
+import project.system.service.PublicAccountService;
 
 import javax.annotation.Resource;
 import java.util.List;

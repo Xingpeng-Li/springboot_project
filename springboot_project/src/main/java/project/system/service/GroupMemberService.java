@@ -1,8 +1,9 @@
-package com.project.service;
+package project.system.service;
 
-import com.project.error.BusinessException;
-import com.project.response.request.GroupRequest;
-import com.project.response.response.GroupResponse;
+
+import project.system.error.BusinessException;
+import project.system.response.request.GroupRequest;
+import project.system.response.response.GroupResponse;
 
 /*
 @author WL

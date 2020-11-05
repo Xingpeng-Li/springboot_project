@@ -1,14 +1,15 @@
-package com.project.ws.send;
+package project.system.ws.send;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.project.domain.SocketMessage;
-import com.project.domain.User;
-import com.project.mapper.UserMapper;
-import com.project.service.SocketMessageService;
-import com.project.ws.model.SocketMessageModel;
-import com.project.ws.utils.SocketMessageUtil;
+
 import org.springframework.stereotype.Component;
+import project.system.domain.SocketMessage;
+import project.system.domain.User;
+import project.system.mapper.UserMapper;
+import project.system.service.SocketMessageService;
+import project.system.ws.model.SocketMessageModel;
+import project.system.ws.utils.SocketMessageUtil;
 
 import javax.websocket.*;
 import javax.websocket.server.PathParam;

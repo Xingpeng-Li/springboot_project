@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.project.mapper.UserMapper">
-  <resultMap id="BaseResultMap" type="com.project.domain.User">
+<mapper namespace="project.system.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="project.system.domain.User">
     <id column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="user_phonenumber" jdbcType="CHAR" property="userPhonenumber" />
@@ -90,7 +90,7 @@
     where user_phonenumber=#{userPhonenumber,jdbcType=VARCHAR}
   </select>
   <!--  登录密码验证@author DKR-->
-  <select id="getUserByPhoneNumberAndPassword" parameterType="com.project.domain.User" resultMap="BaseResultMap">
+  <select id="getUserByPhoneNumberAndPassword" parameterType="project.system.domain.User" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
     from telecommutingdb.user
@@ -106,7 +106,7 @@
     delete from user
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.project.domain.User">
+  <insert id="insert" parameterType="project.system.domain.User">
     insert into user (user_id, user_name, user_phonenumber,
       user_password, dept_id, company_id,
       user_gender, user_position, socket_id,
@@ -116,7 +116,7 @@
       #{userGender,jdbcType=CHAR}, #{userPosition,jdbcType=VARCHAR}, #{socketId,jdbcType=VARCHAR},
       #{userEmail,jdbcType=VARCHAR}, #{emailAuthorizationCode,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.project.domain.User">
+  <insert id="insertSelective" parameterType="project.system.domain.User">
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -189,7 +189,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.project.domain.User">
+  <update id="updateByPrimaryKeySelective" parameterType="project.system.domain.User">
     update user
     <set>
       <if test="userName != null">
@@ -225,7 +225,7 @@
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.project.domain.User">
+  <update id="updateByPrimaryKey" parameterType="project.system.domain.User">
     update user
     set user_name = #{userName,jdbcType=VARCHAR},
       user_phonenumber = #{userPhonenumber,jdbcType=CHAR},

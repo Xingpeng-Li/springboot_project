@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.project.mapper.PublicAccountMapper">
-  <resultMap id="BaseResultMap" type="com.project.domain.PublicAccount">
+<mapper namespace="project.system.mapper.PublicAccountMapper">
+  <resultMap id="BaseResultMap" type="project.system.domain.PublicAccount">
     <id column="publicaccount_id" jdbcType="INTEGER" property="publicaccountId" />
     <result column="publicaccount_owner" jdbcType="INTEGER" property="publicaccountOwner" />
     <result column="publicaccount_name" jdbcType="VARCHAR" property="publicaccountName" />
@@ -49,7 +49,7 @@
     delete from publicaccount
     where publicaccount_id = #{publicaccountId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.project.domain.PublicAccount">
+  <insert id="insert" parameterType="project.system.domain.PublicAccount">
     insert into publicaccount (publicaccount_id, publicaccount_owner,
       publicaccount_name, publicaccount_type, publicaccount_brief
       )
@@ -57,7 +57,7 @@
       #{publicaccountName,jdbcType=VARCHAR}, #{publicaccountType,jdbcType=VARCHAR}, #{publicaccountBrief,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.project.domain.PublicAccount">
+  <insert id="insertSelective" parameterType="project.system.domain.PublicAccount">
     insert into publicaccount
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="publicaccountId != null">
@@ -94,7 +94,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.project.domain.PublicAccount">
+  <update id="updateByPrimaryKeySelective" parameterType="project.system.domain.PublicAccount">
     update publicaccount
     <set>
       <if test="publicaccountOwner != null">
@@ -112,7 +112,7 @@
     </set>
     where publicaccount_id = #{publicaccountId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.project.domain.PublicAccount">
+  <update id="updateByPrimaryKey" parameterType="project.system.domain.PublicAccount">
     update publicaccount
     set publicaccount_owner = #{publicaccountOwner,jdbcType=INTEGER},
       publicaccount_name = #{publicaccountName,jdbcType=VARCHAR},

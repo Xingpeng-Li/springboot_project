@@ -1,11 +1,11 @@
 package project.system.controller;
 
-import com.project.response.CommonReturnType;
-import com.project.service.UploadService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import project.system.error.BusinessException;
 import project.system.error.EmBusinessError;
+import project.system.response.CommonReturnType;
+import project.system.service.UploadService;
 
 import javax.annotation.Resource;
 

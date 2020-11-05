@@ -1,16 +1,19 @@
-package com.project.service.impl;
-import com.project.domain.Company;
-import com.project.domain.User;
-import com.project.mapper.CompanyMapper;
-import com.project.mapper.DeptMapper;
-import com.project.mapper.UserMapper;
-import com.project.service.UserService;
-import com.project.view.UserDetailView;
-import com.project.view.UserView;
+package project.system.service.impl;
+
+
 import lombok.Builder;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import project.system.domain.Company;
+import project.system.domain.User;
+import project.system.mapper.CompanyMapper;
+import project.system.mapper.DeptMapper;
+import project.system.mapper.UserMapper;
+import project.system.service.UserService;
+import project.system.view.UserDetailView;
+import project.system.view.UserView;
+
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.stream.Collectors;

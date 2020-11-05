@@ -1,21 +1,20 @@
 package project.system.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.project.common.utils.Md5Utils;
-import com.project.common.utils.SMSParameter;
-import com.project.domain.User;
-import com.project.error.BusinessException;
-import com.project.service.UserService;
-import com.project.common.utils.TecentMessage;
-import com.project.common.utils.Validator;
-import com.project.error.EmBusinessError;
-import com.project.response.CommonReturnType;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import project.system.common.utils.Md5Utils;
+import project.system.common.utils.Validator;
+import project.system.domain.User;
+import project.system.error.BusinessException;
+import project.system.error.EmBusinessError;
+import project.system.response.CommonReturnType;
+import project.system.service.UserService;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -32,8 +31,8 @@ import javax.servlet.http.HttpSession;
 public class RegisterController extends BaseController {
     @Resource
     UserService userService;
-    @Resource
-    TecentMessage tecentMessage;
+//    @Resource
+//    TencentMessage tecentMessage;
     @ApiOperation(value = "验证码接口",notes = "type为register为注册验证码,其他type不会验证手机号是否已经注册")
     @ApiResponses({
             @ApiResponse(code = 200,message = "success"),
@@ -56,20 +55,35 @@ public class RegisterController extends BaseController {
                 throw new BusinessException(EmBusinessError.USER_PHONE_EXIST);//电话号码已被注册
             }
         }
-        SMSParameter smsParameter= tecentMessage.GetVerifyCodeParam(phoneNumber);//生成短信发送参数对象
-        if(tecentMessage.sendSms(smsParameter).equals("success")) {
+        String verificationCode = "123456";
+        //TODO: 邮件实现
+        if(true) {
             HttpSession session=request.getSession();//短信发送成功
             request.getSession().removeAttribute("verifyCode");
             //将验证码存到session中,同时存入创建时间,以json存放，使用阿里的fastjson
             JSONObject json = null;
             json = new JSONObject();
-            json.put("phoneNumber", smsParameter.getPhone());
-            json.put("verifyCode", smsParameter.getVerifyCode());
+            json.put("phoneNumber", phoneNumber);
+            json.put("verifyCode", verificationCode);
             json.put("createTime", System.currentTimeMillis());
             request.getSession().setAttribute("verifyCode", json);
             return CommonReturnType.create(null);
         }
         else throw new BusinessException(EmBusinessError.USER_VERIFICATION_CODE_SEND_FAIL);
+//        SMSParameter smsParameter= tecentMessage.GetVerifyCodeParam(phoneNumber);//生成短信发送参数对象
+//        if(tecentMessage.sendSms(smsParameter).equals("success")) {
+//            HttpSession session=request.getSession();//短信发送成功
+//            request.getSession().removeAttribute("verifyCode");
+//            //将验证码存到session中,同时存入创建时间,以json存放，使用阿里的fastjson
+//            JSONObject json = null;
+//            json = new JSONObject();
+//            json.put("phoneNumber", smsParameter.getPhone());
+//            json.put("verifyCode", smsParameter.getVerifyCode());
+//            json.put("createTime", System.currentTimeMillis());
+//            request.getSession().setAttribute("verifyCode", json);
+//            return CommonReturnType.create(null);
+//        }
+//        else throw new BusinessException(EmBusinessError.USER_VERIFICATION_CODE_SEND_FAIL);
     }
     @ApiOperation(value = "注册接口")
     @ApiResponses({

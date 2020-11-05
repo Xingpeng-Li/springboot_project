@@ -1,4 +1,4 @@
-package com.project.ws.model;
+package project.system.ws.model;
 
 import java.util.Date;
 

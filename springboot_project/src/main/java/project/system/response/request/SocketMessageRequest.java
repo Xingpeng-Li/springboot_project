@@ -1,4 +1,4 @@
-package com.project.response.request;
+package project.system.response.request;
 
 public class SocketMessageRequest {
 

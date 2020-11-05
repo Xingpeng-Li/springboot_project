@@ -1,7 +1,7 @@
-package com.project.mapper;
+package project.system.mapper;
 
-import com.project.domain.Punchin;
 import org.apache.ibatis.annotations.Mapper;
+import project.system.domain.Punchin;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
-package com.project.mapper;
+package project.system.mapper;
 
-import com.project.domain.HealthPunchin;
 import org.apache.ibatis.annotations.Mapper;
+import project.system.domain.HealthPunchin;
 
 @Mapper
 public interface HealthPunchinMapper {

@@ -1,19 +1,20 @@
 package project.system.controller;
 
-import com.project.common.utils.RequestUtil;
-import com.project.common.utils.TencentCosClient;
-import com.project.common.utils.TencentSpeechRecognition;
-import com.project.error.BusinessException;
-import com.project.error.EmBusinessError;
-import com.project.response.CommonReturnType;
-import com.project.response.response.TokenInfoResponse;
-import com.project.service.LoginService;
-import com.project.service.TokenService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import project.system.common.utils.RequestUtil;
+import project.system.common.utils.TencentCosClient;
+import project.system.common.utils.TencentSpeechRecognition;
+import project.system.error.BusinessException;
+import project.system.error.EmBusinessError;
+import project.system.response.CommonReturnType;
+import project.system.response.response.TokenInfoResponse;
+import project.system.service.LoginService;
+import project.system.service.TokenService;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

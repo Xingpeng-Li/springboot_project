@@ -2,17 +2,7 @@ package project.system.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.project.common.utils.RequestUtil;
-import com.project.domain.User;
-import com.project.error.BusinessException;
-import com.project.error.EmBusinessError;
-import com.project.mapper.UserMapper;
-import com.project.response.CommonReturnType;
-import com.project.response.response.TokenInfoResponse;
-import com.project.service.CompanyService;
-import com.project.service.LoginService;
-import com.project.service.TokenService;
-import com.project.service.UserService;
+
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -20,6 +10,17 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import project.system.common.utils.RequestUtil;
+import project.system.domain.User;
+import project.system.error.BusinessException;
+import project.system.error.EmBusinessError;
+import project.system.mapper.UserMapper;
+import project.system.response.CommonReturnType;
+import project.system.response.response.TokenInfoResponse;
+import project.system.service.CompanyService;
+import project.system.service.LoginService;
+import project.system.service.TokenService;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;

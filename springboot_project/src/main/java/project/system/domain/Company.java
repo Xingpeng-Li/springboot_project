@@ -1,4 +1,4 @@
-package com.project.domain;
+package project.system.domain;
 
 public class Company {
     private Integer companyId;

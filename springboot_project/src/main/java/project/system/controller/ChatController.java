@@ -1,20 +1,19 @@
 package project.system.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.project.common.utils.RequestUtil;
-import com.project.domain.SocketMessage;
-import com.project.domain.User;
-
-import com.project.mapper.UserMapper;
-import com.project.response.CommonReturnType;
-import com.project.response.response.TokenInfoResponse;
-import com.project.service.LoginService;
-import com.project.service.SocketMessageService;
-import com.project.ws.utils.SocketMessageUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import project.system.common.utils.RequestUtil;
+import project.system.domain.SocketMessage;
+import project.system.domain.User;
 import project.system.error.BusinessException;
 import project.system.error.EmBusinessError;
+import project.system.mapper.UserMapper;
+import project.system.response.CommonReturnType;
+import project.system.response.response.TokenInfoResponse;
+import project.system.service.LoginService;
+import project.system.service.SocketMessageService;
+import project.system.ws.utils.SocketMessageUtil;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;

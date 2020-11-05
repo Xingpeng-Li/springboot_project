@@ -1,8 +1,8 @@
-package com.project.mapper;
+package project.system.mapper;
 
-import com.project.domain.SocketMessage;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import project.system.domain.SocketMessage;
 
 import java.util.Date;
 import java.util.List;

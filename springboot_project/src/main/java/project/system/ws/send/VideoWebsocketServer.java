@@ -1,7 +1,6 @@
-package com.project.ws.send;
+package project.system.ws.send;
 
 import com.alibaba.fastjson.JSON;
-import com.project.service.manager.SimpleCoreManager;
 import org.springframework.stereotype.Component;
 
 import javax.websocket.*;

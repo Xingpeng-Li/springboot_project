@@ -1,6 +1,7 @@
-package com.project.service;
+package project.system.service;
 
-import com.project.domain.Post;
+
+import project.system.domain.Post;
 
 /*
 @author WL

@@ -1,6 +1,5 @@
-package com.project.service;
+package project.system.service;
 
-import com.project.domain.Announcement;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;

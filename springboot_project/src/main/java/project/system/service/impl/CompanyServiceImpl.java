@@ -1,16 +1,17 @@
-package com.project.service.impl;
+package project.system.service.impl;
 
-import com.project.domain.Company;
-import com.project.domain.Dept;
-import com.project.domain.User;
-import com.project.error.BusinessException;
-import com.project.error.EmBusinessError;
-import com.project.mapper.CompanyMapper;
-import com.project.mapper.DeptMapper;
-import com.project.mapper.UserMapper;
-import com.project.service.CompanyService;
-import com.project.service.UserService;
+
 import org.springframework.stereotype.Service;
+import project.system.domain.Company;
+import project.system.domain.Dept;
+import project.system.domain.User;
+import project.system.error.BusinessException;
+import project.system.error.EmBusinessError;
+import project.system.mapper.CompanyMapper;
+import project.system.mapper.DeptMapper;
+import project.system.mapper.UserMapper;
+import project.system.service.CompanyService;
+import project.system.service.UserService;
 
 import javax.annotation.Resource;
 import java.util.*;

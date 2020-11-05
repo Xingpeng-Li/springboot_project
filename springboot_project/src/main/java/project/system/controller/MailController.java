@@ -1,14 +1,5 @@
 package project.system.controller;
 
-import com.project.common.utils.RequestUtil;
-import com.project.domain.User;
-import com.project.error.BusinessException;
-import com.project.error.EmBusinessError;
-import com.project.mapper.UserMapper;
-import com.project.response.CommonReturnType;
-import com.project.response.response.TokenInfoResponse;
-import com.project.service.LoginService;
-import com.project.service.MailService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +10,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import project.system.common.utils.RequestUtil;
+import project.system.domain.User;
+import project.system.error.BusinessException;
+import project.system.error.EmBusinessError;
+import project.system.mapper.UserMapper;
+import project.system.response.CommonReturnType;
+import project.system.response.response.TokenInfoResponse;
+import project.system.service.LoginService;
+import project.system.service.MailService;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;

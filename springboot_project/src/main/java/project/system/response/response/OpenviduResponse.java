@@ -1,4 +1,4 @@
-package com.project.response.response;
+package project.system.response.response;
 
 import lombok.Data;
 

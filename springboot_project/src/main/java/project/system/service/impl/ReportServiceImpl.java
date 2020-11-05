@@ -1,19 +1,20 @@
-package com.project.service.impl;
+package project.system.service.impl;
 
-import com.project.common.utils.TencentCosClient;
-import com.project.domain.Notification;
-import com.project.domain.User;
-import com.project.domain.WorkReport;
-import com.project.error.BusinessException;
-import com.project.error.EmBusinessError;
-import com.project.mapper.NotificationMapper;
-import com.project.mapper.UserMapper;
-import com.project.mapper.WorkReportMapper;
-import com.project.service.ReportService;
+
 import com.tencentcloudapi.billing.v20180709.models.BusinessSummaryOverviewItem;
 import org.apache.poi.ss.usermodel.CellType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import project.system.common.utils.TencentCosClient;
+import project.system.domain.Notification;
+import project.system.domain.User;
+import project.system.domain.WorkReport;
+import project.system.error.BusinessException;
+import project.system.error.EmBusinessError;
+import project.system.mapper.NotificationMapper;
+import project.system.mapper.UserMapper;
+import project.system.mapper.WorkReportMapper;
+import project.system.service.ReportService;
 
 import javax.annotation.Resource;
 import java.io.*;
@@ -21,7 +22,8 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 
-import static com.project.common.utils.WaterMarkUtil.addWatermarkToWord;
+import static project.system.common.utils.WaterMarkUtil.addWatermarkToWord;
+
 
 /*
  @author:李星鹏

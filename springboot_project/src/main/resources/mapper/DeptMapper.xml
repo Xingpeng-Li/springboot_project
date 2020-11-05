@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.project.mapper.DeptMapper">
-  <resultMap id="BaseResultMap" type="com.project.domain.Dept">
+<mapper namespace="project.system.mapper.DeptMapper">
+  <resultMap id="BaseResultMap" type="project.system.domain.Dept">
     <id column="dept_id" jdbcType="INTEGER" property="deptId" />
     <result column="dept_name" jdbcType="VARCHAR" property="deptName" />
     <result column="dept_master" jdbcType="INTEGER" property="deptMaster" />
@@ -32,13 +32,13 @@
     delete from dept
     where dept_id = #{deptId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.project.domain.Dept">
+  <insert id="insert" parameterType="project.system.domain.Dept">
     insert into dept (dept_id, dept_name, dept_master,
       company_id)
     values (#{deptId,jdbcType=INTEGER}, #{deptName,jdbcType=VARCHAR}, #{deptMaster,jdbcType=INTEGER},
       #{companyId,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.project.domain.Dept" useGeneratedKeys="true" keyProperty="deptId" keyColumn="dept_id">
+  <insert id="insertSelective" parameterType="project.system.domain.Dept" useGeneratedKeys="true" keyProperty="deptId" keyColumn="dept_id">
     insert into dept
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="deptId != null">
@@ -69,7 +69,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.project.domain.Dept">
+  <update id="updateByPrimaryKeySelective" parameterType="project.system.domain.Dept">
     update dept
     <set>
       <if test="deptName != null">
@@ -84,7 +84,7 @@
     </set>
     where dept_id = #{deptId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.project.domain.Dept">
+  <update id="updateByPrimaryKey" parameterType="project.system.domain.Dept">
     update dept
     set dept_name = #{deptName,jdbcType=VARCHAR},
       dept_master = #{deptMaster,jdbcType=INTEGER},

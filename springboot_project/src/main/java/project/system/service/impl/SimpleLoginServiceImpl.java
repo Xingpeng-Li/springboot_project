@@ -1,10 +1,12 @@
-package com.project.service.impl;
+package project.system.service.impl;
 
-import com.project.response.request.LoginRequest;
-import com.project.response.response.TokenInfoResponse;
-import com.project.service.LoginService;
-import com.project.service.manager.SimpleCoreManager;
+
+
 import org.springframework.stereotype.Service;
+import project.system.response.request.LoginRequest;
+import project.system.response.response.TokenInfoResponse;
+import project.system.service.LoginService;
+import project.system.service.manager.SimpleCoreManager;
 
 import javax.annotation.Resource;
 import java.util.Objects;

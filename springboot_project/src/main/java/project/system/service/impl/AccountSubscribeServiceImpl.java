@@ -1,10 +1,10 @@
-package com.project.service.impl;
+package project.system.service.impl;
 
-import com.project.domain.PublicAccount;
-import com.project.mapper.AccountSubscribeMapper;
-import com.project.mapper.PublicAccountMapper;
-import com.project.service.AccountSubscribeService;
 import org.springframework.stereotype.Service;
+import project.system.domain.PublicAccount;
+import project.system.mapper.AccountSubscribeMapper;
+import project.system.mapper.PublicAccountMapper;
+import project.system.service.AccountSubscribeService;
 
 import javax.annotation.Resource;
 import java.util.List;

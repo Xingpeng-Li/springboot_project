@@ -1,11 +1,12 @@
-package com.project.service.impl;
+package project.system.service.impl;
 
-import com.project.domain.Notification;
-import com.project.domain.User;
-import com.project.mapper.NotificationMapper;
-import com.project.mapper.UserMapper;
-import com.project.service.NotificationService;
+
 import org.springframework.stereotype.Service;
+import project.system.domain.Notification;
+import project.system.domain.User;
+import project.system.mapper.NotificationMapper;
+import project.system.mapper.UserMapper;
+import project.system.service.NotificationService;
 
 import javax.annotation.Resource;
 import java.text.SimpleDateFormat;

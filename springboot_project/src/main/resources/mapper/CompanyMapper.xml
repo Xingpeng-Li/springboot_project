@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.project.mapper.CompanyMapper">
-  <resultMap id="BaseResultMap" type="com.project.domain.Company">
+<mapper namespace="project.system.mapper.CompanyMapper">
+  <resultMap id="BaseResultMap" type="project.system.domain.Company">
     <id column="company_id" jdbcType="INTEGER" property="companyId" />
     <result column="company_name" jdbcType="VARCHAR" property="companyName" />
     <result column="company_admin" jdbcType="INTEGER" property="companyAdmin" />
@@ -32,13 +32,13 @@
     delete from company
     where company_id = #{companyId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.project.domain.Company">
+  <insert id="insert" parameterType="project.system.domain.Company">
     insert into company (company_id, company_name, company_admin,
       company_invite_code)
     values (#{companyId,jdbcType=INTEGER}, #{companyName,jdbcType=VARCHAR}, #{companyAdmin,jdbcType=INTEGER},
       #{companyInviteCode,jdbcType=CHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.project.domain.Company">
+  <insert id="insertSelective" parameterType="project.system.domain.Company">
     insert into company
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="companyId != null">
@@ -69,7 +69,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.project.domain.Company">
+  <update id="updateByPrimaryKeySelective" parameterType="project.system.domain.Company">
     update company
     <set>
       <if test="companyName != null">
@@ -84,7 +84,7 @@
     </set>
     where company_id = #{companyId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.project.domain.Company">
+  <update id="updateByPrimaryKey" parameterType="project.system.domain.Company">
     update company
     set company_name = #{companyName,jdbcType=VARCHAR},
       company_admin = #{companyAdmin,jdbcType=INTEGER},

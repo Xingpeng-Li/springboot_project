@@ -1,8 +1,8 @@
-package com.project.service;
+package project.system.service;
 
-import com.project.domain.User;
-import com.project.view.UserDetailView;
-import com.project.view.UserView;
+import project.system.domain.User;
+import project.system.view.UserDetailView;
+import project.system.view.UserView;
 
 import java.util.List;
 
