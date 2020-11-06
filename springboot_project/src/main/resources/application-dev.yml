@@ -59,7 +59,7 @@ config:
     #iss 签发者
     iss: miaowhu
 server:
-  port: 8080
+  port: 9000
 #  ssl:
 #    key-store: classpath:miaowhu.cn.jks
 #    key-store-password: 168171miaowhu

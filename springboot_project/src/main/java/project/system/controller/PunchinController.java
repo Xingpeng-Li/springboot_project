@@ -103,12 +103,12 @@ public class PunchinController extends BaseController {
 
         Timestamp timestamp = new Timestamp((new Date()).getTime());
         User user = userMapper.selectByPrimaryKey(userId);
-        if(user.getCompanyId() != null && userService.isCompanyAdmin(userId)){
+        if(user.getCompanyId() != null && userService.isCompanyAdmin(userId)) {
             List<User> userList = userMapper.selectByCompanyId(user.getCompanyId());
-            for(User user1: userList){
+            for (User user1 : userList) {
                 Punchin punchin = punchinService.IsPunched(user1.getUserId());
                 //如果未打卡则发送打卡消息
-                if(punchin == null && userId!=user1.getUserId()){
+                if (punchin == null && userId != user1.getUserId()) {
                     Notification notification = new Notification();
                     notification.setNotificationSenderId(userId);
                     notification.setNotificationReceiverId(user1.getUserId());
@@ -121,8 +121,6 @@ public class PunchinController extends BaseController {
                 }
             }
         }
-
-
         return CommonReturnType.create(null);
     }
 

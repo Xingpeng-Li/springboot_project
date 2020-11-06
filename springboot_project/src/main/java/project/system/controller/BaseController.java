@@ -18,7 +18,6 @@ import java.util.Map;
 */
 @RestController
 public class BaseController {
-
     @ExceptionHandler(Exception.class)
     public Object handlerException(Exception e, HttpServletRequest request) {
         Map<String, Object> responseData = new HashMap<>();

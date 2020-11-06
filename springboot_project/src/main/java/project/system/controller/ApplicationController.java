@@ -6,6 +6,8 @@ import io.swagger.annotations.ApiResponses;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 import project.system.common.utils.RequestUtil;
 import project.system.error.BusinessException;
 import project.system.error.EmBusinessError;
@@ -24,7 +26,7 @@ import java.util.Map;
  @createDate:2020/7/17
  @description:审批功能后端Controller:发送审批、查看审批、处理审批
  */
-@Controller
+@RestController
 public class ApplicationController extends BaseController {
     @Resource
     LoginService loginService;
@@ -42,7 +44,7 @@ public class ApplicationController extends BaseController {
             @ApiResponse(code = 10006,message = "日期格式不正确"),
             @ApiResponse(code = 10007,message = "开始时间不能晚于结束时间"),
     })
-    @GetMapping("/application/send")
+    @PostMapping("/application/send")
     public CommonReturnType sendApplication(HttpServletRequest request){
         String type = request.getParameter("type");
         String startTime = request.getParameter("startTime");
