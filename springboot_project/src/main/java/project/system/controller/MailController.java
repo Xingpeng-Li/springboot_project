@@ -5,10 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import project.system.common.utils.RequestUtil;
 import project.system.domain.User;
@@ -37,7 +34,7 @@ import java.util.*;
  @update：
  @description: 包括邮件发送和邮件读取
  */
-@Controller
+@RestController
 public class MailController extends BaseController {
     private final Logger logger=LoggerFactory.getLogger(this.getClass());
     @Resource
@@ -148,7 +145,7 @@ public class MailController extends BaseController {
 
     //读取QQ邮箱内容,网易邮箱不可授权读取
     //获取邮箱中各种类型邮件数量
-    @RequestMapping(value = "/mail/receive",method = RequestMethod.GET)
+    @GetMapping(value = "/mail/receive")
     public CommonReturnType receive() throws Exception {
         Map<String,Object> map = new HashMap<>();
 
@@ -188,7 +185,7 @@ public class MailController extends BaseController {
 
     //分别读取QQ邮箱内容
     //读取所有邮箱内容
-    @RequestMapping(value = "mail/all",method = RequestMethod.GET)
+    @GetMapping(value = "mail/all")
     public CommonReturnType getAllMailContent() throws MessagingException, IOException {
         List<Map<String,Object>> mapList = new ArrayList<>();
 
@@ -232,7 +229,7 @@ public class MailController extends BaseController {
     }
 
     //根据传过来的id获取邮件内容
-    @RequestMapping(value = "mail/content",method = RequestMethod.GET)
+    @PostMapping(value = "mail/content")
     public CommonReturnType mailContent(HttpServletRequest request) throws MessagingException {
         String id = request.getParameter("id");
 
@@ -284,7 +281,7 @@ public class MailController extends BaseController {
     }
 
     //登录邮箱
-    @RequestMapping(value = "mail/login",method = RequestMethod.GET)
+    @PostMapping(value = "mail/login")
     public CommonReturnType mailLogin(HttpServletRequest request) throws MessagingException {
         String userMail = request.getParameter("userMail");
         String mailPassword = request.getParameter("mailPassword");
@@ -335,7 +332,7 @@ public class MailController extends BaseController {
     }
 
     //如果用户有登录历史，不用填写账号和授权码
-    @RequestMapping(value = "mail/already",method = RequestMethod.GET)
+    @GetMapping(value = "mail/already")
     public CommonReturnType mailAlready(HttpServletRequest request){
         int userId;
         String token = RequestUtil.getCookievalue(request);
