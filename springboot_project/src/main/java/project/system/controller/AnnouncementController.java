@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import project.system.common.utils.RequestUtil;
 import project.system.error.BusinessException;
@@ -25,12 +26,14 @@ import java.util.List;
 import java.util.Map;
 
 /*
- @author:李星鹏
- @createDate:2020/7/21
- @description:发送公告、查看公告
+ * @author zws
+ * @description 用以接收和发送公告
+ * @create 2020/11/6 19:00
+ * @update 2020/11/6 19:00
+ * @param  
+ * @return  
  */
-
-@Controller
+@RestController
 public class AnnouncementController extends BaseController {
 
     @Resource
@@ -40,7 +43,8 @@ public class AnnouncementController extends BaseController {
     @Resource
     AnnouncementService announcementService;
 
-    //发布公告(可添加附件发送也可以不添加附件发送)
+    // 发布公告(可添加附件发送也可以不添加附件发送)
+
     @ApiOperation("发布公告接口")
     @ApiResponses({
             @ApiResponse(code = 200,message = "success"),
@@ -51,9 +55,12 @@ public class AnnouncementController extends BaseController {
     @PostMapping("/announcement/send")
     public CommonReturnType sendAnnouncement(@RequestParam(value = "file", required = false)MultipartFile file,
                                              HttpServletRequest request){
-        String type = request.getParameter("type");   //公告类型
-        String title = request.getParameter("title");   //公告标题
-        String body = request.getParameter("body");   //公告正文(主体)
+        //公告类型
+        String type = request.getParameter("type");
+        //公告标题
+        String title = request.getParameter("title");
+        //公告正文(主体)
+        String body = request.getParameter("body");
         String token = RequestUtil.getCookievalue(request);
         if (StringUtils.isNotBlank(token) && !tokenService.isExpiration(token)) {
             TokenInfoResponse tokenInfoResponse = loginService.checkLogin(token);
@@ -72,10 +79,14 @@ public class AnnouncementController extends BaseController {
             @ApiResponse(code = 1,message = "用户未登录"),
             @ApiResponse(code = 1,message = "登录已过期"),
     })
-    //接收公告
+
+    /*
+     * @description 接收公告
+     */
     @GetMapping("/announcement/get")
     public CommonReturnType getAnnouncement(HttpServletRequest request){
-        String type = request.getParameter("type");   //公告类型
+        //公告类型
+        String type = request.getParameter("type");
         String token = RequestUtil.getCookievalue(request);
         if (StringUtils.isNotBlank(token) && !tokenService.isExpiration(token)) {
             TokenInfoResponse tokenInfoResponse = loginService.checkLogin(token);
