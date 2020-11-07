@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiResponses;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import project.system.common.utils.RequestUtil;
 import project.system.domain.Notification;
 import project.system.error.BusinessException;
@@ -67,7 +68,7 @@ public class NotificationController extends BaseController {
             @ApiResponse(code = 1,message = "登录已过期"),
     })
     //删除一个提醒
-    @GetMapping("/notification/delete")
+    @PostMapping("/notification/delete")
     public CommonReturnType deleteNotification(HttpServletRequest request){
         String notificationId = request.getParameter("notificationId");
         //通过token获取UserId
@@ -83,7 +84,7 @@ public class NotificationController extends BaseController {
 
     @ApiOperation("设置提醒已阅接口")
     //设置一个提醒已阅
-    @GetMapping("/notification/read")
+    @PostMapping("/notification/read")
     public CommonReturnType readNotification(HttpServletRequest request){
         String notificationId = request.getParameter("notificationId");
         //通过token获取UserId
