@@ -59,7 +59,7 @@ public class CompanyController extends BaseController {
             @ApiResponse(code = 1,message = "登录已过期"),
     })
     //返回用户的职位
-    @GetMapping(value ="company/authority")
+    @GetMapping(value ="/company/authority")
     public CommonReturnType haveAuthority(HttpServletRequest request){
         //通过token获取UserId
         String token = RequestUtil.getCookievalue(request);
@@ -157,7 +157,7 @@ public class CompanyController extends BaseController {
             @ApiResponse(code = 1,message = "登录已过期"),
     })
     //返回一个部门中所有的人员信息
-    @GetMapping("company/dept")
+    @GetMapping("/company/dept")
     public CommonReturnType getDeptUser(HttpServletRequest request){
         List<Map<String,String>> mapList;
 
@@ -181,7 +181,7 @@ public class CompanyController extends BaseController {
             @ApiResponse(code = 20013,message = "用户没有权限"),
     })
     //删除一个部门成员
-    @GetMapping("company/deleteDeptUser")
+    @GetMapping("/company/deleteDeptUser")
     public CommonReturnType deleteDeptUser(HttpServletRequest request){
         String deleteUserId = request.getParameter("deleteUserId");
         //通过token获取UserId
@@ -211,7 +211,7 @@ public class CompanyController extends BaseController {
             @ApiResponse(code = 20013,message = "用户没有权限"),
     })
     //删除一个企业成员
-    @GetMapping("company/deleteCompanyUser")
+    @GetMapping("/company/deleteCompanyUser")
     public CommonReturnType deleteCompanyUser(HttpServletRequest request){
         String deleteUserId = request.getParameter("deleteUserId");
         //通过token获取UserId

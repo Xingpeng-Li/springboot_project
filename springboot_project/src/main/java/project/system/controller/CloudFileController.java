@@ -3,10 +3,7 @@ package project.system.controller;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import project.system.common.utils.RequestUtil;
 import project.system.domain.Cloudfile;
@@ -51,7 +48,7 @@ public class CloudFileController extends BaseController {
             @ApiResponse(code = 60001,message = "文件上传失败"),
             @ApiResponse(code = 60008,message = "服务器接收文件失败")
     })
-    @RequestMapping(value = "/uploadFile",method = RequestMethod.POST)
+    @PostMapping(value = "/uploadFile")
     public CommonReturnType uploadFile(@RequestParam("file")MultipartFile file,
                                        HttpServletRequest request){
         //登录有效性判断
@@ -78,7 +75,7 @@ public class CloudFileController extends BaseController {
             @ApiResponse(code = 10003, message = "数据库错误"),
             @ApiResponse(code = 60006,message = "文件保存失败")
     })
-    @RequestMapping(value = "/copyfile",method = RequestMethod.GET)
+    @GetMapping(value = "/copyfile")
     public CommonReturnType copyfile(@RequestParam("fileId")Integer fileId,
                                      HttpServletRequest request) {
         //登录有效性判断
@@ -106,7 +103,7 @@ public class CloudFileController extends BaseController {
             @ApiResponse(code = 10003, message = "数据库错误")
     })
     //分页获取云空间文件列表
-    @RequestMapping(value = "/getMyFiles",method = RequestMethod.GET)
+    @GetMapping(value = "/getMyFiles")
     public CommonReturnType getMyFiles(@RequestParam(name = "pageNumber",required = false)String pageNumber,
                                        @RequestParam(name = "pageSize",required = false)String pageSize,
                                        HttpServletRequest request){
@@ -136,7 +133,7 @@ public class CloudFileController extends BaseController {
             @ApiResponse(code = 10002, message = "未知错误"),
             @ApiResponse(code = 10003, message = "数据库错误")
     })
-    @RequestMapping(value = "/deleteFile",method = RequestMethod.GET)
+    @GetMapping(value = "/deleteFile")
     public CommonReturnType deleteFile(@RequestParam("fileId")Integer fileId,
                                        HttpServletRequest request)
     {
@@ -162,7 +159,7 @@ public class CloudFileController extends BaseController {
             @ApiResponse(code = 10003, message = "数据库错误")
     })
     //获取用户所有云空间文件列表
-    @RequestMapping(value = "/getAll",method = RequestMethod.GET)
+    @GetMapping(value = "/getAll")
     public CommonReturnType getAll(HttpServletRequest request){
         //登录有效性验证
         String token= RequestUtil.getCookievalue(request);
@@ -183,7 +180,7 @@ public class CloudFileController extends BaseController {
             @ApiResponse(code = 10003, message = "数据库错误")
     })
     //搜索文件接口
-    @RequestMapping(value = "/search",method = RequestMethod.GET)
+    @GetMapping(value = "/search")
     public CommonReturnType search(@RequestParam("key")String key,
                                    HttpServletRequest request){
         //登录有效性验证

@@ -2,10 +2,7 @@ package project.system.controller;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import project.system.common.utils.RequestUtil;
 import project.system.domain.HealthPunchin;
 import project.system.domain.Notification;
@@ -68,7 +65,7 @@ public class HealthPunchinController extends BaseController {
 
     //将数据库中healthpunchin表中的数据输出为"Health报表.xlsx"excle文件
     //判断了是企业管理员还是部门管理员
-    @RequestMapping(value = "/health/punchin", method = RequestMethod.GET)
+    @GetMapping(value = "/health/punchin")
     public CommonReturnType healthExcel(HttpServletResponse response, HttpServletRequest request) {
         List<HealthPunchin> healthPunchinList = Arrays.asList(healthPunchinMapper.selectAll());
         //获取一个空表
@@ -141,7 +138,7 @@ public class HealthPunchinController extends BaseController {
     }
 
     //进行健康打卡，将网页中的数据存储到数据库中
-    @GetMapping(value = "/user/health")
+    @PostMapping(value = "/user/health")
     public Object health(HttpServletRequest request) {
         //从前端获取打卡参数
         String usertemperature = request.getParameter("usertemperature");
@@ -199,7 +196,7 @@ public class HealthPunchinController extends BaseController {
 
     //健康打卡人数统计
     //返回一日之内打卡情况人数统计
-    @RequestMapping("health/count")
+    @GetMapping("health/count")
     public CommonReturnType getDeptUser(HttpServletRequest request){
         int userId;
         int companyId;
@@ -247,7 +244,7 @@ public class HealthPunchinController extends BaseController {
     }
 
     //健康打卡提醒(管理员向所有人发出)
-    @RequestMapping("health/notification")
+    @GetMapping("health/notification")
     public CommonReturnType sendHealthPunchinNotification(HttpServletRequest request){
         //HealthPunchin healthPunchin = new HealthPunchin();
 
