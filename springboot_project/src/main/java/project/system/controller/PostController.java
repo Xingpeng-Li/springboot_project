@@ -15,14 +15,13 @@ import project.system.error.EmBusinessError;
 import project.system.mapper.PublicAccountMapper;
 import project.system.response.CommonReturnType;
 import project.system.response.response.TokenInfoResponse;
-import project.system.service.LoginService;
-import project.system.service.PostService;
-import project.system.service.TokenService;
-import project.system.service.UploadService;
+import project.system.service.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
+
+import static java.lang.Integer.parseInt;
 
 /*
 @author WL
@@ -45,15 +44,16 @@ public class PostController extends BaseController {
     private PostService postService;
 
     @Resource
-    private PublicAccountMapper publicAccountMapper;
+    private PublicAccountService publicAccountService;
 
     @Resource
     private UploadService uploadService;
 
-    @GetMapping("/postDetail")
+    @PostMapping("/postDetail")
     @ApiOperation("根据公众号文章id查看文章详情")
     @ApiImplicitParam(name = "postId", value = "公众号文章id")
-    public CommonReturnType postDetail(HttpServletRequest request, @RequestParam("postId") Integer postId) {
+    public CommonReturnType postDetail(HttpServletRequest request) {
+        Integer postId = parseInt(request.getParameter("postId"));
         String token = RequestUtil.getCookievalue(request);
         if (StringUtils.isNotBlank(token)) {
             TokenInfoResponse tokenInfoResponse = loginService.checkLogin(token);
@@ -78,8 +78,8 @@ public class PostController extends BaseController {
                 String postTitle = request.getParameter("postTitle");
                 String postBody = request.getParameter("postBody");
                 String postBrief = request.getParameter("postBrief");
-                Integer publicAccountId = Integer.parseInt(request.getParameter("publicAccountId"));
-                PublicAccount publicAccount = publicAccountMapper.selectByPrimaryKey(publicAccountId);
+                Integer publicAccountId = parseInt(request.getParameter("publicAccountId"));
+                PublicAccount publicAccount = publicAccountService.selectByPrimaryKey(publicAccountId);
                 if(publicAccount==null){
                     throw new BusinessException(EmBusinessError.PUBLIC_ACCOUNT_NOT_EXISTS);
                 }

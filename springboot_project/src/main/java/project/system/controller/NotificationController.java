@@ -37,8 +37,6 @@ public class NotificationController extends BaseController {
     LoginService loginService;
     @Resource
     NotificationService notificationService;
-    @Resource
-    NotificationMapper notificationMapper;
 
     @ApiOperation("查看提醒接口")
     @ApiResponses({
@@ -91,9 +89,9 @@ public class NotificationController extends BaseController {
         //通过token获取UserId
         String token = RequestUtil.getCookievalue(request);
         if (StringUtils.isNotBlank(token) && !tokenService.isExpiration(token)) {
-            Notification notification = notificationMapper.selectByPrimaryKey(Integer.parseInt(notificationId));
+            Notification notification = notificationService.selectByPrimaryKey(Integer.parseInt(notificationId));
             notification.setNotificationChecked("是");
-            notificationMapper.updateByPrimaryKeySelective(notification);
+            notificationService.updateByPrimaryKeySelective(notification);
             return CommonReturnType.create(null);
         }
         else{

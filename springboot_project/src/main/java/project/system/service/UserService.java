@@ -30,4 +30,8 @@ public interface UserService {
     boolean isCompanyAdmin(Integer userId);
     //判断是否是部门管理员
     boolean isDeptMaster(Integer userId);
+
+    User selectByPrimaryKey(Integer userId);
+
+    int updateByPrimaryKeySelective(User record);
 }

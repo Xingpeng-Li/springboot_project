@@ -4,10 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import project.system.common.utils.RequestUtil;
 import project.system.domain.Post;
 import project.system.domain.PublicAccount;
@@ -43,34 +40,31 @@ public class PublicAccountController extends BaseController {
     private TokenService tokenService;
 
     @Resource
-    private PublicAccountMapper publicAccountMapper;
-
-    @Resource
     private UserService userService;
 
     @Resource
     private AccountSubscribeService accountSubscribeService;
 
     @Resource
-    private PostMapper postMapper;
+    private PostService postService;
 
     @Resource
     private PublicAccountService publicAccountService;
 
-    @GetMapping("/createPersonalAccount")
+    @PostMapping("/createPersonalAccount")
     @ApiOperation("创建个人公众号")
     public CommonReturnType createPersonalAccount(HttpServletRequest request) {
+        String name = request.getParameter("name");//公众号名字
+        String brief = request.getParameter("brief");//公众号简介
         String token = RequestUtil.getCookievalue(request);
         if (StringUtils.isNotBlank(token)) {
             TokenInfoResponse tokenInfoResponse = loginService.checkLogin(token);
             if (Objects.nonNull(tokenInfoResponse) && tokenInfoResponse.getIsLogin() && !tokenService.isExpiration(token)) {
                 int userId = Integer.parseInt(tokenInfoResponse.getUserId());
-                String name = request.getParameter("name");//公众号名字
-                PublicAccount publicAccount1 = publicAccountMapper.selectByName(name);
+                PublicAccount publicAccount1 = publicAccountService.selectByName(name);
                 if (publicAccount1 != null) {
                     throw new BusinessException(EmBusinessError.PUBLIC_ACCOUNT_ALREADY_EXISTS);
                 }
-                String brief = request.getParameter("brief");//公众号简介
                 PublicAccount publicAccount = new PublicAccount();
                 publicAccount.setPublicaccountType("person");//设置公众号为个人公众号
                 publicAccount.setPublicaccountOwner(userId);//公众号所属着id为用户id
@@ -86,9 +80,11 @@ public class PublicAccountController extends BaseController {
         }
     }
 
-    @GetMapping("/createCompanyAccount")
+    @PostMapping("/createCompanyAccount")
     @ApiOperation("创建公司公众号")
     public CommonReturnType createCompanyAccount(HttpServletRequest request) {
+        String name = request.getParameter("name");//公众号名字
+        String brief = request.getParameter("brief");//公众号简介
         String token = RequestUtil.getCookievalue(request);
         if (StringUtils.isNotBlank(token)) {
             TokenInfoResponse tokenInfoResponse = loginService.checkLogin(token);
@@ -97,12 +93,10 @@ public class PublicAccountController extends BaseController {
                 User user = userService.getUserById(userId);
                 boolean isCompanyAdmin = userService.isCompanyAdmin(userId);
                 if (isCompanyAdmin) {
-                    String name = request.getParameter("name");//公众号名字
-                    PublicAccount publicAccount1 = publicAccountMapper.selectByName(name);
+                    PublicAccount publicAccount1 = publicAccountService.selectByName(name);
                     if (publicAccount1 != null) {
                         throw new BusinessException(EmBusinessError.PUBLIC_ACCOUNT_ALREADY_EXISTS);
                     }
-                    String brief = request.getParameter("brief");//公众号简介
                     PublicAccount publicAccount = new PublicAccount();
                     publicAccount.setPublicaccountType("company");//设置公众号为企业公众号
                     publicAccount.setPublicaccountOwner(user.getCompanyId());//公众号所属着id为企业id
@@ -121,20 +115,21 @@ public class PublicAccountController extends BaseController {
         }
     }
 
-    @GetMapping("/createPost")
+    @PostMapping("/createPost")
     @ApiOperation("判断是否有写文章的权限")
     public CommonReturnType createPost(HttpServletRequest request) {
+        String id = request.getParameter("id");//公众号简介
         String token = RequestUtil.getCookievalue(request);
         if (StringUtils.isNotBlank(token)) {
             TokenInfoResponse tokenInfoResponse = loginService.checkLogin(token);
             if (Objects.nonNull(tokenInfoResponse) && tokenInfoResponse.getIsLogin() && !tokenService.isExpiration(token)) {
                 int userId = Integer.parseInt(tokenInfoResponse.getUserId());
                 User user = userService.getUserById(userId);
-                Integer publicAccountId = Integer.parseInt(request.getParameter("id"));
-                PublicAccount publicAccount = publicAccountMapper.selectByPrimaryKey(publicAccountId);
+                Integer publicAccountId = Integer.parseInt(id);
+                PublicAccount publicAccount = publicAccountService.selectByPrimaryKey(publicAccountId);
                 //如果是个人公众号
                 if (publicAccount.getPublicaccountType().equals("person")) {
-                    List<PublicAccount> publicAccounts = publicAccountMapper.selectByUserId(userId);
+                    List<PublicAccount> publicAccounts = publicAccountService.selectByUserId(userId);
                     boolean isMine = publicAccounts.stream().anyMatch(account -> publicAccountId.equals(account.getPublicaccountId()));
                     return CommonReturnType.create(isMine);
                 } else {//否则是企业公众号
@@ -156,7 +151,7 @@ public class PublicAccountController extends BaseController {
         if (StringUtils.isNotBlank(token)) {
             TokenInfoResponse tokenInfoResponse = loginService.checkLogin(token);
             if (Objects.nonNull(tokenInfoResponse) && tokenInfoResponse.getIsLogin() && !tokenService.isExpiration(token)) {
-                List<PublicAccount> publicAccounts = publicAccountMapper.selectByUserId(Integer.parseInt(tokenInfoResponse.getUserId()));
+                List<PublicAccount> publicAccounts = publicAccountService.selectByUserId(Integer.parseInt(tokenInfoResponse.getUserId()));
                 return CommonReturnType.create(publicAccounts);
             } else {
                 throw new BusinessException(EmBusinessError.UNLOGIN);
@@ -174,7 +169,7 @@ public class PublicAccountController extends BaseController {
             TokenInfoResponse tokenInfoResponse = loginService.checkLogin(token);
             if (Objects.nonNull(tokenInfoResponse) && tokenInfoResponse.getIsLogin() && !tokenService.isExpiration(token)) {
                 User user = userService.getUserById(Integer.parseInt(tokenInfoResponse.getUserId()));
-                List<PublicAccount> publicAccounts = publicAccountMapper.selectByCompanyId(user.getCompanyId());
+                List<PublicAccount> publicAccounts = publicAccountService.selectByCompanyId(user.getCompanyId());
                 return CommonReturnType.create(publicAccounts);
             } else {
                 throw new BusinessException(EmBusinessError.UNLOGIN);
@@ -201,15 +196,16 @@ public class PublicAccountController extends BaseController {
         }
     }
 
-    @GetMapping("/search")
+    @PostMapping("/search")
     @ApiOperation("根据关键字搜索公众号")
     @ApiImplicitParam(name = "key", value = "搜索关键字")
-    public CommonReturnType search(HttpServletRequest request, @RequestParam("key") String key) {
+    public CommonReturnType search(HttpServletRequest request) {
+        String key = request.getParameter("key");
         String token = RequestUtil.getCookievalue(request);
         if (StringUtils.isNotBlank(token)) {
             TokenInfoResponse tokenInfoResponse = loginService.checkLogin(token);
             if (Objects.nonNull(tokenInfoResponse) && tokenInfoResponse.getIsLogin() && !tokenService.isExpiration(token)) {
-                List<PublicAccount> publicAccounts = publicAccountMapper.selectByKey(key);
+                List<PublicAccount> publicAccounts = publicAccountService.selectByKey(key);
                 return CommonReturnType.create(publicAccounts);
             } else {
                 throw new BusinessException(EmBusinessError.UNLOGIN);
@@ -229,7 +225,7 @@ public class PublicAccountController extends BaseController {
             if (Objects.nonNull(tokenInfoResponse) && tokenInfoResponse.getIsLogin() && !tokenService.isExpiration(token)) {
                 System.out.println(request.getParameter("id"));
                 int id = Integer.parseInt(request.getParameter("id"));
-                List<Post> posts = postMapper.selectByPublicAccountId(id);
+                List<Post> posts = postService.selectByPublicAccountId(id);
                 return CommonReturnType.create(posts);
             } else {
                 throw new BusinessException(EmBusinessError.UNLOGIN);
@@ -242,7 +238,8 @@ public class PublicAccountController extends BaseController {
     @GetMapping("/subscribe")
     @ApiOperation("订阅公众号")
     @ApiImplicitParam(name = "id", value = "公众号id")
-    public CommonReturnType subscribe(HttpServletRequest request, @RequestParam("id") Integer id) {
+    public CommonReturnType subscribe(HttpServletRequest request) {
+        Integer id = Integer.parseInt(request.getParameter("id"));
         String token = RequestUtil.getCookievalue(request);
         if (StringUtils.isNotBlank(token)) {
             TokenInfoResponse tokenInfoResponse = loginService.checkLogin(token);

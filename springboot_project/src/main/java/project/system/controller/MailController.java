@@ -19,6 +19,7 @@ import project.system.response.CommonReturnType;
 import project.system.response.response.TokenInfoResponse;
 import project.system.service.LoginService;
 import project.system.service.MailService;
+import project.system.service.UserService;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
@@ -43,9 +44,9 @@ public class MailController extends BaseController {
     @Resource
     private MailService mailService;
     @Resource
-    LoginService loginService;
+    private LoginService loginService;
     @Resource
-    UserMapper userMapper;
+    private UserService userService;
 
     static String from = "";
     static String authorizationCode = "";
@@ -301,7 +302,7 @@ public class MailController extends BaseController {
         } else {
             throw new BusinessException(EmBusinessError.UNLOGIN);
         }
-        User user = userMapper.selectByPrimaryKey(userId);
+        User user = userService.selectByPrimaryKey(userId);
         if(!user.getUserEmail().equals(userMail) || !user.getEmailAuthorizationCode().equals(mailPassword)){
 
             Session session = mailService.getSmtpSession();
@@ -325,7 +326,7 @@ public class MailController extends BaseController {
             user.setUserEmail(userMail);
             user.setEmailAuthorizationCode(mailPassword);
 
-            userMapper.updateByPrimaryKeySelective(user);
+            userService.updateByPrimaryKeySelective(user);
             //保存用户名和授权码
         }
         //保存用户名和授权码
@@ -349,7 +350,7 @@ public class MailController extends BaseController {
         } else {
             throw new BusinessException(EmBusinessError.UNLOGIN);
         }
-        User user = userMapper.selectByPrimaryKey(userId);
+        User user = userService.selectByPrimaryKey(userId);
         Map<String,String> map = new HashMap<>();
         map.put("userMail","");
         map.put("mailPassword","");
