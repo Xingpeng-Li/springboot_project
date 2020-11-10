@@ -85,8 +85,9 @@ public class ChatController extends BaseController{
     /*
      * 获取部门联系人
      * */
-    @GetMapping("/chatRoom/users/relevant/{userId}")
+    @GetMapping("/chatRoom/users/relevant")
     public CommonReturnType getSocketUserRelevant(@PathVariable String userId) {
+
         User user = userMapper.selectByPrimaryKey(Integer.parseInt(userId));
         User[] users = userMapper.selectByCompanyAndDept(user.getCompanyId(),user.getDeptId());
         return CommonReturnType.create(Arrays.stream(users).filter(t -> !t.getUserId().equals(Integer.parseInt(userId))).collect(Collectors.toList()));

@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiResponses;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import project.system.common.utils.RequestUtil;
 import project.system.domain.User;
@@ -81,7 +82,7 @@ public class CompanyController extends BaseController {
             @ApiResponse(code = 1,message = "登录已过期"),
             @ApiResponse(code = 50001,message = "该企业已经存在"),
     })
-    @GetMapping(value = "/company/add")
+    @PostMapping(value = "/company/add")
     public CommonReturnType addCompany(HttpServletRequest request){
         String companyname = request.getParameter("companyname");
         //通过token获取UserId
@@ -104,7 +105,7 @@ public class CompanyController extends BaseController {
             @ApiResponse(code = 1,message = "登录已过期"),
             @ApiResponse(code = 20009,message = "所属企业不存在"),
     })
-    @GetMapping("/company/join")
+    @PostMapping("/company/join")
     public CommonReturnType joinCompany(HttpServletRequest request){
         String companycode = request.getParameter("companycode");
         //通过token获取UserId
@@ -129,7 +130,7 @@ public class CompanyController extends BaseController {
             @ApiResponse(code = 20009,message = "所属企业不存在"),
             @ApiResponse(code = 50002,message = "该部门已经存在"),
     })
-    @GetMapping("/company/addDeptToDB")
+    @PostMapping("/company/addDeptToDB")
     public CommonReturnType addDeptToDB(HttpServletRequest request){
         String deptname = request.getParameter("deptname");
         String masterPhoneNumber = request.getParameter("masterPhoneNumber");
@@ -181,7 +182,7 @@ public class CompanyController extends BaseController {
             @ApiResponse(code = 20013,message = "用户没有权限"),
     })
     //删除一个部门成员
-    @GetMapping("/company/deleteDeptUser")
+    @PostMapping("/company/deleteDeptUser")
     public CommonReturnType deleteDeptUser(HttpServletRequest request){
         String deleteUserId = request.getParameter("deleteUserId");
         //通过token获取UserId
@@ -211,7 +212,7 @@ public class CompanyController extends BaseController {
             @ApiResponse(code = 20013,message = "用户没有权限"),
     })
     //删除一个企业成员
-    @GetMapping("/company/deleteCompanyUser")
+    @PostMapping("/company/deleteCompanyUser")
     public CommonReturnType deleteCompanyUser(HttpServletRequest request){
         String deleteUserId = request.getParameter("deleteUserId");
         //通过token获取UserId
