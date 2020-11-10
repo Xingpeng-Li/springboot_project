@@ -34,6 +34,16 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
+    public Notification selectByPrimaryKey(Integer notificationId) {
+        return notificationMapper.selectByPrimaryKey(notificationId);
+    }
+
+    @Override
+    public int updateByPrimaryKeySelective(Notification record) {
+        return notificationMapper.updateByPrimaryKeySelective(record);
+    }
+
+    @Override
     public List<Map<String, Object>> getNotification(Integer userId) {
         //找到并返回所有接收者是该成员的消息
         Notification[] notifications = notificationMapper.selectByReceiverId(userId);

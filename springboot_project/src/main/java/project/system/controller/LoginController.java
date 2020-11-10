@@ -7,9 +7,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import project.system.common.constant.RequestConstant;
 import project.system.common.utils.Md5Utils;
 import project.system.common.utils.RequestUtil;
@@ -56,7 +54,7 @@ public class LoginController extends BaseController{
             @ApiResponse(code = 2006, message = "验证码填写错误"),
             @ApiResponse(code = 2008, message = "验证码过期")
     })
-    @RequestMapping("/loginByPhone")
+    @PostMapping("/loginByPhone")
     public CommonReturnType login(HttpServletRequest request, HttpServletResponse response){
         //从前端获取需要的参数
         String phoneNumber=request.getParameter("phoneNumber");
@@ -114,7 +112,7 @@ public class LoginController extends BaseController{
             @ApiResponse(code = 200,message = "success",response = TokenInfoResponse.class),
             @ApiResponse(code = 20011,message = "用户名或者密码错误")
     })
-    @RequestMapping("/login")
+    @PostMapping("/login")
     public  Object loginByPassword(HttpServletRequest request, HttpServletResponse response) {
         //从前端获取需要的参数
         String phoneNumber = request.getParameter("phoneNumber");
@@ -153,7 +151,7 @@ public class LoginController extends BaseController{
     }
     @ApiOperation("用户登出接口")
     //退出登录操作，清除浏览器cookie，清除服务器缓存的用户登录信息
-    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    @GetMapping(value = "/logout")
     public CommonReturnType logout(HttpServletRequest request, HttpServletResponse response) {
         String token = RequestUtil.getCookievalue(request);
         if ( StringUtils.isNotBlank(token)) {

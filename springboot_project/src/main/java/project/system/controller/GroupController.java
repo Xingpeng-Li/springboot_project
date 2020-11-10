@@ -4,10 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import project.system.common.utils.RequestUtil;
 import project.system.error.BusinessException;
 import project.system.error.EmBusinessError;
@@ -47,7 +44,7 @@ public class GroupController extends BaseController {
     /*
      * 点击会议按钮，跳转到加入会议界面，判断是否登录，若登录返回登录信息
      * */
-    @RequestMapping(value = "/joinVideo", method = RequestMethod.POST)
+    @GetMapping(value = "/joinVideo")
     public CommonReturnType joinVideo(HttpServletRequest request) {
         String token = RequestUtil.getCookievalue(request);
         if (StringUtils.isNotBlank(token)) {
@@ -64,7 +61,7 @@ public class GroupController extends BaseController {
 
     @ApiOperation(value = "加入会议接口", notes = "绑定用户与当前会议的关系")
     @ApiImplicitParam(name = "guid", value = "会议唯一编号", required = true)
-    @RequestMapping(value = "/join/{guid}", method = {RequestMethod.POST})
+    @GetMapping(value = "/join/{guid}")
     public CommonReturnType join(@PathVariable(name = "guid") String groupUniqueId, HttpServletRequest request) {
         String token = RequestUtil.getCookievalue(request);
         if (StringUtils.isNotBlank(token)) {

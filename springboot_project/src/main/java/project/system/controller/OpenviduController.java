@@ -51,8 +51,7 @@ public class OpenviduController extends BaseController {
     private OpenVidu openVidu;
 
 	@ApiOperation("初始化接口")
-	@ResponseBody
-	@RequestMapping(value = "/init", method = { RequestMethod.POST })
+	@PostMapping("/init")
 	public CommonReturnType addUser(@RequestBody OpenviduRequest openviduRequest, HttpServletRequest request) {
 		TokenInfoResponse tokenInfoResponse = checkUserLogged(request);
 		if (Objects.isNull(tokenInfoResponse)) {
@@ -104,8 +103,7 @@ public class OpenviduController extends BaseController {
 	}
 
 	@ApiOperation("退出视频会话")
-	@ResponseBody
-	@RequestMapping(value = "/leave", method = RequestMethod.POST)
+	@GetMapping("/leave")
 	public CommonReturnType removeUser(HttpServletRequest request, HttpServletResponse response) {
 		TokenInfoResponse tokenInfoResponse = checkUserLogged(request);
 		if(Objects.isNull(tokenInfoResponse)||!tokenInfoResponse.getIsLogin()){
@@ -128,8 +126,7 @@ public class OpenviduController extends BaseController {
 	}
 
 	@ApiOperation("录制接口")
-	@ResponseBody
-	@RequestMapping(value = "/record", method = RequestMethod.POST)
+	@PostMapping("/record")
 	public CommonReturnType record(@RequestBody OpenviduRequest openviduRequest, HttpServletRequest request) {
 		TokenInfoResponse tokenInfoResponse = checkUserLogged(request);
 		if (Objects.isNull(tokenInfoResponse) || Objects.isNull(tokenInfoResponse.getGroupUniqueId())) {
