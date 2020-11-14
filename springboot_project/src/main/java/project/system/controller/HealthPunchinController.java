@@ -48,8 +48,6 @@ import java.util.*;
 @RestController
 public class HealthPunchinController extends BaseController {
     @Resource
-    HealthPunchinMapper healthPunchinMapper;
-    @Resource
     UserMapper userMapper;
     @Resource
     HealthService healthService;
@@ -67,7 +65,7 @@ public class HealthPunchinController extends BaseController {
     //判断了是企业管理员还是部门管理员
     @GetMapping(value = "/health/punchin")
     public CommonReturnType healthExcel(HttpServletResponse response, HttpServletRequest request) {
-        List<HealthPunchin> healthPunchinList = Arrays.asList(healthPunchinMapper.selectAll());
+        List<HealthPunchin> healthPunchinList = Arrays.asList(healthService.selectAll());
         //获取一个空表
         List<HealthPunchin> healthPunchinListSelect = new ArrayList<HealthPunchin>();
         List<User> userList;
@@ -173,18 +171,18 @@ public class HealthPunchinController extends BaseController {
                 String userId = tokenInfoResponse.getUserId();
 
                 //判断用户一日之内是否打过卡
-                List<HealthPunchin> healthPunchinList = Arrays.asList(healthPunchinMapper.selectByUserID(Integer.parseInt(userId)));
+                List<HealthPunchin> healthPunchinList = Arrays.asList(healthService.selectByUserID(Integer.parseInt(userId)));
                 //如果一日之内已经打过卡，则删除今天的打卡记录，然后再插入最新的记录
                 if(healthPunchinList.size()>0){
                     for(HealthPunchin punchin:healthPunchinList){
                         if(punchin.getPunchinDate().getDate() == timestamp.getDate())
                             //删除今天的打卡记录
-                            healthPunchinMapper.deleteByPrimaryKey(punchin.getPunchinId());
+                            healthService.deleteByPrimaryKey(punchin.getPunchinId());
                     }
                 }
                 healthPunchin.setUserId(Integer.parseInt(userId));
                 //插入最新的打卡记录
-                healthPunchinMapper.insert(healthPunchin);
+                healthService.insert(healthPunchin);
                 return CommonReturnType.create(null);
             } else {
                 throw new BusinessException(EmBusinessError.UNLOGIN);
@@ -228,7 +226,7 @@ public class HealthPunchinController extends BaseController {
         int punchin = 0;
         int notPunchin;
         for(User user1:userList){
-            healthPunchinList = Arrays.asList(healthPunchinMapper.selectByUserID(user1.getUserId()));
+            healthPunchinList = Arrays.asList(healthService.selectByUserID(user1.getUserId()));
             for(HealthPunchin healthPunchin: healthPunchinList){
                 if(healthPunchin.getPunchinDate().getDate() == day)
                     punchin = punchin + 1;
@@ -264,7 +262,7 @@ public class HealthPunchinController extends BaseController {
                     //对每个用户发送考勤打卡提醒
                     for(User user1:userList) {
                         //判断用户一日之内是否打过卡
-                        List<HealthPunchin> healthPunchinList = Arrays.asList(healthPunchinMapper.selectByUserID(user1.getUserId()));
+                        List<HealthPunchin> healthPunchinList = Arrays.asList(healthService.selectByUserID(user1.getUserId()));
                         if (healthPunchinList.size() > 0) {
                             for (HealthPunchin punchin : healthPunchinList) {
                                 if (punchin.getPunchinDate().getDate() == timestamp.getDate()) {
@@ -305,7 +303,7 @@ public class HealthPunchinController extends BaseController {
             //对每个用户发送考勤打卡提醒
             for(User user1:userList) {
                 //判断用户一日之内是否打过卡
-                List<HealthPunchin> healthPunchinList = Arrays.asList(healthPunchinMapper.selectByUserID(user1.getUserId()));
+                List<HealthPunchin> healthPunchinList = Arrays.asList(healthService.selectByUserID(user1.getUserId()));
                 if (healthPunchinList.size() > 0) {
                     for (HealthPunchin punchin : healthPunchinList) {
                         if (punchin.getPunchinDate().getDate() == timestamp.getDate()) {

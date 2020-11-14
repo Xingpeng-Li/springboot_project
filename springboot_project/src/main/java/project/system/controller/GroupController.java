@@ -61,7 +61,7 @@ public class GroupController extends BaseController {
 
     @ApiOperation(value = "加入会议接口", notes = "绑定用户与当前会议的关系")
     @ApiImplicitParam(name = "guid", value = "会议唯一编号", required = true)
-    @GetMapping(value = "/join/{guid}")
+    @PostMapping(value = "/join/{guid}")
     public CommonReturnType join(@PathVariable(name = "guid") String groupUniqueId, HttpServletRequest request) {
         String token = RequestUtil.getCookievalue(request);
         if (StringUtils.isNotBlank(token)) {
