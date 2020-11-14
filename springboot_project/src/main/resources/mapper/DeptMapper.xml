@@ -13,13 +13,13 @@
   <select id="selectByCompanyId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from telecommutingdb.dept
+    from dept
     where company_id = #{companyId,jdbcType=INTEGER}
   </select>
   <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from telecommutingdb.dept
+    from dept
     where dept_name = #{deptName,jdbcType=VARCHAR}
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">

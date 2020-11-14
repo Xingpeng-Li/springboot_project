@@ -75,7 +75,7 @@ public class CloudFileController extends BaseController {
             @ApiResponse(code = 10003, message = "数据库错误"),
             @ApiResponse(code = 60006,message = "文件保存失败")
     })
-    @GetMapping(value = "/copyfile")
+    @PostMapping(value = "/copyfile")
     public CommonReturnType copyfile(@RequestParam("fileId")Integer fileId,
                                      HttpServletRequest request) {
         //登录有效性判断

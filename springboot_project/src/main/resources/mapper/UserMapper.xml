@@ -21,20 +21,20 @@
 <!--  <select id="selectbycompanyid" parameterType="java.lang.Integer" resultMap="BaseResultMap">-->
 <!--    select-->
 <!--    <include refid="Base_Column_List" />-->
-<!--    from telecommutingdb.user-->
+<!--    from user-->
 <!--    where company_id = #{companyId,jdbcType=INTEGER}-->
 <!--  </select>-->
 
   <select id="selectAll" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from telecommutingdb.user
+    from user
   </select>
 <!--  获取指定公司下没有加入部门的用户-DKR-->
   <select id="getNoDeptUsers" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from telecommutingdb.user
+    from user
     where company_id=#{companyId,jdbcType=INTEGER} and user_id &lt;&gt; #{userId,jdbcType=INTEGER} and dept_id=0
     order by convert(user_name using gbk)
   </select>
@@ -42,7 +42,7 @@
   <select id="getDeptContact" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from telecommutingdb.user
+    from user
     where dept_id &lt;&gt; 0 and dept_id=#{deptId,jdbcType=INTEGER} and user_id &lt;&gt; #{userId,jdbcType=INTEGER}
     order by convert(user_name using gbk)
   </select>
@@ -50,35 +50,35 @@
   <select id="getCompContact" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from telecommutingdb.user
+    from user
     where company_id=#{companyId,jdbcType=INTEGER} and user_id &lt;&gt; #{userId,jdbcType=INTEGER}
     order by convert(user_name using gbk)
   </select>
   <select id="selectByCompanyAndDept" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from telecommutingdb.user
+    from user
     where dept_id = #{deptId,jdbcType=INTEGER}
     and company_id=#{companyId}
   </select>
   <select id="selectByCompanyId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from telecommutingdb.user
+    from user
     where company_id = #{companyId,jdbcType=INTEGER}
   </select>
   <!--  通过deptId获取一个部门的全部人员-->
   <select id="selectByDeptId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from telecommutingdb.user
+    from user
     where dept_id = #{deptId,jdbcType=INTEGER}
   </select>
 
   <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from telecommutingdb.user
+    from user
     where user_name = #{userName,jdbcType=VARCHAR}
   </select>
 
@@ -86,14 +86,14 @@
   <select id="getUserByPhoneNumber" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
-    from telecommutingdb.user
+    from user
     where user_phonenumber=#{userPhonenumber,jdbcType=VARCHAR}
   </select>
   <!--  登录密码验证@author DKR-->
   <select id="getUserByPhoneNumberAndPassword" parameterType="project.system.domain.User" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
-    from telecommutingdb.user
+    from user
     where user_phonenumber=#{userPhonenumber,jdbcType=VARCHAR} and user_password=#{userPassword,jdbcType=VARCHAR}
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">

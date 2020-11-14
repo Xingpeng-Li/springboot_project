@@ -34,7 +34,7 @@ import javax.servlet.http.HttpSession;
 public class RegisterController extends BaseController {
     @Resource
     UserService userService;
-//    @Resource
+    @Resource
     AliMessage aliMessage;
     @ApiOperation(value = "验证码接口",notes = "type为register为注册验证码,其他type不会验证手机号是否已经注册")
     @ApiResponses({
@@ -58,10 +58,25 @@ public class RegisterController extends BaseController {
                 throw new BusinessException(EmBusinessError.USER_PHONE_EXIST);//电话号码已被注册
             }
         }
+        //String verificationCode = "";
         //TODO: 邮件实现
+//        if(true) {
+//            HttpSession session=request.getSession();//短信发送成功
+//            request.getSession().removeAttribute("verifyCode");
+//            //将验证码存到session中,同时存入创建时间,以json存放，使用阿里的fastjson
+//            JSONObject json = null;
+//            json = new JSONObject();
+//            json.put("phoneNumber", phoneNumber);
+//            json.put("verifyCode", verificationCode);
+//            json.put("createTime", System.currentTimeMillis());
+//            request.getSession().setAttribute("verifyCode", json);
+//            return CommonReturnType.create(null);
+//        }
+//        else throw new BusinessException(EmBusinessError.USER_VERIFICATION_CODE_SEND_FAIL);
         SMSParameter smsParameter= aliMessage.GetVerifyCodeParam(phoneNumber);//生成短信发送参数对象
-        if(aliMessage.sendSms(smsParameter).equals("success")) {
-            HttpSession session=request.getSession();//短信发送成功
+//        if(aliMessage.sendSms(smsParameter).equals("success")) {
+//            HttpSession session = request.getSession();//短信发送成功
+        if(true) {
             request.getSession().removeAttribute("verifyCode");
             //将验证码存到session中,同时存入创建时间,以json存放，使用阿里的fastjson
             JSONObject json = null;

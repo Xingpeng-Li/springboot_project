@@ -63,4 +63,29 @@ public class PublicAccountServiceImpl implements PublicAccountService {
         if (affectedRows == 0)
             throw new BusinessException(EmBusinessError.DB_ERROR);
     }
+
+    @Override
+    public PublicAccount selectByName(String name) {
+        return publicAccountMapper.selectByName(name);
+    }
+
+    @Override
+    public PublicAccount selectByPrimaryKey(Integer publicaccountId) {
+        return publicAccountMapper.selectByPrimaryKey(publicaccountId);
+    }
+
+    @Override
+    public List<PublicAccount> selectByCompanyId(Integer companyId) {
+        return publicAccountMapper.selectByCompanyId(companyId);
+    }
+
+    @Override
+    public List<PublicAccount> selectByUserId(Integer userId) {
+        return publicAccountMapper.selectByUserId(userId);
+    }
+
+    @Override
+    public List<PublicAccount> selectByKey(String key) {
+        return publicAccountMapper.selectByKey(key);
+    }
 }

@@ -94,6 +94,17 @@ public class UserServiceImpl implements UserService {
         User user = userMapper.selectByPrimaryKey(userId);
         return "master".equals(user.getUserPosition());
     }
+
+    @Override
+    public User selectByPrimaryKey(Integer userId) {
+        return userMapper.selectByPrimaryKey(userId);
+    }
+
+    @Override
+    public int updateByPrimaryKeySelective(User record) {
+        return userMapper.updateByPrimaryKeySelective(record);
+    }
+
     @Override
     public UserView convertFromUserToUserView(User user){
         if(user==null)

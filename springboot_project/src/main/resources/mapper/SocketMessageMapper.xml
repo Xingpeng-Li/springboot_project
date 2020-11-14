@@ -17,7 +17,7 @@
   <select id="getSocketMessageByGroup" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
-    from telecommutingdb.socket_message
+    from socket_message
     where receive_id='0' and company_id=#{companyId} and dept_id=#{deptId} and create_time &lt; #{date}
     order by create_time desc limit 15;
   </select>

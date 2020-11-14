@@ -9,6 +9,7 @@ import project.system.mapper.PostMapper;
 import project.system.service.PostService;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /*
 @author WL
@@ -28,5 +29,10 @@ public class PostServiceImpl implements PostService {
             throw new BusinessException(EmBusinessError.POST_NOT_EXISTS);
         }
         return post;
+    }
+
+    @Override
+    public List<Post> selectByPublicAccountId(Integer id) {
+        return postMapper.selectByPublicAccountId(id);
     }
 }

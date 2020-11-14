@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiResponses;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import project.system.common.utils.RequestUtil;
 import project.system.domain.Notification;
 import project.system.error.BusinessException;
@@ -37,8 +38,6 @@ public class NotificationController extends BaseController {
     LoginService loginService;
     @Resource
     NotificationService notificationService;
-    @Resource
-    NotificationMapper notificationMapper;
 
     @ApiOperation("查看提醒接口")
     @ApiResponses({
@@ -49,17 +48,19 @@ public class NotificationController extends BaseController {
     //返回用户收到的所有提醒
     @GetMapping("/notification/get")
     public CommonReturnType getAllNotification(HttpServletRequest request){
+        List<Map<String,Object>> notificationLis =  notificationService.getNotification(50);
+        return CommonReturnType.create(notificationLis);
         //通过token获取UserId
-        String token = RequestUtil.getCookievalue(request);
-        if (StringUtils.isNotBlank(token) && !tokenService.isExpiration(token)) {
-            TokenInfoResponse tokenInfoResponse = loginService.checkLogin(token);
-            String userId = tokenInfoResponse.getUserId();
-            List<Map<String,Object>> notificationList =  notificationService.getNotification(Integer.parseInt(userId));
-            return CommonReturnType.create(notificationList);
-        }
-        else{
-            throw new BusinessException(EmBusinessError.UNLOGIN);
-        }
+//        String token = RequestUtil.getCookievalue(request);
+//        if (StringUtils.isNotBlank(token) && !tokenService.isExpiration(token)) {
+//            TokenInfoResponse tokenInfoResponse = loginService.checkLogin(token);
+//            String userId = tokenInfoResponse.getUserId();
+//            List<Map<String,Object>> notificationList =  notificationService.getNotification(Integer.parseInt(userId));
+//            return CommonReturnType.create(notificationList);
+//        }
+//        else{
+//            throw new BusinessException(EmBusinessError.UNLOGIN);
+//        }
     }
 
     @ApiOperation("删除提醒接口")
@@ -69,7 +70,7 @@ public class NotificationController extends BaseController {
             @ApiResponse(code = 1,message = "登录已过期"),
     })
     //删除一个提醒
-    @GetMapping("/notification/delete")
+    @PostMapping("/notification/delete")
     public CommonReturnType deleteNotification(HttpServletRequest request){
         String notificationId = request.getParameter("notificationId");
         //通过token获取UserId
@@ -85,15 +86,15 @@ public class NotificationController extends BaseController {
 
     @ApiOperation("设置提醒已阅接口")
     //设置一个提醒已阅
-    @GetMapping("/notification/read")
+    @PostMapping("/notification/read")
     public CommonReturnType readNotification(HttpServletRequest request){
         String notificationId = request.getParameter("notificationId");
         //通过token获取UserId
         String token = RequestUtil.getCookievalue(request);
         if (StringUtils.isNotBlank(token) && !tokenService.isExpiration(token)) {
-            Notification notification = notificationMapper.selectByPrimaryKey(Integer.parseInt(notificationId));
+            Notification notification = notificationService.selectByPrimaryKey(Integer.parseInt(notificationId));
             notification.setNotificationChecked("是");
-            notificationMapper.updateByPrimaryKeySelective(notification);
+            notificationService.updateByPrimaryKeySelective(notification);
             return CommonReturnType.create(null);
         }
         else{
