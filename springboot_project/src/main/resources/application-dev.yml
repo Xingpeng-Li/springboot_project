@@ -46,6 +46,15 @@ tx:
 #  speech:
 #    secretId: AKIDWmAJBdFR0LrfkUzGVWIrBD0bNvBCbXnk
 #    secretKey: t4xYw5yadWZN0xe6GE0tWt0FFySpKYVC
+aliyun:
+  accessKeyID: LTAI4G4F1c1cBGeJis39KE3i
+  accessKeySecret: aOxIV5RtrJRk9aCP2yDUbrYhwHzDxi
+  domain: dysmsapi.aliyuncs.com
+  regionId: ap-nanjing
+  templateCode: SMS_205445358
+  signName: JavaEEPro
+  smsEffectiveTime: 2
+
 config:
   jwt:
     # 加密密钥
