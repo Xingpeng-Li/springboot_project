@@ -5,6 +5,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -77,7 +78,10 @@ public class RegisterController extends BaseController {
 //        if(aliMessage.sendSms(smsParameter).equals("success")) {
 //            HttpSession session = request.getSession();//短信发送成功
         if(true) {
-            request.getSession().removeAttribute("verifyCode");
+            HttpSession session = request.getSession();
+            //request.getSession().removeAttribute("verifyCode");
+            session.removeAttribute("verifyCode");
+            String sessionid = session.getId();
             //将验证码存到session中,同时存入创建时间,以json存放，使用阿里的fastjson
             JSONObject json = null;
             json = new JSONObject();
@@ -104,6 +108,8 @@ public class RegisterController extends BaseController {
         String phoneNumber = request.getParameter("phoneNumber");
         String verificationCode = request.getParameter("verificationCode");
         //从session中获取正确的验证码
+        HttpSession session = request.getSession();
+        String sessionid = session.getId();
         JSONObject json = (JSONObject)request.getSession(false).getAttribute("verifyCode");
         if(json == null){
             throw new BusinessException(EmBusinessError.USER_VERIFICATION_CODE_ERROR);//session中不存在验证码
