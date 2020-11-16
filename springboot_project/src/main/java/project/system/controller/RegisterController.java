@@ -59,21 +59,6 @@ public class RegisterController extends BaseController {
                 throw new BusinessException(EmBusinessError.USER_PHONE_EXIST);//电话号码已被注册
             }
         }
-        //String verificationCode = "";
-        //TODO: 邮件实现
-//        if(true) {
-//            HttpSession session=request.getSession();//短信发送成功
-//            request.getSession().removeAttribute("verifyCode");
-//            //将验证码存到session中,同时存入创建时间,以json存放，使用阿里的fastjson
-//            JSONObject json = null;
-//            json = new JSONObject();
-//            json.put("phoneNumber", phoneNumber);
-//            json.put("verifyCode", verificationCode);
-//            json.put("createTime", System.currentTimeMillis());
-//            request.getSession().setAttribute("verifyCode", json);
-//            return CommonReturnType.create(null);
-//        }
-//        else throw new BusinessException(EmBusinessError.USER_VERIFICATION_CODE_SEND_FAIL);
         SMSParameter smsParameter= aliMessage.GetVerifyCodeParam(phoneNumber);//生成短信发送参数对象
 //        if(aliMessage.sendSms(smsParameter).equals("success")) {
 //            HttpSession session = request.getSession();//短信发送成功
@@ -126,7 +111,7 @@ public class RegisterController extends BaseController {
         User user=new User();
         user.setUserName(userName);
         String userPassword;
-        userPassword= Md5Utils.inputPassToDBPass(password,phoneNumber+"miaowhu");//对用户的密码进行加密
+        userPassword= Md5Utils.inputPassToDBPass(password,phoneNumber+"miaowhu");//前端传来的密码进行二次加密
       //  System.out.println(userPassword);
         user.setUserPassword(userPassword);
         user.setUserPhonenumber(phoneNumber);
