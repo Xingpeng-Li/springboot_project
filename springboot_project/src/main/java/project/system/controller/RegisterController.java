@@ -51,7 +51,8 @@ public class RegisterController extends BaseController {
         String type=request.getParameter("type");
         // 生成随机的六位数验证码
         if(!Validator.isMobile(phoneNumber)){
-            throw new BusinessException(EmBusinessError.USER_PHONE_ERROR);//电话号码格式错误
+            //电话号码格式错误
+            throw new BusinessException(EmBusinessError.USER_PHONE_ERROR);
         }
         if(type.equals("register")) {
             if (userService.PhoneNumberExist(phoneNumber)) {
@@ -79,15 +80,16 @@ public class RegisterController extends BaseController {
         if(true) {
             request.getSession().removeAttribute("verifyCode");
             //将验证码存到session中,同时存入创建时间,以json存放，使用阿里的fastjson
-            JSONObject json = null;
-            json = new JSONObject();
+            JSONObject json = new JSONObject();
             json.put("phoneNumber", smsParameter.getPhone());
             json.put("verifyCode", smsParameter.getVerifyCode());
             json.put("createTime", System.currentTimeMillis());
             request.getSession().setAttribute("verifyCode", json);
             return CommonReturnType.create(null);
         }
-        else throw new BusinessException(EmBusinessError.USER_VERIFICATION_CODE_SEND_FAIL);
+        else {
+            throw new BusinessException(EmBusinessError.USER_VERIFICATION_CODE_SEND_FAIL);
+        }
     }
     @ApiOperation(value = "注册接口")
     @ApiResponses({
@@ -103,7 +105,9 @@ public class RegisterController extends BaseController {
         String password = request.getParameter("password");
         String phoneNumber = request.getParameter("phoneNumber");
         String verificationCode = request.getParameter("verificationCode");
+        HttpSession session = request.getSession();
         //从session中获取正确的验证码
+        //JSONObject json = (JSONObject)session.getAttribute("verifyCode");
         JSONObject json = (JSONObject)request.getSession(false).getAttribute("verifyCode");
         if(json == null){
             throw new BusinessException(EmBusinessError.USER_VERIFICATION_CODE_ERROR);//session中不存在验证码
