@@ -18,6 +18,8 @@ public class CorsConfig {
         corsConfiguration.addAllowedOrigin("*"); // 1
         corsConfiguration.addAllowedHeader("*"); // 2
         corsConfiguration.addAllowedMethod("*"); // 3
+        corsConfiguration.setMaxAge(3600L);
+        corsConfiguration.setAllowCredentials(true);
         return corsConfiguration;
     }
 
