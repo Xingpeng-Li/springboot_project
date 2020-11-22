@@ -85,7 +85,7 @@ public class ApplicationServiceImpl implements ApplicationService {
 
     //发送审批
     @Override
-    public void sendApplication(String type, String startTime,String endTime,String reason,Integer sender,String approverPhoneNumber,String secondApproverPhoneNumber) {
+    public void sendApplication(String type, String startTime,String endTime,String reason,Integer sender,String approverId,String secondApproverId) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
         Date startDate, endDate;
         try {
@@ -98,8 +98,8 @@ public class ApplicationServiceImpl implements ApplicationService {
         if(endDate.before(startDate)){
             throw new BusinessException(EmBusinessError.DATE_ERROR);
         }
-        Integer approver = userMapper.getUserByPhoneNumber(approverPhoneNumber).getUserId();
-        Integer secondApprover = userMapper.getUserByPhoneNumber(secondApproverPhoneNumber).getUserId();
+        Integer approver = Integer.parseInt(approverId);
+        Integer secondApprover = Integer.parseInt(secondApproverId);
         Application application = new Application();
         application.setApplicantId(sender);
         application.setApplicationStartTime(startDate);
