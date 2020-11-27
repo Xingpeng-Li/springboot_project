@@ -51,8 +51,9 @@ public class UserController extends BaseController {
     public CommonReturnType getDeptContact(HttpServletRequest request){
         String token= RequestUtil.getCookievalue(request);
         TokenInfoResponse tokenInfoResponse = loginService.checkLogin(token);
-        if(tokenInfoResponse==null||tokenService.isExpiration(token))
+        if(tokenInfoResponse==null||tokenService.isExpiration(token)) {
             throw new BusinessException(EmBusinessError.UNLOGIN);
+        }
         //查找部门联系人
         List<UserView> contacts=userService.getMyDeptContacts(Integer.parseInt(tokenInfoResponse.getUserId()));
         return CommonReturnType.create(contacts);
@@ -68,8 +69,9 @@ public class UserController extends BaseController {
     public CommonReturnType getCompanyContact(HttpServletRequest request){
         String token= RequestUtil.getCookievalue(request);
         TokenInfoResponse tokenInfoResponse = loginService.checkLogin(token);
-        if(tokenInfoResponse==null||tokenService.isExpiration(token))
+        if(tokenInfoResponse==null||tokenService.isExpiration(token)) {
             throw new BusinessException(EmBusinessError.UNLOGIN);
+        }
         //查找公司联系人
         List<UserView> contacts=userService.getMyCompContacts(Integer.parseInt(tokenInfoResponse.getUserId()));
         return CommonReturnType.create(contacts);
@@ -85,8 +87,9 @@ public class UserController extends BaseController {
     public  CommonReturnType getNoDeptContacts(HttpServletRequest request){
         String token= RequestUtil.getCookievalue(request);
         TokenInfoResponse tokenInfoResponse = loginService.checkLogin(token);
-        if(tokenInfoResponse==null||tokenService.isExpiration(token))
+        if(tokenInfoResponse==null||tokenService.isExpiration(token)) {
             throw new BusinessException(EmBusinessError.UNLOGIN);
+        }
         //查找没有部门的联系人
         List<UserView> contacts=userService.getMyNoDeptUsers(Integer.parseInt(tokenInfoResponse.getUserId()));
         return CommonReturnType.create(contacts);

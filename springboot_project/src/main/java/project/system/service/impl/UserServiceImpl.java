@@ -35,7 +35,8 @@ public class UserServiceImpl implements UserService {
     DeptMapper deptMapper;
     @Override
     public boolean PhoneNumberExist(String phoneNumber){
-        User user=userMapper.getUserByPhoneNumber(phoneNumber);//判断电话号码是否已经被注册
+        //判断电话号码是否已经被注册
+        User user=userMapper.getUserByPhoneNumber(phoneNumber);
         return user != null;
     }
     //根据电话号码获取用户
