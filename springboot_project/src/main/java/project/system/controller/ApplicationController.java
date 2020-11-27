@@ -50,15 +50,15 @@ public class ApplicationController extends BaseController {
         String startTime = request.getParameter("startTime");
         String endTime = request.getParameter("endTime");
         String reason = request.getParameter("reason");
-        String approverPhoneNumber = request.getParameter("approverPhoneNumber");
-        String secondApproverPhoneNumber = request.getParameter("secondApproverPhoneNumber");
+        String approverId = request.getParameter("approverId");
+        String secondApproverId = request.getParameter("secondApproverId");
         //通过token获取UserId
         String token = RequestUtil.getCookievalue(request);
         if (StringUtils.isNotBlank(token) && !tokenService.isExpiration(token)) {
             TokenInfoResponse tokenInfoResponse = loginService.checkLogin(token);
             String userId = tokenInfoResponse.getUserId();
             applicationService.sendApplication(type,startTime,endTime,reason,Integer.parseInt(userId),
-                    approverPhoneNumber,secondApproverPhoneNumber);
+                    approverId,secondApproverId);
             return CommonReturnType.create("发送成功！");
         }
         else{
