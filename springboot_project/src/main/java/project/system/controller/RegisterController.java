@@ -60,10 +60,8 @@ public class RegisterController extends BaseController {
             }
         }
         SMSParameter smsParameter= aliMessage.GetVerifyCodeParam(phoneNumber);//生成短信发送参数对象
-//        if(aliMessage.sendSms(smsParameter).equals("success")) {
-//            HttpSession session = request.getSession();//短信发送成功
-        if(true) {
-            HttpSession session = request.getSession();
+        if(aliMessage.sendSms(smsParameter).equals("success")) {
+            HttpSession session = request.getSession();//短信发送成功
             //request.getSession().removeAttribute("verifyCode");
             session.removeAttribute("verifyCode");
             String sessionid = session.getId();
@@ -111,7 +109,7 @@ public class RegisterController extends BaseController {
         User user=new User();
         user.setUserName(userName);
         String userPassword;
-        userPassword= Md5Utils.inputPassToDBPass(password,phoneNumber+"miaowhu");//前端传来的密码进行二次加密
+        userPassword= Md5Utils.inputPassToDBPass(password,phoneNumber);//前端传来的密码进行二次加密
       //  System.out.println(userPassword);
         user.setUserPassword(userPassword);
         user.setUserPhonenumber(phoneNumber);

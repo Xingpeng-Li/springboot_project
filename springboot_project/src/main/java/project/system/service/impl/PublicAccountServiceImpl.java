@@ -40,8 +40,8 @@ public class PublicAccountServiceImpl implements PublicAccountService {
         if (publicAccount == null) {
             throw new BusinessException(EmBusinessError.PUBLIC_ACCOUNT_NOT_EXISTS);
         }
-        List<PublicAccount> publicAccounts = accountSubscribeService.selectByUserId(userId);
-        List<PublicAccount> publicAccounts1 = publicAccountMapper.selectByUserId(userId);
+        List<PublicAccount> publicAccounts = accountSubscribeService.selectByUserId(userId);//已订阅的数据库里面查找
+        List<PublicAccount> publicAccounts1 = publicAccountMapper.selectByUserId(userId);//公众号的数据库里面查找
         boolean hasSubscribed = publicAccounts.stream().anyMatch(account -> publicAccountId.equals(account.getPublicaccountId())) || publicAccounts1.stream().anyMatch(account -> publicAccountId.equals(account.getPublicaccountId()));
 
         if (hasSubscribed) {

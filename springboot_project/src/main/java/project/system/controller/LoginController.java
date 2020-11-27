@@ -118,7 +118,7 @@ public class LoginController extends BaseController{
         String phoneNumber = request.getParameter("phoneNumber");
         String password = request.getParameter("password");
         //对前端传来的密码加密处理后与数据库的密码比对
-        String userPassword = Md5Utils.inputPassToDBPass(password, phoneNumber + "miaowhu");
+        String userPassword = Md5Utils.inputPassToDBPass(password, phoneNumber);
         User user = new User();
         user.setUserPhonenumber(phoneNumber);
         user.setUserPassword(userPassword);

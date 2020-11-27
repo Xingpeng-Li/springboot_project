@@ -92,7 +92,10 @@ public class UploadServiceImpl implements UploadService {
         // 支持的文件类型
         List<String> suffixes = Arrays.asList("image/png", "image/jpeg", "image/jpg", "image/gif", "image/webp", "image/bmp");
         String filePath = "/post/images/";
-        String imgUrl= upload(file, suffixes, filePath);
+        String imgUrl= "";
+        if(file!=null) {
+            imgUrl = upload(file, suffixes, filePath);
+        }
         post.setPostImage(imgUrl);
         int affectedRows = postMapper.insertSelective(post);
         if(affectedRows==0)

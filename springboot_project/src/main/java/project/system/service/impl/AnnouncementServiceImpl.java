@@ -50,7 +50,7 @@ public class AnnouncementServiceImpl implements AnnouncementService {
                 String announcementTime = format.format(announcement.getAnnouncementDate());
                 map.put("announcementTime",announcementTime);
                 map.put("announcementFile",announcement.getAnnouncementUrl());
-                announcements.add(map);
+                announcements.add(0, map);
             }
         }
         else{
@@ -67,7 +67,7 @@ public class AnnouncementServiceImpl implements AnnouncementService {
                 String announcementTime = format.format(announcement.getAnnouncementDate());
                 map.put("announcementTime",announcementTime);
                 map.put("announcementFile",announcement.getAnnouncementUrl());
-                announcements.add(map);
+                announcements.add(0,map);
             }
         }
         return announcements;

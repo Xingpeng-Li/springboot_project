@@ -5,10 +5,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import project.system.common.utils.RequestUtil;
 import project.system.domain.User;
 import project.system.error.BusinessException;
@@ -104,7 +101,7 @@ public class UserController extends BaseController {
             @ApiResponse(code = 2006, message = "验证码填写错误"),
             @ApiResponse(code = 2008, message = "验证码过期")
     })
-    @RequestMapping(value = "/updatePersonalInfo",method = RequestMethod.GET)
+    @PostMapping(value = "/updatePersonalInfo")
     public CommonReturnType updatePersonInfo(@RequestParam(value = "phoneNumber",required = false)String phoneNumber,
                                              @RequestParam(value = "password",required = false)String password,
                                              @RequestParam(value = "userName",required = false)String userName,
@@ -149,7 +146,7 @@ public class UserController extends BaseController {
             @ApiResponse(code = 10002, message = "未知错误"),
             @ApiResponse(code = 10003, message = "数据库错误")
     })
-    @RequestMapping(value = "/getMyPersonalInfo",method = RequestMethod.GET)
+    @GetMapping(value = "/getMyPersonalInfo")
     public CommonReturnType getMyPersonalInfo(HttpServletRequest request){
         String token= RequestUtil.getCookievalue(request);
         TokenInfoResponse tokenInfoResponse = loginService.checkLogin(token);

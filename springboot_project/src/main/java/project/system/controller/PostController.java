@@ -70,7 +70,7 @@ public class PostController extends BaseController {
 
     @PostMapping("/createPost")
     @ApiOperation("写文章")
-    public CommonReturnType postDetail(HttpServletRequest request, @RequestParam("file") MultipartFile file) {
+    public CommonReturnType createPost(HttpServletRequest request, @RequestParam(value = "file", required = false) MultipartFile file) {
         String token = RequestUtil.getCookievalue(request);
         if (StringUtils.isNotBlank(token)) {
             TokenInfoResponse tokenInfoResponse = loginService.checkLogin(token);

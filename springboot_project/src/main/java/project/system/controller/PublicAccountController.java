@@ -161,7 +161,7 @@ public class PublicAccountController extends BaseController {
         }
     }
 
-    @GetMapping("/companyPublicAccounts")
+    @PostMapping("/companyPublicAccounts")
     @ApiOperation("查询企业所有公众号")
     public CommonReturnType companyPublicAccounts(HttpServletRequest request) {
         String token = RequestUtil.getCookievalue(request);
@@ -179,7 +179,7 @@ public class PublicAccountController extends BaseController {
         }
     }
 
-    @GetMapping("/allSubscribePublicAccounts")
+    @PostMapping("/allSubscribePublicAccounts")
     @ApiOperation("查询个人订阅的所有公众号")
     public CommonReturnType allSubscribePublicAccounts(HttpServletRequest request) {
         String token = RequestUtil.getCookievalue(request);
