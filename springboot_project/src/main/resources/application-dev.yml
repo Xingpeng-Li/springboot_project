@@ -2,9 +2,9 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://cdb-9i2suojo.cd.tencentcdb.com:10192/officesystem?serverTimezone=GMT%2B8&rewriteBatchedStatements=true
+    url: jdbc:mysql://cdb-pdopkmq0.cd.tencentcdb.com:10134/officesystem?serverTimezone=GMT%2B8&rewriteBatchedStatements=true
     username: root
-    password: lxp123456
+    password: abcd1234
   mail:
     #smtp服务主机  qq邮箱则为smtp.qq.com
     #host: smtp.163.com
@@ -38,6 +38,19 @@ aliyun:
   templateCode: SMS_205445358
   signName: JavaEEPro
   smsEffectiveTime: 2
+
+config:
+  jwt:
+    # 加密密钥
+    secret: iwqjhda8232bjgh432[cicada-smile]
+    # token有效时长
+    expire: 3600
+    # header 名称
+    header: Authorization
+    #prefix 前缀
+    prefix: Bearer
+    #iss 签发者
+    iss: miaowhu
 server:
   port: 9000
 openvidu:

@@ -17,4 +17,6 @@ public interface PostService {
     Post getPostDetail(Integer postId);
 
     List<Post> selectByPublicAccountId(Integer id);
+
+    void deletePost(Integer postId);
 }

@@ -21,4 +21,7 @@ public interface AccountSubscribeMapper {
     int updateByPrimaryKey(AccountSubscribe record);
 
     List<String> selectByUserId(Integer userId);
+
+    int deleteByUserAndAccount(Integer userId,String publicAccountName);
+
 }

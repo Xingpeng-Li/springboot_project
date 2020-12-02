@@ -35,4 +35,9 @@ public class PostServiceImpl implements PostService {
     public List<Post> selectByPublicAccountId(Integer id) {
         return postMapper.selectByPublicAccountId(id);
     }
+
+    @Override
+    public void deletePost(Integer postId) {
+        postMapper.deleteByPrimaryKey(postId);
+    }
 }

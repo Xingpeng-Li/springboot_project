@@ -253,4 +253,23 @@ public class PublicAccountController extends BaseController {
             throw new BusinessException(EmBusinessError.UNLOGIN);
         }
     }
+
+    @PostMapping("/unsubscribe")
+    @ApiOperation("取消订阅公众号")
+    @ApiImplicitParam(name = "id", value = "公众号id")
+    public CommonReturnType unsubscribe(HttpServletRequest request) {
+        Integer id = Integer.parseInt(request.getParameter("id"));
+        String token = RequestUtil.getCookievalue(request);
+        if (StringUtils.isNotBlank(token)) {
+            TokenInfoResponse tokenInfoResponse = loginService.checkLogin(token);
+            if (Objects.nonNull(tokenInfoResponse) && tokenInfoResponse.getIsLogin() && !tokenService.isExpiration(token)) {
+                publicAccountService.unsubscribe(Integer.parseInt(tokenInfoResponse.getUserId()), id);
+                return CommonReturnType.create(null);
+            } else {
+                throw new BusinessException(EmBusinessError.UNLOGIN);
+            }
+        } else {
+            throw new BusinessException(EmBusinessError.UNLOGIN);
+        }
+    }
 }
