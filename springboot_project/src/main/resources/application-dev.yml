@@ -31,11 +31,11 @@ tx:
 #    secretId: AKIDWmAJBdFR0LrfkUzGVWIrBD0bNvBCbXnk
 #    secretKey: t4xYw5yadWZN0xe6GE0tWt0FFySpKYVC
 aliyun:
-  accessKeyID: LTAI4G4F1c1cBGeJis39KE3i
-  accessKeySecret: aOxIV5RtrJRk9aCP2yDUbrYhwHzDxi
+  accessKeyID: LTAI4G36y3VKJyASeRWUNScU
+  accessKeySecret: vgX0Ow3E2gyjN1A1C6yfc7w3B1ZShQ
   domain: dysmsapi.aliyuncs.com
-  regionId: ap-nanjing
-  templateCode: SMS_205445358
+  regionId: cn-beijing
+  templateCode: SMS_206545859
   signName: JavaEEPro
   smsEffectiveTime: 2
 
