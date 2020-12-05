@@ -11,6 +11,7 @@ public enum EmBusinessError implements CommonError {
     POST_NOT_EXISTS(7002,"公众号文章不存在"),
     PUBLIC_ACCOUNT_ALREADY_EXISTS(7002,"公众号已存在"),
     PUBLIC_ACCOUNT_HAS_SUBSCRIBED(7003,"公众号以订阅"),
+    PUBLIC_ACCOUNT_HAS_NOT_SUBSCRIBED(7004,"公众号未订阅"),
 
 
     NORMAL_ERR(8999,"参数异常"),

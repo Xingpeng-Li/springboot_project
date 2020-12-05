@@ -2,9 +2,9 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://cdb-9i2suojo.cd.tencentcdb.com:10192/officesystem?serverTimezone=GMT%2B8&rewriteBatchedStatements=true
+    url: jdbc:mysql://cdb-pdopkmq0.cd.tencentcdb.com:10134/officesystem?serverTimezone=GMT%2B8&rewriteBatchedStatements=true
     username: root
-    password: lxp123456
+    password: abcd1234
   mail:
     #smtp服务主机  qq邮箱则为smtp.qq.com
     #host: smtp.163.com
@@ -13,45 +13,29 @@ spring:
     protocol: smtp
     # 编码集
     default-encoding: UTF-8
-    #发送邮件的账户
-    #username: bicheng_xu@163.com
-    username: bicheng_xu@qq.com
   servlet:
     multipart:
       max-file-size: 50MB
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: project.system.domain
-#tengxun:
-#  accessKey: AKID0lLg9L0xNYprc6fGwLTM2TGqAF3bptds
-#  secretKey: 8XfWheKnHcpobI8i37uRihQsU6bqujIn
-#  bucket: ap-chengdu
-#  bucketName: telecommuting-1301994676
-#  path: https://miaowhupic-1301994676.cos.ap-chengdu.myqcloud.com
-#  qianzhui: miaowhupic
 tx:
-#  sms:
-#    appId: 1400397557
-#    appKey: b31ac26f3d8a76c0c8bf75d885190bb9
-#    templateId: 657579
-#    smsSign: 喵武个人小程序
-#    smsEffectiveTime: 2
   cos:
     secretId: AKIDe5sQpzRXu3zf44hQp6KOnxbzDCvQbeNw
     secretKey: ub2CZgZBfusa5h7HAoa7NkXKtI8QTFnc
     region: ap-nanjing
     bucketName: officesystem-1304131169
-    path: https://officesystem-1304131169.cos.ap-nanjing.myqcloud.com
+    path: https://officesystem-1304131169.cos.ap-nanjing.myqcloud.com/
     prefix: officesystemCloudFile
 #  speech:
 #    secretId: AKIDWmAJBdFR0LrfkUzGVWIrBD0bNvBCbXnk
 #    secretKey: t4xYw5yadWZN0xe6GE0tWt0FFySpKYVC
 aliyun:
-  accessKeyID: LTAI4G4F1c1cBGeJis39KE3i
-  accessKeySecret: aOxIV5RtrJRk9aCP2yDUbrYhwHzDxi
+  accessKeyID: LTAI4G36y3VKJyASeRWUNScU
+  accessKeySecret: vgX0Ow3E2gyjN1A1C6yfc7w3B1ZShQ
   domain: dysmsapi.aliyuncs.com
-  regionId: ap-nanjing
-  templateCode: SMS_205445358
+  regionId: cn-beijing
+  templateCode: SMS_206545859
   signName: JavaEEPro
   smsEffectiveTime: 2
 
@@ -69,11 +53,6 @@ config:
     iss: miaowhu
 server:
   port: 9000
-#  ssl:
-#    key-store: classpath:miaowhu.cn.jks
-#    key-store-password: 168171miaowhu
-#    key-store-type: JKS
-#    enabled: true
 openvidu:
   #  url: https://212.64.65.145:4443/
   url: https://sx3.51guagua.top

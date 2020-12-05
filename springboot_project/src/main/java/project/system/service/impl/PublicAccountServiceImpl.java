@@ -40,8 +40,8 @@ public class PublicAccountServiceImpl implements PublicAccountService {
         if (publicAccount == null) {
             throw new BusinessException(EmBusinessError.PUBLIC_ACCOUNT_NOT_EXISTS);
         }
-        List<PublicAccount> publicAccounts = accountSubscribeService.selectByUserId(userId);
-        List<PublicAccount> publicAccounts1 = publicAccountMapper.selectByUserId(userId);
+        List<PublicAccount> publicAccounts = accountSubscribeService.selectByUserId(userId);//已订阅的数据库里面查找
+        List<PublicAccount> publicAccounts1 = publicAccountMapper.selectByUserId(userId);//公众号的数据库里面查找
         boolean hasSubscribed = publicAccounts.stream().anyMatch(account -> publicAccountId.equals(account.getPublicaccountId())) || publicAccounts1.stream().anyMatch(account -> publicAccountId.equals(account.getPublicaccountId()));
 
         if (hasSubscribed) {
@@ -87,5 +87,26 @@ public class PublicAccountServiceImpl implements PublicAccountService {
     @Override
     public List<PublicAccount> selectByKey(String key) {
         return publicAccountMapper.selectByKey(key);
+    }
+
+    //取消订阅公众号具体业务逻辑
+    @Override
+    public void unsubscribe(Integer userId, Integer publicAccountId) {
+        PublicAccount publicAccount = publicAccountMapper.selectByPrimaryKey(publicAccountId);
+        if (publicAccount == null) {
+            throw new BusinessException(EmBusinessError.PUBLIC_ACCOUNT_NOT_EXISTS);
+        }
+        List<PublicAccount> publicAccounts = accountSubscribeService.selectByUserId(userId);
+        List<PublicAccount> publicAccounts1 = publicAccountMapper.selectByUserId(userId);
+        boolean hasSubscribed = publicAccounts.stream().anyMatch(account -> publicAccountId.equals(account.getPublicaccountId())) || publicAccounts1.stream().anyMatch(account -> publicAccountId.equals(account.getPublicaccountId()));
+
+        if (!hasSubscribed) {
+            throw new BusinessException(EmBusinessError.PUBLIC_ACCOUNT_HAS_NOT_SUBSCRIBED);
+        }
+
+        int affectedRows = accountSubscribeMapper.deleteByUserAndAccount(userId, publicAccount.getPublicaccountName());
+        if (affectedRows == 0) {
+            throw new BusinessException(EmBusinessError.DB_ERROR);
+        }
     }
 }

@@ -8,5 +8,8 @@ import java.util.List;
 
 public interface HealthService {
     XSSFWorkbook show(List<HealthPunchin> healthPunchinList);
-
+    HealthPunchin[] selectByUserID(int userId);
+    HealthPunchin[] selectAll();
+    int deleteByPrimaryKey(Integer punchinId);
+    int insert(HealthPunchin record);
 }

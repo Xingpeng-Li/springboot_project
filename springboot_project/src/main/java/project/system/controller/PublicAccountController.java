@@ -161,7 +161,7 @@ public class PublicAccountController extends BaseController {
         }
     }
 
-    @GetMapping("/companyPublicAccounts")
+    @PostMapping("/companyPublicAccounts")
     @ApiOperation("查询企业所有公众号")
     public CommonReturnType companyPublicAccounts(HttpServletRequest request) {
         String token = RequestUtil.getCookievalue(request);
@@ -179,7 +179,7 @@ public class PublicAccountController extends BaseController {
         }
     }
 
-    @GetMapping("/allSubscribePublicAccounts")
+    @PostMapping("/allSubscribePublicAccounts")
     @ApiOperation("查询个人订阅的所有公众号")
     public CommonReturnType allSubscribePublicAccounts(HttpServletRequest request) {
         String token = RequestUtil.getCookievalue(request);
@@ -245,6 +245,25 @@ public class PublicAccountController extends BaseController {
             TokenInfoResponse tokenInfoResponse = loginService.checkLogin(token);
             if (Objects.nonNull(tokenInfoResponse) && tokenInfoResponse.getIsLogin() && !tokenService.isExpiration(token)) {
                 publicAccountService.subscribe(Integer.parseInt(tokenInfoResponse.getUserId()), id);
+                return CommonReturnType.create(null);
+            } else {
+                throw new BusinessException(EmBusinessError.UNLOGIN);
+            }
+        } else {
+            throw new BusinessException(EmBusinessError.UNLOGIN);
+        }
+    }
+
+    @PostMapping("/unsubscribe")
+    @ApiOperation("取消订阅公众号")
+    @ApiImplicitParam(name = "id", value = "公众号id")
+    public CommonReturnType unsubscribe(HttpServletRequest request) {
+        Integer id = Integer.parseInt(request.getParameter("id"));
+        String token = RequestUtil.getCookievalue(request);
+        if (StringUtils.isNotBlank(token)) {
+            TokenInfoResponse tokenInfoResponse = loginService.checkLogin(token);
+            if (Objects.nonNull(tokenInfoResponse) && tokenInfoResponse.getIsLogin() && !tokenService.isExpiration(token)) {
+                publicAccountService.unsubscribe(Integer.parseInt(tokenInfoResponse.getUserId()), id);
                 return CommonReturnType.create(null);
             } else {
                 throw new BusinessException(EmBusinessError.UNLOGIN);

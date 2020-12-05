@@ -27,7 +27,12 @@
     delete from account_subscribe
     where subscribe_id = #{subscribeId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="project.system.domain.AccountSubscribe">
+  <delete id= "deleteByUserAndAccount">
+    delete from account_subscribe
+    where publicaccount_name = #{publicAccountName}
+      and user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="project.system.domain.AccountSubscribe">
     insert into account_subscribe (subscribe_id, publicaccount_name, user_id
       )
     values (#{subscribeId,jdbcType=INTEGER}, #{publicaccountName,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}

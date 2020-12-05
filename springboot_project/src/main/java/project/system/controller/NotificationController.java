@@ -48,6 +48,8 @@ public class NotificationController extends BaseController {
     //返回用户收到的所有提醒
     @GetMapping("/notification/get")
     public CommonReturnType getAllNotification(HttpServletRequest request){
+//        List<Map<String,Object>> notificationLis =  notificationService.getNotification(50);
+//        return CommonReturnType.create(notificationLis);
         //通过token获取UserId
         String token = RequestUtil.getCookievalue(request);
         if (StringUtils.isNotBlank(token) && !tokenService.isExpiration(token)) {

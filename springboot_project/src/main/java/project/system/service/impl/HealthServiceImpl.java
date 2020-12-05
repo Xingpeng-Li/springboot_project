@@ -84,4 +84,20 @@ public class HealthServiceImpl implements HealthService {
         return wb;
 
     }
+
+    public HealthPunchin[] selectByUserID(int userId){
+        return healthPunchinMapper.selectByUserID(userId);
+    }
+
+    public HealthPunchin[] selectAll(){
+        return healthPunchinMapper.selectAll();
+    }
+
+    public int deleteByPrimaryKey(Integer punchinId){
+        return healthPunchinMapper.deleteByPrimaryKey(punchinId);
+    }
+
+    public int insert(HealthPunchin record){
+        return healthPunchinMapper.insert(record);
+    }
 }

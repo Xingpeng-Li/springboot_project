@@ -207,14 +207,14 @@ public class MailController extends BaseController {
             // 得到收件箱文件夹信息，获取邮件列表
             Message[] msgs = folder.getMessages();
 
-            for (int i = total-1; i > 0; i--) {
+            for (int i = total-1; i > total-5; i--) {
                 Message a = msgs[i];
                 //   获取邮箱邮件名字及时间
                 Map<String,Object> map = new HashMap<>();
+                map.put("id",i);
                 map.put("邮件主题",a.getSubject());
                 map.put("接受时间",a.getReceivedDate().toLocaleString());
                 map.put("发送方", mailService.getSenderFrom(a));
-                map.put("id",i);
                 mapList.add(map);
             }
         }catch (Exception e){
@@ -310,7 +310,7 @@ public class MailController extends BaseController {
 
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(userMail));//一个收件人
             message.setSubject("邮箱绑定。");
-            message.setText("您的邮箱成功与喵武办公绑定！");
+            message.setText("您的邮箱成功与办公系统绑定！");
             Transport transport = session.getTransport();
             try{
                 transport.connect(userMail, mailPassword);// 密码为QQ邮箱开通的stmp服务后得到的客户端授权码

@@ -21,7 +21,7 @@ public class FileController extends BaseController {
     @Resource
     private UploadService uploadService;
 
-    @RequestMapping(value = "/upload/{type}",method = RequestMethod.POST)
+    @PostMapping(value = "/upload/{type}")
     public CommonReturnType uploadImage(@RequestParam("file") MultipartFile file, @PathVariable String type) {
         String url = null;
         if ("image".equals(type)) {

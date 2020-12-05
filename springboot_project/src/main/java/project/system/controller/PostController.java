@@ -70,7 +70,7 @@ public class PostController extends BaseController {
 
     @PostMapping("/createPost")
     @ApiOperation("写文章")
-    public CommonReturnType postDetail(HttpServletRequest request, @RequestParam("file") MultipartFile file) {
+    public CommonReturnType createPost(HttpServletRequest request, @RequestParam(value = "file", required = false) MultipartFile file) {
         String token = RequestUtil.getCookievalue(request);
         if (StringUtils.isNotBlank(token)) {
             TokenInfoResponse tokenInfoResponse = loginService.checkLogin(token);
@@ -90,6 +90,24 @@ public class PostController extends BaseController {
                 post.setPublicaccountId(publicAccountId);
                 post.setPublicaccountName(publicAccount.getPublicaccountName());
                 uploadService.uploadFie(file,post);
+                return CommonReturnType.create(null);
+            } else {
+                throw new BusinessException(EmBusinessError.UNLOGIN);
+            }
+        } else {
+            throw new BusinessException(EmBusinessError.UNLOGIN);
+        }
+    }
+
+    @PostMapping("/deletePost")
+    @ApiOperation("删除文章")
+    public CommonReturnType deletePost(HttpServletRequest request) {
+        String token = RequestUtil.getCookievalue(request);
+        if (StringUtils.isNotBlank(token)) {
+            TokenInfoResponse tokenInfoResponse = loginService.checkLogin(token);
+            if (Objects.nonNull(tokenInfoResponse) && tokenInfoResponse.getIsLogin() && !tokenService.isExpiration(token)) {
+                Integer postId = parseInt(request.getParameter("postId"));
+                postService.deletePost(postId);
                 return CommonReturnType.create(null);
             } else {
                 throw new BusinessException(EmBusinessError.UNLOGIN);
