@@ -86,7 +86,7 @@ public class ApplicationServiceImpl implements ApplicationService {
     //发送审批
     @Override
     public void sendApplication(String type, String startTime,String endTime,String reason,Integer sender,String approverId,String secondApproverId) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Date startDate, endDate;
         try {
             startDate = sdf.parse(startTime);

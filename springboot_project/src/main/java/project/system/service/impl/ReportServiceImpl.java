@@ -43,7 +43,7 @@ public class ReportServiceImpl implements ReportService {
     TencentCosClient tencentCosClient;
 
     @Override
-    public void sendReport(MultipartFile mFile,String addWatermark, String type, Integer reporter, String approverPhoneNumber, String secondApproverPhoneNumber) throws IOException {
+    public void sendReport(MultipartFile mFile,String addWatermark, String type, Integer reporter, String approverId, String secondApproverId) throws IOException {
         //文件名：发送者姓名-type-时间.doc
         User reporterUser = userMapper.selectByPrimaryKey(reporter);
 
@@ -78,8 +78,8 @@ public class ReportServiceImpl implements ReportService {
             url = tencentCosClient.uploadCloudFile(mFile, reporter.toString(), filename);
         }
 
-        Integer approver = userMapper.getUserByPhoneNumber(approverPhoneNumber).getUserId();
-        Integer secondApprover = userMapper.getUserByPhoneNumber(secondApproverPhoneNumber).getUserId();
+        Integer approver = Integer.parseInt(approverId);
+        Integer secondApprover = Integer.parseInt(secondApproverId);
         WorkReport report = new WorkReport();
         report.setReporterId(reporter);
         report.setReportApprover(approver);

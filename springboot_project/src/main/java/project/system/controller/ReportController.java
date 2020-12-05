@@ -52,15 +52,15 @@ public class ReportController extends BaseController {
         //是否加水印
         String addWatermark = request.getParameter("addWatermark");
         //批阅人
-        String approverPhoneNumber = request.getParameter("approverPhoneNumber");
+        String approverId = request.getParameter("approverId");
         //抄送人
-        String secondApproverPhoneNumber = request.getParameter("secondApproverPhoneNumber");
+        String secondApproverId = request.getParameter("secondApproverId");
         //通过token获取UserId
         String token = RequestUtil.getCookievalue(request);
         if (StringUtils.isNotBlank(token)) {
             TokenInfoResponse tokenInfoResponse = loginService.checkLogin(token);
             String userId = tokenInfoResponse.getUserId();
-            reportService.sendReport(file,addWatermark,type,Integer.parseInt(userId),approverPhoneNumber,secondApproverPhoneNumber);
+            reportService.sendReport(file,addWatermark,type,Integer.parseInt(userId),approverId,secondApproverId);
             return CommonReturnType.create("发送成功！");
         }
         else{
