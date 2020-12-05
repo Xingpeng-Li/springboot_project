@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="project.system.mapper.BacklogMapper" >
+  <resultMap id="BaseResultMap" type="project.system.domain.Backlog" >
+    <id column="backlog_id" property="backlogId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="is_finished" property="isFinished" jdbcType="BIT" />
+    <result column="is_overtime" property="isOvertime" jdbcType="BIT" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    backlog_id, user_id, end_time, is_finished, is_overtime, description, title
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from backlog
+    where backlog_id = #{backlogId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from backlog
+    where backlog_id = #{backlogId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.server.entity.Backlog" >
+    insert into backlog (backlog_id, user_id, end_time, 
+      is_finished, is_overtime, description, 
+      title)
+    values (#{backlogId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{endTime,jdbcType=TIMESTAMP}, 
+      #{isFinished,jdbcType=BIT}, #{isOvertime,jdbcType=BIT}, #{description,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.server.entity.Backlog" >
+    insert into backlog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="backlogId != null" >
+        backlog_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="isFinished != null" >
+        is_finished,
+      </if>
+      <if test="isOvertime != null" >
+        is_overtime,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="backlogId != null" >
+        #{backlogId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isFinished != null" >
+        #{isFinished,jdbcType=BIT},
+      </if>
+      <if test="isOvertime != null" >
+        #{isOvertime,jdbcType=BIT},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.server.entity.Backlog" >
+    update backlog
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isFinished != null" >
+        is_finished = #{isFinished,jdbcType=BIT},
+      </if>
+      <if test="isOvertime != null" >
+        is_overtime = #{isOvertime,jdbcType=BIT},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where backlog_id = #{backlogId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.server.entity.Backlog" >
+    update backlog
+    set user_id = #{userId,jdbcType=INTEGER},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      is_finished = #{isFinished,jdbcType=BIT},
+      is_overtime = #{isOvertime,jdbcType=BIT},
+      description = #{description,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR}
+    where backlog_id = #{backlogId,jdbcType=INTEGER}
+  </update>
+</mapper>
