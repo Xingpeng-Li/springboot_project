@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService {
         return userMapper.getCompContact(user.getCompanyId(),userId).stream().
                 map(this::convertFromUserToUserView).collect(Collectors.toList());
     }
-//获取没有加入部门的人
+   //获取没有加入部门的人
     @Override
     public List<UserView> getMyNoDeptUsers(Integer userId){
         User user=userMapper.selectByPrimaryKey(userId);
