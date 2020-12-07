@@ -1,7 +1,9 @@
 package project.system.mapper;
 
+import org.apache.ibatis.annotations.Mapper;
 import project.system.domain.Backlog;
 
+@Mapper
 public interface BacklogMapper {
     int deleteByPrimaryKey(Integer backlogId);
 

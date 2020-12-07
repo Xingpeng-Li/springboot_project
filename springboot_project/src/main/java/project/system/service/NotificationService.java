@@ -13,4 +13,6 @@ public interface NotificationService {
     Notification selectByPrimaryKey(Integer notificationId);
 
     int updateByPrimaryKeySelective(Notification record);
+
+    int getUncheckedCount(Integer userId);
 }

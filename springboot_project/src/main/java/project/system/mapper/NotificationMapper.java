@@ -18,4 +18,6 @@ public interface NotificationMapper {
     int updateByPrimaryKey(Notification record);
 
     Notification[] selectByReceiverId(Integer receiverId);
+
+    int getUncheckedCount(Integer userId);
 }

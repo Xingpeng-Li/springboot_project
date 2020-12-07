@@ -23,7 +23,7 @@
     delete from backlog
     where backlog_id = #{backlogId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.server.entity.Backlog" >
+  <insert id="insert" parameterType="project.system.domain.Backlog" >
     insert into backlog (backlog_id, user_id, end_time, 
       is_finished, is_overtime, description, 
       title)
@@ -31,7 +31,7 @@
       #{isFinished,jdbcType=BIT}, #{isOvertime,jdbcType=BIT}, #{description,jdbcType=VARCHAR}, 
       #{title,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.server.entity.Backlog" >
+  <insert id="insertSelective" parameterType="project.system.domain.Backlog" >
     insert into backlog
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="backlogId != null" >
@@ -80,7 +80,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.server.entity.Backlog" >
+  <update id="updateByPrimaryKeySelective" parameterType="project.system.domain.Backlog" >
     update backlog
     <set >
       <if test="userId != null" >
@@ -104,7 +104,7 @@
     </set>
     where backlog_id = #{backlogId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.server.entity.Backlog" >
+  <update id="updateByPrimaryKey" parameterType="project.system.domain.Backlog" >
     update backlog
     set user_id = #{userId,jdbcType=INTEGER},
       end_time = #{endTime,jdbcType=TIMESTAMP},

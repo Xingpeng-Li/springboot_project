@@ -49,7 +49,7 @@ public class ApplicationServiceImpl implements ApplicationService {
         notification2.setNotificationSenderId(userId);
         notification2.setNotificationReceiverId(notification.getNotificationSenderId());
         notification2.setNotificationType("已处理审批");
-        notification2.setNotificationChecked("是");
+        notification2.setNotificationChecked("否");
         String body;
         if("0".equals(isAgree)){
             body = "您的"+application.getApplicationType()+"申请已通过";
