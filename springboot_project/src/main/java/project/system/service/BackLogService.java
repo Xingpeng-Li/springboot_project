@@ -45,7 +45,7 @@ public interface BackLogService {
      * @param [backLogId]
      * @return java.util.Date
      **/
-    Date getBackLogEndTime(Integer backLogId);
+    Date getBackLogEndTime();
 
     /*
      * @author zws

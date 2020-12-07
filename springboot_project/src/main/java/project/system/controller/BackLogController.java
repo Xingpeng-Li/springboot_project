@@ -131,16 +131,7 @@ public class BackLogController {
     @GetMapping(value = "/getBackLogEndTime")
     public CommonReturnType getBackLogEndTime(HttpServletRequest request)
     {
-        String backLogId = request.getParameter("backLogId");
-        //获取token检查是否登录
-        String token = RequestUtil.getCookievalue(request);
-        if (StringUtils.isNotBlank(token) && !tokenService.isExpiration(token)) {
-            Date backLogEndTime = backLogService.getBackLogEndTime(Integer.parseInt(backLogId));
-            return CommonReturnType.create(backLogEndTime);
-        }
-        else{
-            throw new BusinessException(EmBusinessError.UNLOGIN);
-        }
+        return CommonReturnType.create(null);
     }
 
     //完成待办事项

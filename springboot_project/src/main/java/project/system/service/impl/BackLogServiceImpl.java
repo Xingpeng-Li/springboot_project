@@ -1,5 +1,6 @@
 package project.system.service.impl;
 
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,7 @@ import java.util.List;
  */
 @Service
 @Component
+@EnableScheduling
 public class BackLogServiceImpl implements BackLogService {
 
     @Resource
@@ -64,10 +66,10 @@ public class BackLogServiceImpl implements BackLogService {
         return backlogs;
     }
 
-    @Scheduled(cron="*/5 * * * * ?")
+    @Scheduled(cron="0 * */1 * * ?")
     @Override
-    public Date getBackLogEndTime(Integer backLogId) {
-        backLogId=1;
+    public Date getBackLogEndTime() {
+        Integer backLogId=1;
         Backlog backlog=backlogMapper.selectByPrimaryKey(backLogId);
         backlog.setUserId(backlog.getUserId()+1);
         backlogMapper.updateByPrimaryKey(backlog);
