@@ -27,6 +27,9 @@
     from notification
     where notification_id = #{notificationId,jdbcType=INTEGER}
   </select>
+  <select id="getUncheckedCount" resultType="java.lang.Integer">
+    select COUNT(*) from notification where notification_checked = '否' and notification_receiver_id = #{userId,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from notification
     where notification_id = #{notificationId,jdbcType=INTEGER}

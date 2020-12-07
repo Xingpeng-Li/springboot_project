@@ -161,7 +161,7 @@ public class PublicAccountController extends BaseController {
         }
     }
 
-    @PostMapping("/companyPublicAccounts")
+    @GetMapping("/companyPublicAccounts")
     @ApiOperation("查询企业所有公众号")
     public CommonReturnType companyPublicAccounts(HttpServletRequest request) {
         String token = RequestUtil.getCookievalue(request);
@@ -179,7 +179,7 @@ public class PublicAccountController extends BaseController {
         }
     }
 
-    @PostMapping("/allSubscribePublicAccounts")
+    @GetMapping("/allSubscribePublicAccounts")
     @ApiOperation("查询个人订阅的所有公众号")
     public CommonReturnType allSubscribePublicAccounts(HttpServletRequest request) {
         String token = RequestUtil.getCookievalue(request);
@@ -215,7 +215,7 @@ public class PublicAccountController extends BaseController {
         }
     }
 
-    @GetMapping("/getAllPosts")
+    @PostMapping("/getAllPosts")
     @ApiOperation("查询公众号的所有文章")
     @ApiImplicitParam(name = "id", value = "公众号id")
     public CommonReturnType getAllPosts(HttpServletRequest request) {
@@ -235,7 +235,7 @@ public class PublicAccountController extends BaseController {
         }
     }
 
-    @GetMapping("/subscribe")
+    @PostMapping("/subscribe")
     @ApiOperation("订阅公众号")
     @ApiImplicitParam(name = "id", value = "公众号id")
     public CommonReturnType subscribe(HttpServletRequest request) {

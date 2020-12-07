@@ -44,6 +44,11 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
+    public int getUncheckedCount(Integer userId) {
+        return notificationMapper.getUncheckedCount(userId);
+    }
+
+    @Override
     public List<Map<String, Object>> getNotification(Integer userId) {
         //找到并返回所有接收者是该成员的消息
         Notification[] notifications = notificationMapper.selectByReceiverId(userId);

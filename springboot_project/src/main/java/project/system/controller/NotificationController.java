@@ -21,6 +21,7 @@ import project.system.service.TokenService;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 /*
@@ -96,6 +97,23 @@ public class NotificationController extends BaseController {
             notification.setNotificationChecked("是");
             notificationService.updateByPrimaryKeySelective(notification);
             return CommonReturnType.create(null);
+        }
+        else{
+            throw new BusinessException(EmBusinessError.UNLOGIN);
+        }
+    }
+
+    @ApiOperation("查看未阅消息数量")
+    @GetMapping("/notification/uncheckedCount")
+    public CommonReturnType getUncheckedCount(HttpServletRequest request) {
+        String token = RequestUtil.getCookievalue(request);
+        if (StringUtils.isNotBlank(token) && !tokenService.isExpiration(token)) {
+            TokenInfoResponse tokenInfoResponse = loginService.checkLogin(token);
+            String userId = tokenInfoResponse.getUserId();
+            int count = notificationService.getUncheckedCount(Integer.parseInt(userId));
+            Map<String, Integer> map = new HashMap<>();
+            map.put("count", count);
+            return CommonReturnType.create(map);
         }
         else{
             throw new BusinessException(EmBusinessError.UNLOGIN);

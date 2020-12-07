@@ -2,7 +2,7 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://cdb-pdopkmq0.cd.tencentcdb.com:10134/officesystem?serverTimezone=GMT%2B8&rewriteBatchedStatements=true
+    url: jdbc:mysql://cdb-pdopkmq0.cd.tencentcdb.com:10134/office_system?serverTimezone=GMT%2B8&rewriteBatchedStatements=true
     username: root
     password: abcd1234
   mail:
