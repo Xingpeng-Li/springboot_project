@@ -15,7 +15,7 @@ public interface BackLogService {
      * @param [userId, endTime]
      * @return void
      **/
-    void createBackLog(Integer userId, Date endTime);
+    void createBackLog(Integer userId,String title,String description,Boolean isFinished,Boolean isOverTime, String endTime);
 
     /*
      * @author zws
@@ -25,7 +25,7 @@ public interface BackLogService {
      * @param []
      * @return java.util.List<project.system.domain.Backlog>
      **/
-    List<Backlog> getNotFinishedBackLogs();
+    List<Backlog> getNotFinishedBackLogs(Integer userId);
 
     /*
      * @author zws
@@ -35,7 +35,7 @@ public interface BackLogService {
      * @param []
      * @return java.util.List<project.system.domain.Backlog>
      **/
-    List<Backlog> getFinishedBackLogs();
+    List<Backlog> getFinishedBackLogs(Integer userId);
 
     /*
      * @author zws

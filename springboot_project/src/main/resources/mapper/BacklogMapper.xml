@@ -23,6 +23,20 @@
     delete from backlog
     where backlog_id = #{backlogId,jdbcType=INTEGER}
   </delete>
+  <select id="selectFinishedBacklogsByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from backlog
+    where user_id = #{userId,jdbcType=INT}
+    AND is_finished=true
+  </select>
+  <select id="selectUnFinishedBacklogsByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from backlog
+    where user_id = #{userId,jdbcType=INT}
+    AND is_finished=false
+  </select>
   <insert id="insert" parameterType="com.server.entity.Backlog" >
     insert into backlog (backlog_id, user_id, end_time, 
       is_finished, is_overtime, description, 
