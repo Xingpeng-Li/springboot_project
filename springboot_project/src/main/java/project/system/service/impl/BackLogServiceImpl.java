@@ -55,7 +55,7 @@ public class BackLogServiceImpl implements BackLogService {
         backlog.setIsFinished(isFinished);
         backlog.setIsOvertime(isOverTime);
         backlog.setEndTime(endDate);
-        backlogMapper.insert(backlog);
+        backlogMapper.insertSelective(backlog);
     }
 
     @Override
