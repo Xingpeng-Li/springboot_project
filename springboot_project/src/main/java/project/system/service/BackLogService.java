@@ -49,6 +49,7 @@ public interface BackLogService {
 
 
 
+
     /*
      * @author zws
      * @description 完成一个待办事项
@@ -58,6 +59,26 @@ public interface BackLogService {
      * @return void
      **/
     void finishBackLog(Integer backLogId);
+
+    /*
+     * @author zws
+     * @description 删除一个待办事项
+     * @create 2020/12/8 14:24
+     * @update 2020/12/8 14:24
+     * @param [backLogId]
+     * @return void
+     **/
+    void DeleteBackLog(Integer backLogId);
+
+    /*
+     * @author zws
+     * @description 修改一个待办事项
+     * @create 2020/12/8 14:25
+     * @update 2020/12/8 14:25
+     * @param [backLogId]
+     * @return void
+     **/
+    void UpdateBackLog(Integer userId,String title,String description,Boolean isFinished,Boolean isOverTime, String endTime);
 
     /*
      * @author zws
