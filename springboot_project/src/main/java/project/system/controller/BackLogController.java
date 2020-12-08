@@ -63,7 +63,7 @@ public class BackLogController {
             TokenInfoResponse tokenInfoResponse = loginService.checkLogin(token);
             String userId = tokenInfoResponse.getUserId();
             backLogService.createBackLog(Integer.parseInt(userId),title,description,isFinished,isOverTime,endTime);
-            return CommonReturnType.create("待办事项创建成功");
+            return CommonReturnType.create(null);
         }
         else{
             throw new BusinessException(EmBusinessError.UNLOGIN);

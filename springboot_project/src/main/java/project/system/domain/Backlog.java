@@ -17,6 +17,8 @@ public class Backlog {
 
     private String title;
 
+    private Date checkedTime;
+
     public Integer getBacklogId() {
         return backlogId;
     }
@@ -71,5 +73,13 @@ public class Backlog {
 
     public void setTitle(String title) {
         this.title = title == null ? null : title.trim();
+    }
+
+    public Date getCheckedTime() {
+        return checkedTime;
+    }
+
+    public void setCheckedTime(Date checkedTime) {
+        this.checkedTime = checkedTime;
     }
 }
