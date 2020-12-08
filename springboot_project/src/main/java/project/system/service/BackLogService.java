@@ -68,7 +68,7 @@ public interface BackLogService {
      * @param [backLogId]
      * @return void
      **/
-    void DeleteBackLog(Integer backLogId);
+    void deleteBackLog(Integer backLogId);
 
     /*
      * @author zws
@@ -78,7 +78,7 @@ public interface BackLogService {
      * @param [backLogId]
      * @return void
      **/
-    void UpdateBackLog(Integer userId,String title,String description,Boolean isFinished,Boolean isOverTime, String endTime);
+    void updateBackLog(Integer userId, String title, String description, Boolean isFinished, Boolean isOverTime, String endTime);
 
     /*
      * @author zws

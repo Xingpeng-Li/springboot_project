@@ -99,12 +99,12 @@ public class BackLogServiceImpl implements BackLogService {
     }
 
     @Override
-    public void DeleteBackLog(Integer backLogId) {
+    public void deleteBackLog(Integer backLogId) {
         backlogMapper.deleteByPrimaryKey(backLogId);
     }
 
     @Override
-    public void UpdateBackLog(Integer userId,String title,String description,Boolean isFinished,Boolean isOverTime, String endTime) {
+    public void updateBackLog(Integer userId, String title, String description, Boolean isFinished, Boolean isOverTime, String endTime) {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Date endDate;
