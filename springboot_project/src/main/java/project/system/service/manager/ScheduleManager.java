@@ -22,14 +22,14 @@ public class ScheduleManager {
     /**
      * 同步OpenVidu的活跃会话
      */
-    @Scheduled(fixedDelay=5000,initialDelay=1000)
-    public void refreshOpenvidusTask() {
-        try {
-            log.debug("同步OpenVidu的活跃会话==>开始");
-            openVidu.fetch();
-            log.debug("同步OpenVidu的活跃会话==>结束");
-        } catch (Exception e) {
-            log.error("同步OpenVidu的活跃会话异常", e);
-        }
-    }
+//    @Scheduled(fixedDelay=5000,initialDelay=1000)
+//    public void refreshOpenvidusTask() {
+//        try {
+//            log.debug("同步OpenVidu的活跃会话==>开始");
+//            openVidu.fetch();
+//            log.debug("同步OpenVidu的活跃会话==>结束");
+//        } catch (Exception e) {
+//            log.error("同步OpenVidu的活跃会话异常", e);
+//        }
+//    }
 }

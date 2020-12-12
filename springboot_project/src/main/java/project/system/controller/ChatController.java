@@ -17,6 +17,8 @@ import project.system.ws.utils.SocketMessageUtil;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -65,24 +67,30 @@ public class ChatController extends BaseController{
      * 提供聊天记录，分为群聊和私聊的聊天记录
      * */
     @PostMapping("/chatRoom/group/message")
-    public CommonReturnType getSocketMessageByDate(@RequestBody JSONObject jsonObject) {
-        System.out.println(jsonObject);
-        Date date = jsonObject.getDate("date");
-        String launchId = jsonObject.getString("launchId");
-        String receiveId = jsonObject.getString("receiveId");
-        Integer companyId=jsonObject.getInteger("companyId");
-        Integer deptId=jsonObject.getInteger("deptId");
-        System.out.println(date);
-        List<SocketMessage> list;
-        if (launchId != null && receiveId != null) {
-            list = socketMessageService.getSocketMessageByUser(launchId, receiveId, date);
-        } else {
-            list = socketMessageService.getSocketMessageByGroup(date,deptId,companyId);
+    public CommonReturnType getSocketMessageByDate(HttpServletRequest request) {
+        String dateStr = request.getParameter("date");
+        String launchId = request.getParameter("launchId");
+        String receiveId = request.getParameter("receiveId");
+        Integer companyId = Integer.parseInt(request.getParameter("companyId"));
+        Integer deptId = Integer.parseInt(request.getParameter("deptId"));
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date();
+        try {
+            date = sdf.parse(dateStr);
+        }catch (ParseException e) {
+            e.printStackTrace();
         }
-        return CommonReturnType.create(list.stream().map(socketMessageUtil::convertFromSocketMessage).collect(Collectors.toList()));
+            //System.out.println(date);
+            List<SocketMessage> list;
+            if (launchId != null && receiveId != null) {
+                list = socketMessageService.getSocketMessageByUser(launchId, receiveId, date);
+            } else {
+                list = socketMessageService.getSocketMessageByGroup(date, deptId, companyId);
+            }
+            return CommonReturnType.create(list.stream().map(socketMessageUtil::convertFromSocketMessage).collect(Collectors.toList()));
     }
 
-    /*
+        /*
      * 获取部门联系人
      * */
     @GetMapping("/chatRoom/users/relevant")
