@@ -45,7 +45,10 @@ public interface BackLogService {
      * @param [backLogId]
      * @return java.util.Date
      **/
-    Date getBackLogEndTime();
+    void checkOverTimedBacklogs();
+
+
+
 
     /*
      * @author zws
@@ -56,6 +59,26 @@ public interface BackLogService {
      * @return void
      **/
     void finishBackLog(Integer backLogId);
+
+    /*
+     * @author zws
+     * @description 删除一个待办事项
+     * @create 2020/12/8 14:24
+     * @update 2020/12/8 14:24
+     * @param [backLogId]
+     * @return void
+     **/
+    void deleteBackLog(Integer backLogId);
+
+    /*
+     * @author zws
+     * @description 修改一个待办事项
+     * @create 2020/12/8 14:25
+     * @update 2020/12/8 14:25
+     * @param [backLogId]
+     * @return void
+     **/
+    void updateBackLog(Integer userId, String title, String description, Boolean isFinished, Boolean isOverTime, String endTime);
 
     /*
      * @author zws

@@ -9,20 +9,17 @@
     <result column="is_overtime" property="isOvertime" jdbcType="BIT" />
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="checked_time" property="checkedTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    backlog_id, user_id, end_time, is_finished, is_overtime, description, title
+    backlog_id, user_id, end_time, is_finished, is_overtime, description, title, checked_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from backlog
     where backlog_id = #{backlogId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from backlog
-    where backlog_id = #{backlogId,jdbcType=INTEGER}
-  </delete>
   <select id="selectFinishedBacklogsByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
@@ -37,13 +34,27 @@
     where user_id = #{userId,jdbcType=INTEGER}
     AND is_finished=false
   </select>
+  <select id="checkOverTimedBacklogs" parameterType="java.util.Date" >
+    update backlog
+    set is_overtime=1,checked_time=#{currentTime,jdbcType=DATE}
+    where is_finished=0 and CURRENT_TIMESTAMP > end_time
+  </select>
+  <select id="getChangedBacklogs" parameterType="java.util.Date">
+    select *
+    from backlog
+    where checked_time=#{currentTime,jdbcType=DATE}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from backlog
+    where backlog_id = #{backlogId,jdbcType=INTEGER}
+  </delete>
   <insert id="insert" parameterType="project.system.domain.Backlog" >
-    insert into backlog (backlog_id, user_id, end_time, 
-      is_finished, is_overtime, description, 
-      title)
-    values (#{backlogId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{endTime,jdbcType=TIMESTAMP}, 
-      #{isFinished,jdbcType=BIT}, #{isOvertime,jdbcType=BIT}, #{description,jdbcType=VARCHAR}, 
-      #{title,jdbcType=VARCHAR})
+    insert into backlog (backlog_id, user_id, end_time,
+      is_finished, is_overtime, description,
+      title, checked_time)
+    values (#{backlogId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{endTime,jdbcType=TIMESTAMP},
+      #{isFinished,jdbcType=BIT}, #{isOvertime,jdbcType=BIT}, #{description,jdbcType=VARCHAR},
+      #{title,jdbcType=VARCHAR}, #{checkedTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="project.system.domain.Backlog" >
     insert into backlog
@@ -69,6 +80,9 @@
       <if test="title != null" >
         title,
       </if>
+      <if test="checkedTime != null" >
+        checked_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="backlogId != null" >
@@ -91,6 +105,9 @@
       </if>
       <if test="title != null" >
         #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="checkedTime != null" >
+        #{checkedTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -115,6 +132,9 @@
       <if test="title != null" >
         title = #{title,jdbcType=VARCHAR},
       </if>
+      <if test="checkedTime != null" >
+        checked_time = #{checkedTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where backlog_id = #{backlogId,jdbcType=INTEGER}
   </update>
@@ -125,7 +145,8 @@
       is_finished = #{isFinished,jdbcType=BIT},
       is_overtime = #{isOvertime,jdbcType=BIT},
       description = #{description,jdbcType=VARCHAR},
-      title = #{title,jdbcType=VARCHAR}
+      title = #{title,jdbcType=VARCHAR},
+      checked_time = #{checkedTime,jdbcType=TIMESTAMP}
     where backlog_id = #{backlogId,jdbcType=INTEGER}
   </update>
 </mapper>

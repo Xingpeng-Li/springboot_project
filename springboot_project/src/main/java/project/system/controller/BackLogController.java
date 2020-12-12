@@ -4,10 +4,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import project.system.common.utils.RequestUtil;
 import project.system.domain.Backlog;
 import project.system.error.BusinessException;
@@ -20,9 +17,7 @@ import project.system.service.TokenService;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author zws
@@ -32,6 +27,7 @@ import java.util.Map;
  * @date 2020/12/5 11:43
  */
 @RestController
+@RequestMapping("/backlog")
 public class BackLogController {
     @Resource
     BackLogService backLogService;
@@ -49,7 +45,7 @@ public class BackLogController {
             @ApiResponse(code = 10002, message = "未知错误"),
             @ApiResponse(code = 10003, message = "数据库错误")
     })
-    @PostMapping(value = "/createBackLog")
+    @PostMapping(value = "/createBacklog")
     public CommonReturnType createBackLog(HttpServletRequest request)
     {
         String title = request.getParameter("title");
@@ -63,7 +59,37 @@ public class BackLogController {
             TokenInfoResponse tokenInfoResponse = loginService.checkLogin(token);
             String userId = tokenInfoResponse.getUserId();
             backLogService.createBackLog(Integer.parseInt(userId),title,description,isFinished,isOverTime,endTime);
-            return CommonReturnType.create("待办事项创建成功");
+            return CommonReturnType.create(null);
+        }
+        else{
+            throw new BusinessException(EmBusinessError.UNLOGIN);
+        }
+
+    }
+    //修改待办事项接口
+    @ApiOperation("修改待办事项接口")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "success"),
+            @ApiResponse(code = 1, message = "用户未登录"),
+            @ApiResponse(code = 20012, message = "token过期,需要重新登录"),
+            @ApiResponse(code = 10002, message = "未知错误"),
+            @ApiResponse(code = 10003, message = "数据库错误")
+    })
+    @PostMapping(value = "/updateBacklog")
+    public CommonReturnType updateBackLog(HttpServletRequest request)
+    {
+        String title = request.getParameter("title");
+        String description = request.getParameter("description");
+        Boolean isFinished=false;
+        Boolean isOverTime=false;
+        String endTime=request.getParameter("endTime");
+        //通过token获取UserId
+        String token = RequestUtil.getCookievalue(request);
+        if (StringUtils.isNotBlank(token)) {
+            TokenInfoResponse tokenInfoResponse = loginService.checkLogin(token);
+            String userId = tokenInfoResponse.getUserId();
+            backLogService.updateBackLog(Integer.parseInt(userId),title,description,isFinished,isOverTime,endTime);
+            return CommonReturnType.create(null);
         }
         else{
             throw new BusinessException(EmBusinessError.UNLOGIN);
@@ -80,7 +106,7 @@ public class BackLogController {
             @ApiResponse(code = 10002, message = "未知错误"),
             @ApiResponse(code = 10003, message = "数据库错误")
     })
-    @GetMapping(value = "/getNotFinishedBackLogs")
+    @GetMapping(value = "/getNotFinished")
     public CommonReturnType getNotFinishedBackLogs(HttpServletRequest request)
     {
         //通过token获取UserId
@@ -104,7 +130,7 @@ public class BackLogController {
             @ApiResponse(code = 10002, message = "未知错误"),
             @ApiResponse(code = 10003, message = "数据库错误")
     })
-    @GetMapping(value = "/getFinishedBackLogs")
+    @GetMapping(value = "/getFinished")
     public CommonReturnType  getFinishedBackLogs(HttpServletRequest request)
     {
         //通过token获取UserId
@@ -119,20 +145,6 @@ public class BackLogController {
             throw new BusinessException(EmBusinessError.UNLOGIN);
         }
     }
-    //获取待办事项截至时间
-    @ApiOperation("获取待办事项截至时间")
-    @ApiResponses({
-            @ApiResponse(code = 200, message = "success"),
-            @ApiResponse(code = 1, message = "用户未登录"),
-            @ApiResponse(code = 20012, message = "token过期,需要重新登录"),
-            @ApiResponse(code = 10002, message = "未知错误"),
-            @ApiResponse(code = 10003, message = "数据库错误")
-    })
-    @GetMapping(value = "/getBackLogEndTime")
-    public CommonReturnType getBackLogEndTime(HttpServletRequest request)
-    {
-        return CommonReturnType.create(null);
-    }
 
     //完成待办事项
     @ApiOperation("完成待办事项")
@@ -143,7 +155,7 @@ public class BackLogController {
             @ApiResponse(code = 10002, message = "未知错误"),
             @ApiResponse(code = 10003, message = "数据库错误")
     })
-    @GetMapping(value = "/finishBackLog")
+    @GetMapping(value = "/finish")
     public CommonReturnType finishBackLog(HttpServletRequest request)
     {
         String backLogId = request.getParameter("backLogId");
@@ -157,9 +169,8 @@ public class BackLogController {
             throw new BusinessException(EmBusinessError.UNLOGIN);
         }
     }
-
-    //待办事项超时
-    @ApiOperation("待办事项超时")
+    //完成待办事项
+    @ApiOperation("完成待办事项")
     @ApiResponses({
             @ApiResponse(code = 200, message = "success"),
             @ApiResponse(code = 1, message = "用户未登录"),
@@ -167,21 +178,18 @@ public class BackLogController {
             @ApiResponse(code = 10002, message = "未知错误"),
             @ApiResponse(code = 10003, message = "数据库错误")
     })
-    @GetMapping(value = "/overTimeBackLog")
-    public CommonReturnType overTimeBackLog(HttpServletRequest request)
+    @GetMapping(value = "/delete")
+    public CommonReturnType deleteBackLog(HttpServletRequest request)
     {
         String backLogId = request.getParameter("backLogId");
         //获取token检查是否登录
         String token = RequestUtil.getCookievalue(request);
         if (StringUtils.isNotBlank(token) && !tokenService.isExpiration(token)) {
-            backLogService.overBackLog(Integer.parseInt(backLogId));
-            return CommonReturnType.create("待办事项已超时！");
+            backLogService.deleteBackLog(Integer.parseInt(backLogId));
+            return CommonReturnType.create(null);
         }
         else{
             throw new BusinessException(EmBusinessError.UNLOGIN);
         }
     }
-
-
-
 }
