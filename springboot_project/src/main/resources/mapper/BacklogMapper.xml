@@ -36,13 +36,13 @@
   </select>
   <select id="checkOverTimedBacklogs" parameterType="java.util.Date" >
     update backlog
-    set is_overtime=1,checked_time=#{currentTime,jdbcType=DATE}
+    set is_overtime=1,checked_time=#{currentTime,jdbcType=TIMESTAMP}
     where is_finished=0 and CURRENT_TIMESTAMP > end_time
   </select>
-  <select id="getChangedBacklogs" parameterType="java.util.Date">
+  <select id="getChangedBacklogs" parameterType="java.util.Date" resultMap="BaseResultMap">
     select user_id,title
     from backlog
-    where checked_time=#{currentTime,jdbcType=DATE}
+    where checked_time=#{currentTime,jdbcType=TIMESTAMP}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from backlog

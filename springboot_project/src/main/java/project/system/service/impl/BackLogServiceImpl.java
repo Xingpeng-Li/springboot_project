@@ -61,23 +61,24 @@ public class BackLogServiceImpl implements BackLogService {
     @Override
     public List<Backlog> getNotFinishedBackLogs(Integer userId) {
 
-        List<Backlog> backlogs= backlogMapper.selectFinishedBacklogsByUserId(userId);
+        List<Backlog> backlogs= backlogMapper.selectUnFinishedBacklogsByUserId(userId);
         return backlogs;
     }
 
     @Override
     public List<Backlog> getFinishedBackLogs(Integer userId) {
-        List<Backlog> backlogs= backlogMapper.selectUnFinishedBacklogsByUserId(userId);
+        List<Backlog> backlogs= backlogMapper.selectFinishedBacklogsByUserId(userId);
         return backlogs;
     }
 
-    @Scheduled(cron="0 * */1 * * ?")
+    @Scheduled(fixedRate = 1000 * 60 * 60)
     @Override
     public void checkOverTimedBacklogs() {
 
         Date currentTime=new Date();
         backlogMapper.checkOverTimedBacklogs(currentTime);
         List<Backlog> backlogs=backlogMapper.getChangedBacklogs(currentTime);
+
         for (Backlog backlog:
              backlogs) {
             Notification notification = new Notification();

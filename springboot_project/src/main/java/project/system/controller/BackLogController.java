@@ -169,7 +169,8 @@ public class BackLogController {
             throw new BusinessException(EmBusinessError.UNLOGIN);
         }
     }
-    //完成待办事项
+
+    //删除待办事项
     @ApiOperation("完成待办事项")
     @ApiResponses({
             @ApiResponse(code = 200, message = "success"),
@@ -178,7 +179,7 @@ public class BackLogController {
             @ApiResponse(code = 10002, message = "未知错误"),
             @ApiResponse(code = 10003, message = "数据库错误")
     })
-    @GetMapping(value = "/delete")
+    @PostMapping(value = "/delete")
     public CommonReturnType deleteBackLog(HttpServletRequest request)
     {
         String backLogId = request.getParameter("backLogId");
