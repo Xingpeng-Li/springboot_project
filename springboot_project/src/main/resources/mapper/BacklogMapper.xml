@@ -34,12 +34,12 @@
     where user_id = #{userId,jdbcType=INTEGER}
     AND is_finished=false
   </select>
-  <select id="checkOverTimedBacklogs" parameterType="java.util.Date" >
+  <select id="checkOverTimedBacklogs" parameterType="java.util.Date" resultMap="BaseResultMap">
     update backlog
     set is_overtime=1,checked_time=#{currentTime,jdbcType=DATE}
     where is_finished=0 and CURRENT_TIMESTAMP > end_time
   </select>
-  <select id="getChangedBacklogs" parameterType="java.util.Date">
+  <select id="getChangedBacklogs" parameterType="java.util.Date" resultType="project.system.domain.Backlog">
     select user_id,title
     from backlog
     where checked_time=#{currentTime,jdbcType=DATE}
