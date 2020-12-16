@@ -39,7 +39,7 @@
     set is_overtime=1,checked_time=#{currentTime,jdbcType=DATE}
     where is_finished=0 and CURRENT_TIMESTAMP > end_time
   </select>
-  <select id="getChangedBacklogs" parameterType="java.util.Date">
+  <select id="getChangedBacklogs" resultMap="BaseResultMap">
     select user_id,title
     from backlog
     where checked_time=#{currentTime,jdbcType=DATE}
