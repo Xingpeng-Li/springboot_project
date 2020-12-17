@@ -45,7 +45,7 @@ public class BackLogController {
             @ApiResponse(code = 10002, message = "未知错误"),
             @ApiResponse(code = 10003, message = "数据库错误")
     })
-    @PostMapping(value = "/createBacklog")
+    @PostMapping(value = "/create")
     public CommonReturnType createBackLog(HttpServletRequest request)
     {
         String title = request.getParameter("title");
@@ -75,7 +75,7 @@ public class BackLogController {
             @ApiResponse(code = 10002, message = "未知错误"),
             @ApiResponse(code = 10003, message = "数据库错误")
     })
-    @PostMapping(value = "/updateBacklog")
+    @PostMapping(value = "/update")
     public CommonReturnType updateBackLog(HttpServletRequest request)
     {
         String title = request.getParameter("title");
@@ -155,7 +155,7 @@ public class BackLogController {
             @ApiResponse(code = 10002, message = "未知错误"),
             @ApiResponse(code = 10003, message = "数据库错误")
     })
-    @GetMapping(value = "/finish")
+    @PostMapping(value = "/finish")
     public CommonReturnType finishBackLog(HttpServletRequest request)
     {
         String backLogId = request.getParameter("backLogId");
