@@ -84,7 +84,7 @@ public class CompanyController extends BaseController {
     })
     @PostMapping(value = "/company/add")
     public CommonReturnType addCompany(HttpServletRequest request){
-        String companyname = request.getParameter("companyname");
+        String companyname = request.getParameter("companyName");
         //通过token获取UserId
         String token = RequestUtil.getCookievalue(request);
         if (StringUtils.isNotBlank(token)) {
@@ -107,7 +107,7 @@ public class CompanyController extends BaseController {
     })
     @PostMapping("/company/join")
     public CommonReturnType joinCompany(HttpServletRequest request){
-        String companycode = request.getParameter("companycode");
+        String companycode = request.getParameter("companyCode");
         //通过token获取UserId
         String token = RequestUtil.getCookievalue(request);
         if (StringUtils.isNotBlank(token) && !tokenService.isExpiration(token)) {
