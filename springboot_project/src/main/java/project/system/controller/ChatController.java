@@ -71,8 +71,8 @@ public class ChatController extends BaseController{
         String dateStr = request.getParameter("date");
         String launchId = request.getParameter("launchId");
         String receiveId = request.getParameter("receiveId");
-        Integer companyId = Integer.parseInt(request.getParameter("companyId"));
-        Integer deptId = Integer.parseInt(request.getParameter("deptId"));
+        String companyId = request.getParameter("companyId");
+        String deptId = request.getParameter("deptId");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date();
         try {
@@ -85,7 +85,7 @@ public class ChatController extends BaseController{
             if (launchId != null && receiveId != null) {
                 list = socketMessageService.getSocketMessageByUser(launchId, receiveId, date);
             } else {
-                list = socketMessageService.getSocketMessageByGroup(date, deptId, companyId);
+                list = socketMessageService.getSocketMessageByGroup(date, Integer.parseInt(deptId), Integer.parseInt(companyId));
             }
             return CommonReturnType.create(list.stream().map(socketMessageUtil::convertFromSocketMessage).collect(Collectors.toList()));
     }
@@ -94,8 +94,8 @@ public class ChatController extends BaseController{
      * 获取部门联系人
      * */
     @GetMapping("/chatRoom/users/relevant")
-    public CommonReturnType getSocketUserRelevant(@PathVariable String userId) {
-
+    public CommonReturnType getSocketUserRelevant(HttpServletRequest request) {
+        String userId=request.getParameter("userId");
         User user = userMapper.selectByPrimaryKey(Integer.parseInt(userId));
         User[] users = userMapper.selectByCompanyAndDept(user.getCompanyId(),user.getDeptId());
         return CommonReturnType.create(Arrays.stream(users).filter(t -> !t.getUserId().equals(Integer.parseInt(userId))).collect(Collectors.toList()));
