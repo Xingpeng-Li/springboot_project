@@ -9,8 +9,10 @@ import project.system.mapper.ApplicationMapper;
 import project.system.mapper.NotificationMapper;
 import project.system.mapper.UserMapper;
 import project.system.service.ApplicationService;
+import project.system.websocket.WebSocketServer;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -36,6 +38,8 @@ public class ApplicationServiceImpl implements ApplicationService {
     ApplicationMapper applicationMapper;
     @Resource
     NotificationMapper notificationMapper;
+    @Resource
+    WebSocketServer webSocketServer;
 
     @Override
     public void disposeApplication(Integer notificationId, String isAgree, Integer userId) {
@@ -50,6 +54,11 @@ public class ApplicationServiceImpl implements ApplicationService {
         notification2.setNotificationReceiverId(notification.getNotificationSenderId());
         notification2.setNotificationType("已处理审批");
         notification2.setNotificationChecked("否");
+        try {
+            webSocketServer.sendMessage(userId.toString(), "receive");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
         String body;
         if("0".equals(isAgree)){
             body = "您的"+application.getApplicationType()+"申请已通过";
@@ -121,6 +130,12 @@ public class ApplicationServiceImpl implements ApplicationService {
         notification.setNotificationBody(application.getApplicationId().toString());
         notification.setNotificationTime(timestamp);
         notificationMapper.insert(notification);
+        //使用web socket提醒
+        try {
+            webSocketServer.sendMessage(approver.toString(), "receive");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
         //提醒抄送人
         Notification notification2 = new Notification();
@@ -131,5 +146,10 @@ public class ApplicationServiceImpl implements ApplicationService {
         notification2.setNotificationBody(application.getApplicationId().toString());
         notification2.setNotificationTime(timestamp);
         notificationMapper.insert(notification2);
+        try {
+            webSocketServer.sendMessage(secondApprover.toString(), "receive");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 }

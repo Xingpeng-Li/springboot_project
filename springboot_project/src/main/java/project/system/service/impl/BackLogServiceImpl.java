@@ -11,8 +11,10 @@ import project.system.mapper.BacklogMapper;
 import project.system.mapper.NotificationMapper;
 import project.system.service.BackLogService;
 import project.system.domain.Backlog;
+import project.system.websocket.WebSocketServer;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -36,6 +38,8 @@ public class BackLogServiceImpl implements BackLogService {
     BacklogMapper backlogMapper;
     @Resource
     NotificationMapper notificationMapper;
+    @Resource
+    WebSocketServer webSocketServer;
 
 
     @Override
@@ -89,6 +93,12 @@ public class BackLogServiceImpl implements BackLogService {
             notification.setNotificationBody(backlog.getTitle());
             notification.setNotificationTime(new Date());
             notificationMapper.insert(notification);
+            //使用web socket提醒
+            try {
+                webSocketServer.sendMessage(backlog.getUserId().toString(), "receive");
+            } catch (IOException e) {
+                System.out.println(e);
+            }
         }
     }
 
@@ -105,7 +115,7 @@ public class BackLogServiceImpl implements BackLogService {
     }
 
     @Override
-    public void updateBackLog(Integer userId, String title, String description, Boolean isFinished, Boolean isOverTime, String endTime) {
+    public void updateBackLog(Integer backlogId,Integer userId, String title, String description, Boolean isFinished, Boolean isOverTime, String endTime) {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Date endDate;
@@ -115,14 +125,16 @@ public class BackLogServiceImpl implements BackLogService {
             //日期格式不正确
             throw new BusinessException(EmBusinessError.DATE_FORMAT_ERROR);
         }
+
         Backlog backlog=new Backlog();
+        backlog.setBacklogId(backlogId);
         backlog.setUserId(userId);
         backlog.setTitle(title);
         backlog.setDescription(description);
         backlog.setIsFinished(isFinished);
         backlog.setIsOvertime(isOverTime);
         backlog.setEndTime(endDate);
-        backlogMapper.updateByPrimaryKeySelective(backlog);
+        backlogMapper.updateByPrimaryKey(backlog);
     }
 
     @Override

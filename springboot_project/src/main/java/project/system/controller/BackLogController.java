@@ -83,12 +83,13 @@ public class BackLogController {
         Boolean isFinished=false;
         Boolean isOverTime=false;
         String endTime=request.getParameter("endTime");
+        String backlogId=request.getParameter("id");
         //通过token获取UserId
         String token = RequestUtil.getCookievalue(request);
         if (StringUtils.isNotBlank(token)) {
             TokenInfoResponse tokenInfoResponse = loginService.checkLogin(token);
             String userId = tokenInfoResponse.getUserId();
-            backLogService.updateBackLog(Integer.parseInt(userId),title,description,isFinished,isOverTime,endTime);
+            backLogService.updateBackLog(Integer.parseInt(backlogId),Integer.parseInt(userId),title,description,isFinished,isOverTime,endTime);
             return CommonReturnType.create(null);
         }
         else{

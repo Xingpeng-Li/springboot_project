@@ -105,6 +105,7 @@ public class LoginController extends BaseController{
         //将token存入cookie
         RequestUtil.setCookieValue(RequestConstant.TOKEN, tokenInfoResponse.getToken(), response);
         RequestUtil.setCookieValue("userName",user.getUserName(),response);
+        RequestUtil.setCookieValue("userId", user.getUserId().toString(), response);
         return CommonReturnType.create(tokenInfoResponse);////登录成功返回用户信息
     }
     @ApiOperation("手机号密码登录接口")
@@ -146,6 +147,7 @@ public class LoginController extends BaseController{
             //将token存入cookie
             RequestUtil.setCookieValue(RequestConstant.TOKEN, tokenInfoResponse.getToken(), response);
             RequestUtil.setCookieValue("userName", verifiedUser.getUserName(), response);
+            RequestUtil.setCookieValue("userId", verifiedUser.getUserId().toString(), response);
             return CommonReturnType.create(tokenInfoResponse);//登录成功返回用户信息
         }
     }
