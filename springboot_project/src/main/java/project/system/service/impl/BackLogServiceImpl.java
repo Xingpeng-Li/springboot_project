@@ -71,13 +71,14 @@ public class BackLogServiceImpl implements BackLogService {
         return backlogs;
     }
 
-    @Scheduled(cron="0 * */1 * * ?")
+    @Scheduled(fixedRate = 1000 * 60 * 60)
     @Override
     public void checkOverTimedBacklogs() {
 
         Date currentTime=new Date();
         backlogMapper.checkOverTimedBacklogs(currentTime);
         List<Backlog> backlogs=backlogMapper.getChangedBacklogs(currentTime);
+
         for (Backlog backlog:
              backlogs) {
             Notification notification = new Notification();
