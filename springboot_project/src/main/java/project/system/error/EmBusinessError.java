@@ -38,9 +38,6 @@ public enum EmBusinessError implements CommonError {
     USER_LOGIN_VERIFY_FAIL(20011,"用户名或者密码错误"),
     USER_LOGIN_EXPIRED(20012,"登录已过期"),
     USER_WITHOUT_AUTHORITY(20013,"用户没有权限"),
-    //30000开头为视频会议信息错误定义,
-    VIDEO_ERROR(30001, ""),
-    GROUP_NOT_EXISTS(40001,"会议不存在"),
     //50000开头为部门
     COMPANY_ALREADY_EXIST(50001,"该企业已经存在"),
     DEPT_ALREADY_EXIST(50002,"该部门已经存在"),
@@ -62,12 +59,7 @@ public enum EmBusinessError implements CommonError {
     MAIL_BINDING_ERROR(80001,"邮箱账号或授权码错误！"),
     MAIL_RECEIVE_ERROR(80002,"邮件读取出错！"),
     MAIL_SEND_ERROR(80003,"邮件发送出错！"),
-    MAIL_FROMATE_ERROR(80004,"邮箱格式出错！"),
-    //90000开头为语音识别相关错误码
-    RECOGNITION_FAIL(90001,"语音转换请求失败"),
-    RECOGNITION_RESULT_FAIL(90002,"语音转换失败"),
-    RECOGNITION_PROCESSING(90003,"转换进行中,请稍等!"),
-    RECOGNITION_WAITING(90004,"等待转换中");
+    MAIL_FROMATE_ERROR(80004,"邮箱格式出错！");
 
     private int errCode;
     private String errMsg;

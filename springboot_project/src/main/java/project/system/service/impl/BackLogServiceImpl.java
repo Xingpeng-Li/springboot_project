@@ -122,7 +122,7 @@ public class BackLogServiceImpl implements BackLogService {
         backlog.setIsFinished(isFinished);
         backlog.setIsOvertime(isOverTime);
         backlog.setEndTime(endDate);
-        backlogMapper.updateByPrimaryKey(backlog);
+        backlogMapper.updateByPrimaryKeySelective(backlog);
     }
 
     @Override
