@@ -30,11 +30,11 @@ public interface UserMapper {
 
     User[] selectByCompanyAndDept(@Param("companyId") Integer companyId, @Param("deptId") Integer deptId);
 
-    //@author DKR 获取用户的部门通讯录
+    //@author zws 获取用户的部门通讯录
     List<User> getDeptContact(Integer deptId, Integer userId);
-    //@author DKR 获取用户的企业通讯录
+    //@author zws 获取用户的企业通讯录
     List<User> getCompContact(Integer companyId, Integer userId);
-    //@author DKR 获取企业下没有加入部门的用户
+    //@author zws 获取企业下没有加入部门的用户
     List<User> getNoDeptUsers(Integer userId, Integer companyId);
     List<User> selectAll();
 //    User[] selectbycompanyid(int companyId);

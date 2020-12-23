@@ -21,14 +21,13 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /*
- @author:李星鹏
- @createDate:2020/7/9
- @update:2020/7/9
- @description:初步实现导入通讯录逻辑功能
-
- @update:2020/7/11
- @description:修改了API接口，更改了返回类型为CommonReturnType
- */
+ * @author zws
+ * @description 实现导入通讯录逻辑功能
+ * @create 2020/11/18 20:51
+ * @update 2020/11/28 20:51
+ * @param
+ * @return
+ **/
 @Controller
 public class ImportUserController extends BaseController {
 
