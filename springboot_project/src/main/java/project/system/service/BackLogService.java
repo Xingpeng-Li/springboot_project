@@ -78,7 +78,7 @@ public interface BackLogService {
      * @param [backLogId]
      * @return void
      **/
-    void updateBackLog(Integer userId, String title, String description, Boolean isFinished, Boolean isOverTime, String endTime);
+    void updateBackLog(Integer backlogId,Integer userId, String title, String description, Boolean isFinished, Boolean isOverTime, String endTime);
 
     /*
      * @author zws
