@@ -24,9 +24,9 @@ import java.util.Objects;
 import static java.lang.Integer.parseInt;
 
 /*
-@author WL
-@CreateDate 2020-7-21
-@update 2020-7-22
+@author wzq
+@CreateDate 2020-11-21
+@update 2020-11-22
 @description 公众号文章相关api
 */
 @RestController

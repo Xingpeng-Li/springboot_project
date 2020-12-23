@@ -26,10 +26,10 @@ import java.util.List;
 import java.util.Map;
 
 /*
- * @author zws
+ * @author wzq
  * @description 用以接收和发送公告
- * @create 2020/11/6 19:00
- * @update 2020/11/6 19:00
+ * @create 2020/11/6
+ * @update 2020/11/6
  * @param  
  * @return  
  */

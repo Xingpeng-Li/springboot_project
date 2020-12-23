@@ -23,11 +23,11 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 /*
-@author DKR
-@CreateDate 2020-7-09
-@update 2020-7-09 实现注册验证码发送功能
-        2020-7-10 session验证验证码
-        2020-7-11 注册根据用户的电话号码和用户填写的密码生成密码
+@author wzq
+@CreateDate 2020-11-09
+@update 2020-11-09 实现注册验证码发送功能
+        2020-11-10 session验证验证码
+        2020-11-21 注册根据用户的电话号码和用户填写的密码生成密码
 @description 发送注册验证码api和注册api
 */
 @Api("注册接口")
