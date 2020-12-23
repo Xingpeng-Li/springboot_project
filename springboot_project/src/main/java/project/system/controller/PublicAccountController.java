@@ -23,9 +23,9 @@ import java.util.List;
 import java.util.Objects;
 
 /*
-@author WL
-@CreateDate 2020-7-21
-@update 2020-7-22 7-23
+@author wzq
+@CreateDate 2020-11-11
+@update 2020-11-22
 @description 公众号相关api
 */
 @RestController
