@@ -3,8 +3,8 @@ package project.system.common.utils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 /*
-@author DKR
-@CreateDate 2020-7-10
+@author zws
+@CreateDate 2020-11-10
 @update
 @description jwt框架生成token的基本配置类
 */

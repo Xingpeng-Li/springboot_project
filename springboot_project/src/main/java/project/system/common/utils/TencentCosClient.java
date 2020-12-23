@@ -1,10 +1,8 @@
 package project.system.common.utils;
 /*
-@author DKR
-@CreateDate 2020-7-14
-@update 2020-7-14 DKR 实现文件的上传，复制，删除
-        2020-7-15 DKR 修改文件上传接口的参数，修复异常处理
-        2020-7-23 DKR 添加水印文件上传接口
+@author 李星鹏
+@CreateDate 2020-11-14
+@update 2020-11-14 李星鹏 实现文件的上传，复制，删除
 @description 与腾讯云对象存储服务对接的类
 */
 

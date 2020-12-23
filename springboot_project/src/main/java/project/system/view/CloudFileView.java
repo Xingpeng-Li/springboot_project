@@ -3,6 +3,13 @@ package project.system.view;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+/*
+@author 李星鹏
+@CreateDate 2020-10-25
+@update 2020-10-25 实现上传、复制、删除、分页获取文件列表业务逻辑
+        2020-11-6 修复了一些bug,实现了获取全部文件列表、搜索文件的业务逻辑
+@description 云空间文件服务类
+*/
 @ApiModel(description = "返回的文件视图类")
 public class CloudFileView {
     @ApiModelProperty(value = "文件id",notes = "唯一标识")

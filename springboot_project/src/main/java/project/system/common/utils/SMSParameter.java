@@ -2,12 +2,6 @@ package project.system.common.utils;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
-/*
-@author DKR
-@CreateDate 2020-7-09
-@update
-@description 短信发送服务的参数类
-*/
 @Data
 @Accessors(chain = true)
 public class SMSParameter {

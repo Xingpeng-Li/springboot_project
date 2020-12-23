@@ -1,8 +1,8 @@
 package project.system.common.constant;
 
 /*
-@author WL
-@CreateDate 2020-7-09
+@author zws
+@CreateDate 2020-10-09
 @update
 @description 常量
 */

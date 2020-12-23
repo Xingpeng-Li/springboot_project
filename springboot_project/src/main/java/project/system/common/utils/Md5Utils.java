@@ -2,9 +2,9 @@ package project.system.common.utils;
 
 import org.apache.commons.codec.digest.DigestUtils;
 /*
-@author DKR
-@CreateDate 2020-7-09
-@update 2020-7-09 实现二次加密动态加盐的Md5加密
+@author 李星鹏
+@CreateDate 2020-10-23
+@update 2020-10-23 实现二次加密动态加盐的Md5加密
 @description 对密码进行加密的类
 */
 public class Md5Utils {

@@ -1,9 +1,9 @@
 package project.system.autoconfig;
 
 /**
- * @Author ASUS
- * @Date 2020/11/6
- * @Description TODO
+ * @Author 李星鹏
+ * @Date 2020/10/20
+ * @Description 解决跨域访问问题
  **/
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

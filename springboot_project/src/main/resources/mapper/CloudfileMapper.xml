@@ -13,7 +13,7 @@
   <sql id="Base_Column_List">
     file_id, file_name, file_size, file_suffix, user_id, file_url, file_upload_time
   </sql>
-<!--  搜索文件@author-DKR -->
+<!--  搜索文件@author-李星鹏 -->
   <select id="searchFileByKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
@@ -21,7 +21,7 @@
     where file_name like '%${key}%' and user_id=#{userId,jdbcType=INTEGER}
     order by file_upload_time desc
   </select>
-<!--  获取用的所有文件@author-DKR-->
+<!--  获取用的所有文件@author-李星鹏-->
   <select id="queryAllFiles" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
@@ -29,7 +29,7 @@
     where user_id=#{userId,jdbcType=INTEGER}
     order by file_upload_time desc
   </select>
- <!--  分页获取用户的文件列表@author-DKR-->
+ <!--  分页获取用户的文件列表@author-李星鹏-->
   <select id="getCloudFilesLimited" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>

@@ -12,9 +12,9 @@ import java.io.IOException;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * @Author ASUS
+ * @Author 李星鹏
  * @Date 2020/12/17
- * @Description TODO
+ * @Description WebSocketServer
  **/
 @ServerEndpoint("/ws/{userId}")
 @Component
