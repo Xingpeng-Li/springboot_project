@@ -29,12 +29,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /*
-@author DKR,WL
-@CreateDate 2020-7-09
-@update 2020 7-10添加token，2020 7-10wl添加退出api，完善登录逻辑
-        2020 7-17登录返回信息添加了一些字段
-@description 登录api，分为电话号码验证码登录和用户名密码登录，退出api
-*/
+ * @author zws
+ * @description 实现登录接口，分为账号密码登录和验证码登录
+ * @create 2020/11/28 20:52
+ * @update 2020/11/28 20:52
+ * @param
+ * @return
+ **/
 @Api("登录接口")
 @RestController
 public class LoginController extends BaseController{
@@ -97,9 +98,13 @@ public class LoginController extends BaseController{
         tokenInfoResponse.setCompanyId(user.getCompanyId());
         tokenInfoResponse.setDeptId(user.getDeptId());
         if(user.getCompanyId()!=0)//判断用户是否已经加入公司
+        {
             tokenInfoResponse.setHaveJoinedCompany(true);
+        }
         else
+        {
             tokenInfoResponse.setHaveJoinedCompany(false);
+        }
         simpleCoreManager.addTokenInfo(token,tokenInfoResponse);
         UserView userView=userService.convertFromUserToUserView(user);
         //将token存入cookie
@@ -125,8 +130,9 @@ public class LoginController extends BaseController{
         user.setUserPassword(userPassword);
         //验证用户
         User verifiedUser = userService.verifyUser(user);
-        if (verifiedUser == null)
+        if (verifiedUser == null) {
             throw new BusinessException(EmBusinessError.USER_LOGIN_VERIFY_FAIL);//用户名或者命名错误，或者用户不存在
+        }
         else {
             //下发token，登录成功
             TokenInfoResponse tokenInfoResponse = new TokenInfoResponse();
@@ -140,9 +146,13 @@ public class LoginController extends BaseController{
             tokenInfoResponse.setDeptId(verifiedUser.getDeptId());
             UserView userView = userService.convertFromUserToUserView(verifiedUser);
             if (verifiedUser.getCompanyId() != 0)//判断用户是否已经加入公司
+            {
                 tokenInfoResponse.setHaveJoinedCompany(true);
+            }
             else
+            {
                 tokenInfoResponse.setHaveJoinedCompany(false);
+            }
             simpleCoreManager.addTokenInfo(token, tokenInfoResponse);
             //将token存入cookie
             RequestUtil.setCookieValue(RequestConstant.TOKEN, tokenInfoResponse.getToken(), response);

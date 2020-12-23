@@ -7,10 +7,10 @@ import project.system.view.UserView;
 import java.util.List;
 
 /*
-@author DKR
-@CreateDate 2020-7-09
-@update  2020-7-09 添加判断电话号码是否注册函数和用户的注册函数
-         2020-7-10 添加登录时的验证函数
+@author zws
+@CreateDate 2020-11-28
+@update  2020-11-28 添加判断电话号码是否注册函数和用户的注册函数
+         2020-11-29 添加登录时的验证函数
 @description 提供与User类相关的服务
 */
 public interface UserService {

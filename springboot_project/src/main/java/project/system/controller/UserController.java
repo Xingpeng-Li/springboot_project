@@ -24,13 +24,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /*
-@author DKR
-@CreateDate 2020-7-16
-@update 2020-7-16 DKR 获取部门联系人和公司联系人
-        2020-7-21 DKR 添加查看和修改个人信息接口，修改了返回数据的类型
-        2020-7-22 DKR 修改个人信息后改变cookie值
-@description 获取联系人相关api
-*/
+ * @author zws
+ * @description  获取部门联系人和公司联系人
+ *               添加查看和修改个人信息接口，修改了返回数据的类型
+ *               修改个人信息后改变cookie值
+ * @create 2020/12/23 20:55
+ * @update 2020/12/23 20:55
+ * @param
+ * @return
+ **/
 @Api("用户接口")
 @RestController
 public class UserController extends BaseController {
@@ -113,8 +115,9 @@ public class UserController extends BaseController {
                                              HttpServletResponse response){
         String token= RequestUtil.getCookievalue(request);
         TokenInfoResponse tokenInfoResponse = loginService.checkLogin(token);
-        if(tokenInfoResponse==null||tokenService.isExpiration(token))
+        if(tokenInfoResponse==null||tokenService.isExpiration(token)) {
             throw new BusinessException(EmBusinessError.UNLOGIN);
+        }
         JSONObject json;
         try{
             json = (JSONObject)request.getSession(false).getAttribute("verifyCode");
@@ -134,12 +137,14 @@ public class UserController extends BaseController {
                 ,userName,password,phoneNumber==null?user.getUserPhonenumber():phoneNumber);
         if(userService.modifyMyInfo(newUser))
         {
-            if(userName!=null)
-                RequestUtil.setCookieValue("userName",userName,response);
+            if(userName!=null) {
+                RequestUtil.setCookieValue("userName", userName, response);
+            }
             return CommonReturnType.create(null);
         }
-        else
+        else {
             throw new BusinessException(EmBusinessError.DB_ERROR);
+        }
     }
     @ApiOperation("查看个人信息接口")
     @ApiResponses({
@@ -153,12 +158,15 @@ public class UserController extends BaseController {
     public CommonReturnType getMyPersonalInfo(HttpServletRequest request){
         String token= RequestUtil.getCookievalue(request);
         TokenInfoResponse tokenInfoResponse = loginService.checkLogin(token);
-        if(tokenInfoResponse==null||tokenService.isExpiration(token))
+        if(tokenInfoResponse==null||tokenService.isExpiration(token)) {
             throw new BusinessException(EmBusinessError.UNLOGIN);
+        }
         UserDetailView userDetailView=userService.getUserInfo(Integer.parseInt(tokenInfoResponse.getUserId()));
-        if(userDetailView==null)
+        if(userDetailView==null) {
             throw new BusinessException(EmBusinessError.DB_ERROR);
-        else
+        }
+        else {
             return CommonReturnType.create(userDetailView);
+        }
     }
 }
