@@ -10,20 +10,18 @@ import project.system.error.BusinessException;
 import project.system.error.EmBusinessError;
 import project.system.mapper.CloudfileMapper;
 import project.system.service.CloudFileService;
-import project.system.view.CloudFileView;
+import project.system.vo.CloudFileVo;
 
 import javax.annotation.Resource;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Locale;
 import java.util.stream.Collectors;
 
 /*
-@author DKR
-@CreateDate 2020-7-14
-@update 2020-7-14 实现上传、复制、删除、分页获取文件列表业务逻辑
-        2020-7-16 修复了一些bug,实现了获取全部文件列表、搜索文件的业务逻辑
+@author 李星鹏
+@CreateDate 2020-11-14
+@update 2020-11-14 实现上传、复制、删除、分页获取文件列表业务逻辑
+        2020-11-16 修复了一些bug,实现了获取全部文件列表、搜索文件的业务逻辑
 @description 云空间文件服务类
 */
 @Service
@@ -63,7 +61,7 @@ public class CloudFileServiceImpl implements CloudFileService {
     }
     @Override
     //分页获取文件
-    public List<CloudFileView> getMyFiles(Integer userId, Integer pageNumber, Integer pageSize){
+    public List<CloudFileVo> getMyFiles(Integer userId, Integer pageNumber, Integer pageSize){
         Integer offset = (pageNumber - 1) * pageSize;//设置offset
         return cloudfileMapper.getCloudFilesLimited(userId,offset,pageSize).stream().
                 map(this::convertFromCloudFileToView).collect(Collectors.toList());
@@ -89,21 +87,21 @@ public class CloudFileServiceImpl implements CloudFileService {
     }
     @Override
     //获取用户的所有云空间文件目录
-    public List<CloudFileView> getAllFiles(Integer userId){
+    public List<CloudFileVo> getAllFiles(Integer userId){
         return cloudfileMapper.queryAllFiles(userId).stream().
                 map(this::convertFromCloudFileToView).collect(Collectors.toList());
     }
     @Override
     //获取搜索云空间文件结果
-    public List<CloudFileView> searchFiles(String key, Integer userId){
+    public List<CloudFileVo> searchFiles(String key, Integer userId){
         return cloudfileMapper.searchFileByKey(key,userId).stream().map(
                 this::convertFromCloudFileToView).collect(Collectors.toList());
     }
-    private CloudFileView convertFromCloudFileToView(Cloudfile cloudfile)
+    private CloudFileVo convertFromCloudFileToView(Cloudfile cloudfile)
     {
         if(cloudfile==null)
             return null;
-        CloudFileView cloudFileView=new CloudFileView();
+        CloudFileVo cloudFileView=new CloudFileVo();
         BeanUtils.copyProperties(cloudfile,cloudFileView);
         SimpleDateFormat time=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         cloudFileView.setFileUploadTime(time.format(cloudfile.getFileUploadTime()));

@@ -12,8 +12,6 @@ import project.system.response.response.TokenInfoResponse;
 */
 public interface LoginService {
 
-    TokenInfoResponse logout(LoginRequest loginParam);
-
     TokenInfoResponse checkLogin(String token);
 
     void setLoginResult(String token, TokenInfoResponse tokenInfoResponse);

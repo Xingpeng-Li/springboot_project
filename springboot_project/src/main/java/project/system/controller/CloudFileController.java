@@ -14,17 +14,17 @@ import project.system.response.response.TokenInfoResponse;
 import project.system.service.CloudFileService;
 import project.system.service.LoginService;
 import project.system.service.TokenService;
-import project.system.view.CloudFileView;
+import project.system.vo.CloudFileVo;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 /*
-@author DKR
+@author 李星鹏
 @CreateDate 2020-11-14
-@update 2020-7-14 DKR 实现文件的上传、复制、删除、获取文件列表接口
-        2020-7-16 DKR 修改获取文件列表接口，完善异常处理
-        2020-7-21 DKR 修改了返回的数据类型
+@update 2020-11-14 李星鹏 实现文件的上传、复制、删除、获取文件列表接口
+        2020-11-16 李星鹏 修改获取文件列表接口，完善异常处理
+        2020-11-21 李星鹏 修改了返回的数据类型
 @description 云空间相关api
 */
 
@@ -96,7 +96,7 @@ public class CloudFileController extends BaseController {
     }
     @ApiOperation(value = "获取文件列表接口",notes = "后端分页获取")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "success",response = CloudFileView.class,responseContainer = "List"),
+            @ApiResponse(code = 200, message = "success",response = CloudFileVo.class,responseContainer = "List"),
             @ApiResponse(code = 1, message = "用户未登录"),
             @ApiResponse(code = 20012, message = "token过期,需要重新登录"),
             @ApiResponse(code = 10002, message = "未知错误"),
@@ -121,7 +121,7 @@ public class CloudFileController extends BaseController {
             throw new BusinessException(EmBusinessError.UNLOGIN);
         }
         //获取文件列表
-        List<CloudFileView> cloudFiles =cloudFileService.getMyFiles(Integer.parseInt(tokenInfoResponse.getUserId()),Integer.parseInt(pageNumber),Integer.parseInt(pageSize));
+        List<CloudFileVo> cloudFiles =cloudFileService.getMyFiles(Integer.parseInt(tokenInfoResponse.getUserId()),Integer.parseInt(pageNumber),Integer.parseInt(pageSize));
         return CommonReturnType.create(cloudFiles);//成功返回文件列表
     }
     //删除文件接口
@@ -152,7 +152,7 @@ public class CloudFileController extends BaseController {
     }
     @ApiOperation(value = "获取所有文件列表接口",notes = "前端分页")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "success",response = CloudFileView.class,responseContainer = "List"),
+            @ApiResponse(code = 200, message = "success",response = CloudFileVo.class,responseContainer = "List"),
             @ApiResponse(code = 1, message = "用户未登录"),
             @ApiResponse(code = 20012, message = "token过期,需要重新登录"),
             @ApiResponse(code = 10002, message = "未知错误"),
@@ -168,12 +168,12 @@ public class CloudFileController extends BaseController {
             throw new BusinessException(EmBusinessError.UNLOGIN);
         }
         //获取文件列表
-        List<CloudFileView> cloudFiles=cloudFileService.getAllFiles(Integer.parseInt(tokenInfoResponse.getUserId()));
+        List<CloudFileVo> cloudFiles=cloudFileService.getAllFiles(Integer.parseInt(tokenInfoResponse.getUserId()));
         return CommonReturnType.create(cloudFiles);//成功返回文件列表
     }
     @ApiOperation(value = "搜索文件接口",notes = "前端分页")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "success",response = CloudFileView.class,responseContainer = "List"),
+            @ApiResponse(code = 200, message = "success",response = CloudFileVo.class,responseContainer = "List"),
             @ApiResponse(code = 1, message = "用户未登录"),
             @ApiResponse(code = 20012, message = "token过期,需要重新登录"),
             @ApiResponse(code = 10002, message = "未知错误"),
@@ -187,7 +187,7 @@ public class CloudFileController extends BaseController {
         String token= RequestUtil.getCookievalue(request);
         TokenInfoResponse tokenInfoResponse = loginService.checkLogin(token);
         //获取搜索结果
-        List<CloudFileView> cloudFiles=cloudFileService.searchFiles(key,Integer.parseInt(tokenInfoResponse.getUserId()));
+        List<CloudFileVo> cloudFiles=cloudFileService.searchFiles(key,Integer.parseInt(tokenInfoResponse.getUserId()));
         return CommonReturnType.create(cloudFiles);//成功返回文件列表
     }
 }

@@ -15,8 +15,8 @@ import project.system.response.response.TokenInfoResponse;
 import project.system.service.LoginService;
 import project.system.service.TokenService;
 import project.system.service.UserService;
-import project.system.view.UserDetailView;
-import project.system.view.UserView;
+import project.system.vo.UserDetailVo;
+import project.system.vo.UserVo;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -44,7 +44,7 @@ public class UserController extends BaseController {
     private UserService userService;
     @ApiOperation("获取部门联系人接口")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "success", response = UserView.class, responseContainer = "List"),
+            @ApiResponse(code = 200, message = "success", response = UserVo.class, responseContainer = "List"),
             @ApiResponse(code = 1, message = "用户未登录"),
             @ApiResponse(code = 20012, message = "token过期,需要重新登录"),
             @ApiResponse(code = 10002, message = "未知错误")
@@ -57,11 +57,11 @@ public class UserController extends BaseController {
             throw new BusinessException(EmBusinessError.UNLOGIN);
         }
         //查找部门联系人
-        List<UserView> contacts=userService.getMyDeptContacts(Integer.parseInt(tokenInfoResponse.getUserId()));
+        List<UserVo> contacts=userService.getMyDeptContacts(Integer.parseInt(tokenInfoResponse.getUserId()));
         return CommonReturnType.create(contacts);
     }
     @ApiResponses({
-            @ApiResponse(code = 200, message = "success", response = UserView.class, responseContainer = "List"),
+            @ApiResponse(code = 200, message = "success", response = UserVo.class, responseContainer = "List"),
             @ApiResponse(code = 1, message = "用户未登录"),
             @ApiResponse(code = 20012, message = "token过期,需要重新登录"),
             @ApiResponse(code = 10002, message = "未知错误")
@@ -75,11 +75,11 @@ public class UserController extends BaseController {
             throw new BusinessException(EmBusinessError.UNLOGIN);
         }
         //查找公司联系人
-        List<UserView> contacts=userService.getMyCompContacts(Integer.parseInt(tokenInfoResponse.getUserId()));
+        List<UserVo> contacts=userService.getMyCompContacts(Integer.parseInt(tokenInfoResponse.getUserId()));
         return CommonReturnType.create(contacts);
     }
     @ApiResponses({
-            @ApiResponse(code = 200, message = "success", response = UserView.class, responseContainer = "List"),
+            @ApiResponse(code = 200, message = "success", response = UserVo.class, responseContainer = "List"),
             @ApiResponse(code = 1, message = "用户未登录"),
             @ApiResponse(code = 20012, message = "token过期,需要重新登录"),
             @ApiResponse(code = 10002, message = "未知错误")
@@ -93,12 +93,12 @@ public class UserController extends BaseController {
             throw new BusinessException(EmBusinessError.UNLOGIN);
         }
         //查找没有部门的联系人
-        List<UserView> contacts=userService.getMyNoDeptUsers(Integer.parseInt(tokenInfoResponse.getUserId()));
+        List<UserVo> contacts=userService.getMyNoDeptUsers(Integer.parseInt(tokenInfoResponse.getUserId()));
         return CommonReturnType.create(contacts);
     }
     @ApiOperation("修改个人信息接口")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "success", response = UserDetailView.class),
+            @ApiResponse(code = 200, message = "success", response = UserDetailVo.class),
             @ApiResponse(code = 1, message = "用户未登录"),
             @ApiResponse(code = 20012, message = "token过期,需要重新登录"),
             @ApiResponse(code = 10002, message = "未知错误"),
@@ -148,7 +148,7 @@ public class UserController extends BaseController {
     }
     @ApiOperation("查看个人信息接口")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "success", response = UserDetailView.class),
+            @ApiResponse(code = 200, message = "success", response = UserDetailVo.class),
             @ApiResponse(code = 1, message = "用户未登录"),
             @ApiResponse(code = 20012, message = "token过期,需要重新登录"),
             @ApiResponse(code = 10002, message = "未知错误"),
@@ -161,7 +161,7 @@ public class UserController extends BaseController {
         if(tokenInfoResponse==null||tokenService.isExpiration(token)) {
             throw new BusinessException(EmBusinessError.UNLOGIN);
         }
-        UserDetailView userDetailView=userService.getUserInfo(Integer.parseInt(tokenInfoResponse.getUserId()));
+        UserDetailVo userDetailView=userService.getUserInfo(Integer.parseInt(tokenInfoResponse.getUserId()));
         if(userDetailView==null) {
             throw new BusinessException(EmBusinessError.DB_ERROR);
         }

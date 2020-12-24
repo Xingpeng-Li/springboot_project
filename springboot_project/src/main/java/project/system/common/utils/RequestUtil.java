@@ -7,9 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /*
-@author 王征权
-@CreateDate 2020-7-09
-@update 2020-7-17 DKR 封装获取taskId的函数
+@author wzq
+@CreateDate 2020-11-09
+@update 2020-11-17 DKR 封装获取taskId的函数
 @description request工具类，目前只要用于用户登录方面
 */
 public class RequestUtil {

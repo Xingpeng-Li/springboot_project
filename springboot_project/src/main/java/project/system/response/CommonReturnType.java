@@ -1,7 +1,7 @@
 package project.system.response;
 
 /*
-@author WL
+@author 李星鹏
 @CreateDate 2020-7-08
 @update
 @description 与前端交互通用返回类型，包装了状态信息以及返回给前端的数据

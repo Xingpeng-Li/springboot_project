@@ -1,8 +1,8 @@
 package project.system.error;
 
 /*
-@author WL DKR LXP XBC
-@CreateDate 2020-7-08
+@author LXP ZWS WZQ XBC
+@CreateDate 2020-10-10
 @update
 @description 一个枚举类，用来返回前端错误码以及错误信息，实现了CommonError接口
 */

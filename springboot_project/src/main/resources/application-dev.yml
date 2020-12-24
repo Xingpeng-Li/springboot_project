@@ -27,9 +27,6 @@ tx:
     bucketName: officesystem-1304131169
     path: https://officesystem-1304131169.cos.ap-nanjing.myqcloud.com/
     prefix: officesystemCloudFile
-#  speech:
-#    secretId: AKIDWmAJBdFR0LrfkUzGVWIrBD0bNvBCbXnk
-#    secretKey: t4xYw5yadWZN0xe6GE0tWt0FFySpKYVC
 aliyun:
   accessKeyID: LTAI4G36y3VKJyASeRWUNScU
   accessKeySecret: vgX0Ow3E2gyjN1A1C6yfc7w3B1ZShQ
@@ -53,7 +50,3 @@ config:
     iss: miaowhu
 server:
   port: 9000
-openvidu:
-  #  url: https://212.64.65.145:4443/
-  url: https://sx3.51guagua.top
-  secret: wangxiaowei

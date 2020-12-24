@@ -1,7 +1,6 @@
 package project.system.service.impl;
 
 
-import lombok.Builder;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,8 +10,8 @@ import project.system.mapper.CompanyMapper;
 import project.system.mapper.DeptMapper;
 import project.system.mapper.UserMapper;
 import project.system.service.UserService;
-import project.system.view.UserDetailView;
-import project.system.view.UserView;
+import project.system.vo.UserDetailVo;
+import project.system.vo.UserVo;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -64,7 +63,7 @@ public class UserServiceImpl implements UserService {
 
     //获取部门通讯录
     @Override
-    public List<UserView> getMyDeptContacts(Integer userId){
+    public List<UserVo> getMyDeptContacts(Integer userId){
         User user=userMapper.selectByPrimaryKey(userId);
         return userMapper.getDeptContact(user.getDeptId(),userId).stream().
                 map(this::convertFromUserToUserView).collect(Collectors.toList());
@@ -72,14 +71,14 @@ public class UserServiceImpl implements UserService {
 
     //获取公司通讯录
     @Override
-    public List<UserView> getMyCompContacts(Integer userId){
+    public List<UserVo> getMyCompContacts(Integer userId){
         User user=userMapper.selectByPrimaryKey(userId);
         return userMapper.getCompContact(user.getCompanyId(),userId).stream().
                 map(this::convertFromUserToUserView).collect(Collectors.toList());
     }
    //获取没有加入部门的人
     @Override
-    public List<UserView> getMyNoDeptUsers(Integer userId){
+    public List<UserVo> getMyNoDeptUsers(Integer userId){
         User user=userMapper.selectByPrimaryKey(userId);
         return userMapper.getNoDeptUsers(userId,user.getCompanyId()).stream().
                 map(this::convertFromUserToUserView).collect(Collectors.toList());
@@ -107,11 +106,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserView convertFromUserToUserView(User user){
+    public UserVo convertFromUserToUserView(User user){
         if(user==null)
             return null;
         else {
-            UserView userView = new UserView();
+            UserVo userView = new UserVo();
             BeanUtils.copyProperties(user, userView);
             if(user.getCompanyId()!=0)
             {
@@ -128,7 +127,7 @@ public class UserServiceImpl implements UserService {
         }
     }
     @Override
-    public UserDetailView getUserInfo(Integer userId){
+    public UserDetailVo getUserInfo(Integer userId){
        return convertFromUserToDetailView(userMapper.selectByPrimaryKey(userId));
     }
     @Override
@@ -136,10 +135,10 @@ public class UserServiceImpl implements UserService {
     {
         return userMapper.updateByPrimaryKeySelective(user)==1;
     }
-    private UserDetailView convertFromUserToDetailView(User user){
+    private UserDetailVo convertFromUserToDetailView(User user){
         if(user==null)
             return null;
-        UserDetailView userDetailView=new UserDetailView();
+        UserDetailVo userDetailView=new UserDetailVo();
         BeanUtils.copyProperties(user,userDetailView);if(user.getCompanyId()!=0)
         {
             Company company=companyMapper.selectByPrimaryKey(user.getCompanyId());

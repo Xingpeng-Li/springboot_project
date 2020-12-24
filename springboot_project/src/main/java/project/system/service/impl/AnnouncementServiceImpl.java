@@ -19,8 +19,8 @@ import java.util.List;
 import java.util.Map;
 
 /*
- @author:李星鹏
- @createDate:2020/7/21
+ @author:wqz
+ @createDate:2020/10/21
  @description:发送公告、接收公告控制类
  */
 

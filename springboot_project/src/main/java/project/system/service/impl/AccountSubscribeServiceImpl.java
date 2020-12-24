@@ -10,12 +10,6 @@ import javax.annotation.Resource;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/*
-@author WL
-@CreateDate 2020-7-21
-@update
-@description 公众号订阅业务逻辑编写
-*/
 @Service
 public class AccountSubscribeServiceImpl implements AccountSubscribeService {
 

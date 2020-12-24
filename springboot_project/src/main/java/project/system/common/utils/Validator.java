@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 import com.alibaba.druid.util.StringUtils;
 /*
-@author 王征权
+@author wzq
 @CreateDate 2020-10-09
 @update 2020-10-09 验证电话号码格式函数
 @description 验证参数的类

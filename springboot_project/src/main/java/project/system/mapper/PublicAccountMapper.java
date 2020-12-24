@@ -5,12 +5,6 @@ import project.system.domain.PublicAccount;
 
 import java.util.List;
 
-/*
-@author WL
-@CreateDate 2020-7-21
-@update
-@description 公众号持久化操作
-*/
 @Mapper
 public interface PublicAccountMapper {
     int deleteByPrimaryKey(Integer publicaccountId);

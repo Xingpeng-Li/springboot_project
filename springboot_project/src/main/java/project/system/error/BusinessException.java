@@ -1,8 +1,8 @@
 package project.system.error;
 
 /*
-@author WL
-@CreateDate 2020-7-08
+@author 李星鹏
+@CreateDate 2020-10-10
 @update
 @description 与业务逻辑有关的异常类
 */

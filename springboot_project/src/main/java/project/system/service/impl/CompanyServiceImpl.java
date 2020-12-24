@@ -16,20 +16,6 @@ import project.system.service.UserService;
 import javax.annotation.Resource;
 import java.util.*;
 
-/*
- @author:李星鹏
- @createDate:2020/7/10
- @description:创建企业、添加部门Service
-
- @update:2020/7/11
- @description:添加了返回部门员工的函数
-
- @update:2020/7/15
- @description:添加了只有管理员能添加部门的权限以及企业邀请码的生成
-
- @update:2020/7/19
- @description:选择联系人添加部门管理员
- */
 @Service
 public class CompanyServiceImpl implements CompanyService {
     @Resource

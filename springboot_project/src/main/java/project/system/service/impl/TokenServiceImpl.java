@@ -14,12 +14,6 @@ import project.system.service.TokenService;
 
 import javax.annotation.Resource;
 import java.util.Date;
-/*
-@author DKR
-@CreateDate 2020-7-10
-@update 2020-7-15 修复过期验证的bug
-@description 对TokenService接口的具体实现
-*/
 @Service
 @Transactional
 public class TokenServiceImpl implements TokenService {

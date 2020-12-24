@@ -1,8 +1,8 @@
 package project.system.service;
 
 import project.system.domain.User;
-import project.system.view.UserDetailView;
-import project.system.view.UserView;
+import project.system.vo.UserDetailVo;
+import project.system.vo.UserVo;
 
 import java.util.List;
 
@@ -20,11 +20,11 @@ public interface UserService {
     boolean InsertUser(User user);
     User verifyUser(User user);
     User getUserById(Integer userId);
-    UserDetailView getUserInfo(Integer userId);
-    List<UserView> getMyDeptContacts(Integer userId);
-    List<UserView> getMyCompContacts(Integer userId);
-    List<UserView> getMyNoDeptUsers(Integer userId);
-    UserView convertFromUserToUserView(User user);
+    UserDetailVo getUserInfo(Integer userId);
+    List<UserVo> getMyDeptContacts(Integer userId);
+    List<UserVo> getMyCompContacts(Integer userId);
+    List<UserVo> getMyNoDeptUsers(Integer userId);
+    UserVo convertFromUserToUserView(User user);
     boolean modifyMyInfo(User user);
     //判断是否是企业管理员
     boolean isCompanyAdmin(Integer userId);

@@ -5,12 +5,6 @@ import project.system.domain.Post;
 
 import java.util.List;
 
-/*
-@author WL
-@CreateDate 2020-7-21
-@update 2020-7-22
-@description 公众号文章持久化操作
-*/
 @Mapper
 public interface PostMapper {
     int deleteByPrimaryKey(Integer postId);

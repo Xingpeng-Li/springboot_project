@@ -28,9 +28,9 @@ import java.util.Objects;
 import java.util.UUID;
 
 /*
-@author WL
-@CreateDate 2020-7-16
-@update 2020-7-17
+@author 李星鹏
+@CreateDate 2020-12-16
+@update 2020-12-16
 @description 具体实现发送图片和文件的相关操作
 */
 @Service

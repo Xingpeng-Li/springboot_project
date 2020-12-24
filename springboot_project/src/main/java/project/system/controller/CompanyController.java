@@ -27,9 +27,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 /*
- @author:wzq
+ @author:wzq zws
  @createDate:2020/11/10
- @description:创建企业、添加部门Controller
+ @description:创建企业、加入企业Controller
+
 
  @update:2020/11/11
  @description:修改了返回值为CommonReturnType

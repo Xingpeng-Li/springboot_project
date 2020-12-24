@@ -25,13 +25,12 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .pathMapping("/")
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.project.controller"))
+                .apis(RequestHandlerSelectors.basePackage("project.system.controller"))
                 .paths(PathSelectors.any())
                 .build().apiInfo(new ApiInfoBuilder()
-                        .title("远程办公系统接口文档")
-                        .description("武大计算机学院大二软工实训Bug仇杀队")
+                        .title("办公系统接口文档")
+                        .description("JavaEE课程设计")
                         .version("1.0")
-                        .contact(new Contact("Bug仇杀队","https://gitee.com/crdv7/training_code_base","2502167785@qq.com"))
                         .build());
     }
 }

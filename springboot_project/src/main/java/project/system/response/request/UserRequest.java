@@ -5,8 +5,8 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /*
-@author WL
-@CreateDate 2020-7-09
+@author zws
+@CreateDate 2020-10-09
 @update
 @description 会议成员相关参数
 */

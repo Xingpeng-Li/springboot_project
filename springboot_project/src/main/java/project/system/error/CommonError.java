@@ -1,8 +1,8 @@
 package project.system.error;
 
 /*
-@author WL
-@CreateDate 2020-7-08
+@author 李星鹏
+@CreateDate 2020-10-10
 @update
 @description 返回前端错误信息接口
 */

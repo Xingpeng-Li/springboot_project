@@ -5,8 +5,8 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /*
-@author WL
-@CreateDate 2020-7-09
+@author 李星鹏
+@CreateDate 2020-10-09
 @update
 @description 密码登录时的登录参数
 */

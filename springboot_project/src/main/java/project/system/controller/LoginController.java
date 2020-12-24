@@ -6,7 +6,6 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
 import org.springframework.web.bind.annotation.*;
 import project.system.common.constant.RequestConstant;
 import project.system.common.utils.Md5Utils;
@@ -22,7 +21,7 @@ import project.system.service.LoginService;
 import project.system.service.TokenService;
 import project.system.service.UserService;
 import project.system.service.manager.SimpleCoreManager;
-import project.system.view.UserView;
+import project.system.vo.UserVo;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -106,7 +105,7 @@ public class LoginController extends BaseController{
             tokenInfoResponse.setHaveJoinedCompany(false);
         }
         simpleCoreManager.addTokenInfo(token,tokenInfoResponse);
-        UserView userView=userService.convertFromUserToUserView(user);
+        UserVo userView=userService.convertFromUserToUserView(user);
         //将token存入cookie
         RequestUtil.setCookieValue(RequestConstant.TOKEN, tokenInfoResponse.getToken(), response);
         RequestUtil.setCookieValue("userName",user.getUserName(),response);
@@ -144,7 +143,7 @@ public class LoginController extends BaseController{
             tokenInfoResponse.setToken(token);
             tokenInfoResponse.setCompanyId(verifiedUser.getCompanyId());
             tokenInfoResponse.setDeptId(verifiedUser.getDeptId());
-            UserView userView = userService.convertFromUserToUserView(verifiedUser);
+            UserVo userView = userService.convertFromUserToUserView(verifiedUser);
             if (verifiedUser.getCompanyId() != 0)//判断用户是否已经加入公司
             {
                 tokenInfoResponse.setHaveJoinedCompany(true);
@@ -169,7 +168,6 @@ public class LoginController extends BaseController{
         if ( StringUtils.isNotBlank(token)) {
             LoginRequest loginParam = new LoginRequest();
             loginParam.setToken(token);
-            loginService.logout(loginParam);
         }
         RequestUtil.clearCookie(RequestConstant.TOKEN, response);
         return CommonReturnType.create(null);

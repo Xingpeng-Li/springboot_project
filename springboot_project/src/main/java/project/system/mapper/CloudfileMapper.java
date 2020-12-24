@@ -19,11 +19,11 @@ public interface CloudfileMapper {
     int updateByPrimaryKeySelective(Cloudfile record);
 
     int updateByPrimaryKey(Cloudfile record);
-    //@author DKR 分页获取用户云空间文件目录列表
+    //@author 李星鹏 分页获取用户云空间文件目录列表
     List<Cloudfile> getCloudFilesLimited(Integer userId, @Param("offset") Integer offset, @Param("pageSize") Integer pageSize);
-    //@author DKR 获取用户云空间所有文件目录列表
+    //@author 李星鹏 获取用户云空间所有文件目录列表
     List<Cloudfile> queryAllFiles(Integer userId);
-    //@author DKR 搜索获取用户云空间文件目录列表
+    //@author 李星鹏 搜索获取用户云空间文件目录列表
     List<Cloudfile> searchFileByKey(String key, Integer userId);
 
 }
